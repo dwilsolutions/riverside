@@ -1,10 +1,10 @@
 # face2parselab
 
-A clean, standalone pipeline that converts FACE UDDL data models (`.face` / `.skayl`) 
+A clean, standalone pipeline that converts FACE UDDL data models (`.skayl`) 
 into [parseLab](https://github.com/lmco/parselab)-compatible JSON — with no dependency 
 on the MUDDL toolchain, no .NET runtime, and no proprietary tools required.
 
-[![Launch in Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/YOUR_USERNAME/face2parselab/HEAD?labpath=demo.ipynb)
+[![Launch in Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/dwilsolutions/face2parselab/HEAD?labpath=demo.ipynb)
 
 ---
 
@@ -13,7 +13,7 @@ on the MUDDL toolchain, no .NET runtime, and no proprietary tools required.
 Takes a FACE UDDL model as input:
 
 ```
-UCI_2_5.skayl + UCI_2_5.face
+UCI_2_5.skayl + uci_templates.txt
 ```
 
 Produces parseLab-ready JSON as output:
@@ -46,7 +46,7 @@ python -m face2parselab run config.yaml
 ```yaml
 model:
   skayl: data/models/UCI_2_5.skayl
-  face:  data/models/UCI_2_5.face
+  templates: data/uci_templates.txt
 
 output:
   dir: output/json
@@ -86,9 +86,9 @@ the MUDDL toolchain. Result: **722/722 messages, 0 field-level mismatches.**
 ## Architecture
 
 ```
-.face / .skayl  ──►  FaceReader  ──►  Protocol (IR)  ──►  ParseLabExporter  ──►  JSON
-                         │                  │
-                    (model-specific)   (format-agnostic)
+.skayl + uci_templates.txt  ──►  FaceReader  ──►  Protocol (IR)  ──►  ParseLabExporter  ──►  JSON
+                                      │                  │
+                                 (model-specific)   (format-agnostic)
 ```
 
 The intermediate representation (`Protocol`, `Struct`, `Field`) is intentionally 
@@ -101,7 +101,7 @@ touching the readers.
 | File | Purpose |
 |------|---------|
 | `face2parselab/model.py` | Agnostic IR dataclasses |
-| `face2parselab/reader_face.py` | FACE .skayl/.face reader |
+| `face2parselab/reader_face.py` | FACE .skayl reader |
 | `face2parselab/exporter_parselab.py` | parseLab JSON exporter |
 | `face2parselab/__main__.py` | CLI + YAML manifest runner |
 
@@ -110,7 +110,7 @@ touching the readers.
 ## Interactive demo
 
 Click the Binder badge above to run the full pipeline interactively in your browser —
-no installation required.
+no installation required. First load takes 2-3 minutes to build the environment.
 
 ---
 
