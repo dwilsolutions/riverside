@@ -1,0 +1,628 @@
+
+{
+    "structs": [
+        {
+            "struct_name": "opdescriptiontype",
+            "members": [
+                {
+                    "name": "namexlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "namex",
+                    "type": "U8[namexlength]"
+                },
+                {
+                    "name": "remarkslength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "remarks",
+                    "type": "U8[remarkslength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "missiontraceabilitytype",
+            "members": [
+                {
+                    "name": "missiontraceability",
+                    "value": "0|1|2|3|4",
+                    "type": "U32"
+                },
+                {
+                    "name": "traceabilitydescriptionlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "traceabilitydescription",
+                    "type": "U8[traceabilitydescriptionlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "timefunctiontype",
+            "members": [
+                {
+                    "name": "function",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15",
+                    "type": "U32"
+                },
+                {
+                    "name": "valuex",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "systemidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "oplineidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "datetimerangetype",
+            "members": [
+                {
+                    "name": "begin",
+                    "type": "U32"
+                },
+                {
+                    "name": "end",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "velocitytwodtype",
+            "members": [
+                {
+                    "name": "northspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "eastspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "downspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "serviceidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                },
+                {
+                    "name": "serviceversionlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "serviceversion",
+                    "type": "U8[serviceversionlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "activityidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "networklinkidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "altituderangetype",
+            "members": [
+                {
+                    "name": "min",
+                    "type": "D8"
+                },
+                {
+                    "name": "max",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "referenceframeidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "altitudeoffsetreferencetype",
+            "members": [
+                {
+                    "name": "altitudeoffsetreference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "altitudeoffset",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "altitudereferencetype",
+            "members": [
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "weekdayintervaltype",
+            "members": [
+                {
+                    "name": "timespan",
+                    "type": "datetimerangetype"
+                },
+                {
+                    "name": "weekday",
+                    "value": "0|1|2|3|4|5|6",
+                    "type": "U32"
+                },
+                {
+                    "name": "weeklyintervalperiod",
+                    "type": "U32"
+                },
+                {
+                    "name": "starttime",
+                    "type": "U32"
+                },
+                {
+                    "name": "duration",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "systemmessageidentifiertype",
+            "members": [
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "serviceid",
+                    "type": "serviceidtype"
+                },
+                {
+                    "name": "activityid",
+                    "type": "activityidtype"
+                },
+                {
+                    "name": "networklinkid",
+                    "type": "networklinkidtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "linepointtwodtype",
+            "members": [
+                {
+                    "name": "latitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "longitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altituderange",
+                    "type": "altituderangetype"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                },
+                {
+                    "name": "leftwidth",
+                    "type": "D8"
+                },
+                {
+                    "name": "rightwidth",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "zchoicetype",
+            "members": [
+                {
+                    "name": "z",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitudeoffset",
+                    "type": "altitudeoffsetreferencetype"
+                },
+                {
+                    "name": "absolutealtitude",
+                    "type": "altitudereferencetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "scheduletype",
+            "members": [
+                {
+                    "name": "timespan",
+                    "type": "datetimerangetype"
+                },
+                {
+                    "name": "weekdayinterval",
+                    "type": "weekdayintervaltype"
+                }
+            ]
+        },
+        {
+            "struct_name": "qualifyingtagstype",
+            "members": [
+                {
+                    "name": "qualifiedspecial",
+                    "type": "U32"
+                },
+                {
+                    "name": "processspeciallength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "processspecial",
+                    "type": "U8[processspeciallength]"
+                },
+                {
+                    "name": "filteroverridelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "filteroverride",
+                    "type": "U8[filteroverridelength]"
+                },
+                {
+                    "name": "highinterestlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "highinterest",
+                    "type": "U8[highinterestlength]"
+                },
+                {
+                    "name": "retainlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "retain",
+                    "type": "U8[retainlength]"
+                },
+                {
+                    "name": "qualifyingsource",
+                    "type": "systemmessageidentifiertype"
+                }
+            ]
+        },
+        {
+            "struct_name": "relativeoffsettwodtype",
+            "members": [
+                {
+                    "name": "rotation",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "xyoffsets",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "x",
+                    "type": "D8"
+                },
+                {
+                    "name": "y",
+                    "type": "D8"
+                },
+                {
+                    "name": "z",
+                    "type": "zchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "schedulestatetype",
+            "members": [
+                {
+                    "name": "state",
+                    "value": "0|1",
+                    "type": "U32"
+                },
+                {
+                    "name": "schedule",
+                    "type": "scheduletype"
+                }
+            ]
+        },
+        {
+            "struct_name": "linerelativetype",
+            "members": [
+                {
+                    "name": "referenceframeid",
+                    "type": "referenceframeidtype"
+                },
+                {
+                    "name": "positionoffset",
+                    "type": "relativeoffsettwodtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "systemschedulestatetype",
+            "members": [
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "systemschedulestate",
+                    "value": "0|1",
+                    "type": "U32"
+                },
+                {
+                    "name": "schedulestate",
+                    "type": "schedulestatetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "linepointchoicetype",
+            "members": [
+                {
+                    "name": "point",
+                    "type": "linepointtwodtype"
+                },
+                {
+                    "name": "relativepoint",
+                    "type": "linerelativetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "oplinetype",
+            "members": [
+                {
+                    "name": "pointchoice",
+                    "type": "linepointchoicetype"
+                },
+                {
+                    "name": "lineprojection",
+                    "value": "0|1",
+                    "type": "U32"
+                },
+                {
+                    "name": "leftwidth",
+                    "type": "D8"
+                },
+                {
+                    "name": "rightwidth",
+                    "type": "D8"
+                },
+                {
+                    "name": "minaltitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "maxaltitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "velocity",
+                    "type": "velocitytwodtype"
+                }
+            ]
+        }
+    ],
+    "protocol_types": [
+        {
+            "name": "oplinemdt",
+            "fields": [
+                {
+                    "name": "opdescription",
+                    "type": "opdescriptiontype"
+                },
+                {
+                    "name": "missiontraceability",
+                    "type": "missiontraceabilitytype"
+                },
+                {
+                    "name": "source",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "schedule",
+                    "type": "scheduletype"
+                },
+                {
+                    "name": "associatedtime",
+                    "type": "timefunctiontype"
+                },
+                {
+                    "name": "priority",
+                    "type": "U32"
+                },
+                {
+                    "name": "qualifyingtags",
+                    "type": "qualifyingtagstype"
+                },
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "systemscheduleoverride",
+                    "type": "systemschedulestatetype"
+                },
+                {
+                    "name": "oplineid",
+                    "type": "oplineidtype"
+                },
+                {
+                    "name": "category",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11",
+                    "type": "U32"
+                },
+                {
+                    "name": "line",
+                    "type": "oplinetype"
+                }
+            ]
+        }
+    ]
+}

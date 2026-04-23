@@ -1,0 +1,290 @@
+
+{
+    "structs": [
+        {
+            "struct_name": "systemidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointfourdtype",
+            "members": [
+                {
+                    "name": "latitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "longitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                },
+                {
+                    "name": "depthcategory",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12",
+                    "type": "U32"
+                },
+                {
+                    "name": "haeadjustment",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "velocitythreedtype",
+            "members": [
+                {
+                    "name": "northspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "eastspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "downspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "velocitytwodtype",
+            "members": [
+                {
+                    "name": "northspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "eastspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "downspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "accelerationthreedtype",
+            "members": [
+                {
+                    "name": "northacceleration",
+                    "type": "D8"
+                },
+                {
+                    "name": "eastacceleration",
+                    "type": "D8"
+                },
+                {
+                    "name": "downacceleration",
+                    "type": "D8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "orientationtype",
+            "members": [
+                {
+                    "name": "yaw",
+                    "type": "D8"
+                },
+                {
+                    "name": "pitch",
+                    "type": "D8"
+                },
+                {
+                    "name": "roll",
+                    "type": "D8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "orientationratetype",
+            "members": [
+                {
+                    "name": "yawrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "pitchrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "rollrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "ellipsetype",
+            "members": [
+                {
+                    "name": "semimajoraxislength",
+                    "type": "D8"
+                },
+                {
+                    "name": "semiminoraxislength",
+                    "type": "D8"
+                },
+                {
+                    "name": "orientation",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "uncertaintytype",
+            "members": [
+                {
+                    "name": "uncertaintyellipse",
+                    "type": "ellipsetype"
+                },
+                {
+                    "name": "uncertaintyvertical",
+                    "type": "D8"
+                },
+                {
+                    "name": "uncertaintytilt",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "inertialstatetype",
+            "members": [
+                {
+                    "name": "position",
+                    "type": "pointfourdtype"
+                },
+                {
+                    "name": "positionuncertainty",
+                    "type": "uncertaintytype"
+                },
+                {
+                    "name": "domainvelocity",
+                    "type": "velocitythreedtype"
+                },
+                {
+                    "name": "groundvelocity",
+                    "type": "velocitytwodtype"
+                },
+                {
+                    "name": "domainacceleration",
+                    "type": "accelerationthreedtype"
+                },
+                {
+                    "name": "orientation",
+                    "type": "orientationtype"
+                },
+                {
+                    "name": "orientationrate",
+                    "type": "orientationratetype"
+                },
+                {
+                    "name": "linkonesixpositionquality",
+                    "value": "(0, 15)",
+                    "type": "U8"
+                }
+            ]
+        }
+    ],
+    "protocol_types": [
+        {
+            "name": "positionreportmdt",
+            "fields": [
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "displaynamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "displayname",
+                    "type": "U8[displaynamelength]"
+                },
+                {
+                    "name": "source",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "currentoperatingdomain",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "inertialstate",
+                    "type": "inertialstatetype"
+                },
+                {
+                    "name": "wanderangle",
+                    "type": "D8"
+                },
+                {
+                    "name": "magneticheading",
+                    "type": "D8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                },
+                {
+                    "name": "simulationtargetnumber",
+                    "type": "I32"
+                }
+            ]
+        }
+    ]
+}

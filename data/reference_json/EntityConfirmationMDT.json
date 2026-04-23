@@ -1,0 +1,75 @@
+
+{
+    "structs": [
+        {
+            "struct_name": "entityidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "requestidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        }
+    ],
+    "protocol_types": [
+        {
+            "name": "entityconfirmationmdt",
+            "fields": [
+                {
+                    "name": "entityid",
+                    "type": "entityidtype"
+                },
+                {
+                    "name": "entityconfirmationrequestid",
+                    "type": "requestidtype"
+                },
+                {
+                    "name": "confirmationprobability",
+                    "type": "D8"
+                },
+                {
+                    "name": "confirmationlevel",
+                    "value": "0|1|2|3|4",
+                    "type": "U32"
+                }
+            ]
+        }
+    ]
+}

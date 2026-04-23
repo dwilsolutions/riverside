@@ -1,0 +1,378 @@
+
+{
+    "structs": [
+        {
+            "struct_name": "systemidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "activityidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "altituderangetype",
+            "members": [
+                {
+                    "name": "min",
+                    "type": "D8"
+                },
+                {
+                    "name": "max",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "referenceframeidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "altitudeoffsetreferencetype",
+            "members": [
+                {
+                    "name": "altitudeoffsetreference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "altitudeoffset",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "altitudereferencetype",
+            "members": [
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "navigationsourcedetailstype",
+            "members": [
+                {
+                    "name": "activityid",
+                    "type": "activityidtype"
+                },
+                {
+                    "name": "navigationsource",
+                    "value": "0|1|2|3|4|5|6|7",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointtwodtype",
+            "members": [
+                {
+                    "name": "latitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "longitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altituderange",
+                    "type": "altituderangetype"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "zchoicetype",
+            "members": [
+                {
+                    "name": "z",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitudeoffset",
+                    "type": "altitudeoffsetreferencetype"
+                },
+                {
+                    "name": "absolutealtitude",
+                    "type": "altitudereferencetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "relativeoffsettwodtype",
+            "members": [
+                {
+                    "name": "rotation",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "xyoffsets",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "x",
+                    "type": "D8"
+                },
+                {
+                    "name": "y",
+                    "type": "D8"
+                },
+                {
+                    "name": "z",
+                    "type": "zchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "polygonrelativetype",
+            "members": [
+                {
+                    "name": "referenceframeid",
+                    "type": "referenceframeidtype"
+                },
+                {
+                    "name": "vertex",
+                    "type": "relativeoffsettwodtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointtwodrelativetype",
+            "members": [
+                {
+                    "name": "referenceframeid",
+                    "type": "referenceframeidtype"
+                },
+                {
+                    "name": "relativeoffset",
+                    "type": "relativeoffsettwodtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "polygonpointchoicetype",
+            "members": [
+                {
+                    "name": "pointtwod",
+                    "type": "pointtwodtype"
+                },
+                {
+                    "name": "relativepolygon",
+                    "type": "polygonrelativetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointchoicetype",
+            "members": [
+                {
+                    "name": "absolutepoint",
+                    "type": "pointtwodtype"
+                },
+                {
+                    "name": "relativepoint",
+                    "type": "pointtwodrelativetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "polygontype",
+            "members": [
+                {
+                    "name": "lineprojection",
+                    "value": "0|1",
+                    "type": "U32"
+                },
+                {
+                    "name": "boundingpolygon",
+                    "type": "polygonpointchoicetype"
+                },
+                {
+                    "name": "interiorpolygon",
+                    "type": "polygonpointchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "locatedellipsetype",
+            "members": [
+                {
+                    "name": "semimajoraxislength",
+                    "type": "D8"
+                },
+                {
+                    "name": "semiminoraxislength",
+                    "type": "D8"
+                },
+                {
+                    "name": "orientation",
+                    "type": "D8"
+                },
+                {
+                    "name": "centerpointchoice",
+                    "type": "pointchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "boundarytype",
+            "members": [
+                {
+                    "name": "polygon",
+                    "type": "polygontype"
+                },
+                {
+                    "name": "ellipse",
+                    "type": "locatedellipsetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "endurancefootprinttype",
+            "members": [
+                {
+                    "name": "boundary",
+                    "type": "boundarytype"
+                },
+                {
+                    "name": "referencealtitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "duration",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "endurancetype",
+            "members": [
+                {
+                    "name": "fuel",
+                    "type": "D8"
+                },
+                {
+                    "name": "duration",
+                    "type": "U32"
+                },
+                {
+                    "name": "durationend",
+                    "type": "U32"
+                },
+                {
+                    "name": "percent",
+                    "type": "D8"
+                },
+                {
+                    "name": "footprint",
+                    "type": "endurancefootprinttype"
+                }
+            ]
+        }
+    ],
+    "protocol_types": [
+        {
+            "name": "navigationreportmdt",
+            "fields": [
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "source",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "contingencylevel",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "endurance",
+                    "type": "endurancetype"
+                },
+                {
+                    "name": "navigation",
+                    "type": "navigationsourcedetailstype"
+                }
+            ]
+        }
+    ]
+}

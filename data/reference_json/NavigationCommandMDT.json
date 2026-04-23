@@ -1,1 +1,4756 @@
 
+{
+    "structs": [
+        {
+            "struct_name": "commandidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "capabilityidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "activityidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "comparablerankingtype",
+            "members": [
+                {
+                    "name": "priority",
+                    "type": "U32"
+                },
+                {
+                    "name": "precedencewithinpriority",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "datetimerangetype",
+            "members": [
+                {
+                    "name": "begin",
+                    "type": "U32"
+                },
+                {
+                    "name": "end",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "ordersmetadataidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "requestidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "eeiidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "ownerproducerchoicetype",
+            "members": [
+                {
+                    "name": "governmentidentifier",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99|100|101|102|103|104|105|106|107|108|109|110|111|112|113|114|115|116|117|118|119|120|121|122|123|124|125|126|127|128|129|130|131|132|133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152|153|154|155|156|157|158|159|160|161|162|163|164|165|166|167|168|169|170|171|172|173|174|175|176|177|178|179|180|181|182|183|184|185|186|187|188|189|190|191|192|193|194|195|196|197|198|199|200|201|202|203|204|205|206|207|208|209|210|211|212|213|214|215|216|217|218|219|220|221|222|223|224|225|226|227|228|229|230|231|232|233|234|235|236|237|238|239|240|241|242|243|244|245|246|247|248|249|250|251|252|253|254|255|256|257|258|259|260|261|262|263|264|265|266|267|268|269|270|271|272|273|274|275|276|277|278|279|280|281|282|283|284|285|286|287|288|289|290|291|292|293|294|295|296|297|298|299|300|301|302|303|304|305|306|307|308|309|310|311|312|313|314|315|316|317|318|319|320|321|322|323|324|325|326|327|328|329|330|331|332|333|334|335|336|337|338|339|340",
+                    "type": "U32"
+                },
+                {
+                    "name": "natospecialwordlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "natospecialword",
+                    "type": "U8[natospecialwordlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "releasabletochoicetype",
+            "members": [
+                {
+                    "name": "governmentidentifier",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99|100|101|102|103|104|105|106|107|108|109|110|111|112|113|114|115|116|117|118|119|120|121|122|123|124|125|126|127|128|129|130|131|132|133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152|153|154|155|156|157|158|159|160|161|162|163|164|165|166|167|168|169|170|171|172|173|174|175|176|177|178|179|180|181|182|183|184|185|186|187|188|189|190|191|192|193|194|195|196|197|198|199|200|201|202|203|204|205|206|207|208|209|210|211|212|213|214|215|216|217|218|219|220|221|222|223|224|225|226|227|228|229|230|231|232|233|234|235|236|237|238|239|240|241|242|243|244|245|246|247|248|249|250|251|252|253|254|255|256|257|258|259|260|261|262|263|264|265|266|267|268|269|270|271|272|273|274|275|276|277|278|279|280|281|282|283|284|285|286|287|288|289|290|291|292|293|294|295|296|297|298|299|300|301|302|303|304|305|306|307|308|309|310|311|312|313|314|315|316|317|318|319|320|321|322|323|324|325|326|327|328|329|330|331|332|333|334|335|336|337|338|339",
+                    "type": "U32"
+                },
+                {
+                    "name": "natospecialwordlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "natospecialword",
+                    "type": "U8[natospecialwordlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "fgisourceopenchoicetype",
+            "members": [
+                {
+                    "name": "foreigngovernmentidentifier",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99|100|101|102|103|104|105|106|107|108|109|110|111|112|113|114|115|116|117|118|119|120|121|122|123|124|125|126|127|128|129|130|131|132|133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152|153|154|155|156|157|158|159|160|161|162|163|164|165|166|167|168|169|170|171|172|173|174|175|176|177|178|179|180|181|182|183|184|185|186|187|188|189|190|191|192|193|194|195|196|197|198|199|200|201|202|203|204|205|206|207|208|209|210|211|212|213|214|215|216|217|218|219|220|221|222|223|224|225|226|227|228|229|230|231|232|233|234|235|236|237|238|239|240|241|242|243|244|245|246|247|248|249|250|251|252|253|254|255|256|257|258|259|260|261|262|263|264|265|266|267|268|269|270|271|272|273|274|275|276|277|278|279|280|281|282|283|284|285|286|287|288|289|290|291|292|293|294|295|296|297|298|299|300|301|302|303|304|305|306|307|308|309|310|311|312|313|314|315|316|317|318|319|320|321|322|323|324|325|326|327|328|329|330|331|332|333|334|335|336|337|338|339",
+                    "type": "U32"
+                },
+                {
+                    "name": "natospecialwordlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "natospecialword",
+                    "type": "U8[natospecialwordlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "fgisourceprotectedchoicetype",
+            "members": [
+                {
+                    "name": "foreigngovernmentidentifier",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99|100|101|102|103|104|105|106|107|108|109|110|111|112|113|114|115|116|117|118|119|120|121|122|123|124|125|126|127|128|129|130|131|132|133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152|153|154|155|156|157|158|159|160|161|162|163|164|165|166|167|168|169|170|171|172|173|174|175|176|177|178|179|180|181|182|183|184|185|186|187|188|189|190|191|192|193|194|195|196|197|198|199|200|201|202|203|204|205|206|207|208|209|210|211|212|213|214|215|216|217|218|219|220|221|222|223|224|225|226|227|228|229|230|231|232|233|234|235|236|237|238|239|240|241|242|243|244|245|246|247|248|249|250|251|252|253|254|255|256|257|258|259|260|261|262|263|264|265|266|267|268|269|270|271|272|273|274|275|276|277|278|279|280|281|282|283|284|285|286|287|288|289|290|291|292|293|294|295|296|297|298|299|300|301|302|303|304|305|306|307|308|309|310|311|312|313|314|315|316|317|318|319|320|321|322|323|324|325|326|327|328|329|330|331|332|333|334|335|336|337|338|339",
+                    "type": "U32"
+                },
+                {
+                    "name": "natospecialwordlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "natospecialword",
+                    "type": "U8[natospecialwordlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "foreignkeytype",
+            "members": [
+                {
+                    "name": "keylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "key",
+                    "type": "U8[keylength]"
+                },
+                {
+                    "name": "systemnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "systemname",
+                    "type": "U8[systemnamelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "remarkstype",
+            "members": [
+                {
+                    "name": "displaynamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "displayname",
+                    "type": "U8[displaynamelength]"
+                },
+                {
+                    "name": "detaillength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "detail",
+                    "type": "U8[detaillength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "effectidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                },
+                {
+                    "name": "version",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "actionidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                },
+                {
+                    "name": "version",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "taskidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                },
+                {
+                    "name": "version",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "responseidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                },
+                {
+                    "name": "version",
+                    "type": "U32"
+                },
+                {
+                    "name": "optionindex",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "commsupportidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "bodyframeaccelerationtype",
+            "members": [
+                {
+                    "name": "nx",
+                    "type": "D8"
+                },
+                {
+                    "name": "ny",
+                    "type": "D8"
+                },
+                {
+                    "name": "nz",
+                    "type": "D8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "trackerrortype",
+            "members": [
+                {
+                    "name": "crosstrackerror",
+                    "type": "D8"
+                },
+                {
+                    "name": "alongtrackerror",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "endurancebasetype",
+            "members": [
+                {
+                    "name": "fuel",
+                    "type": "D8"
+                },
+                {
+                    "name": "duration",
+                    "type": "U32"
+                },
+                {
+                    "name": "durationend",
+                    "type": "U32"
+                },
+                {
+                    "name": "percent",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "anglepairtype",
+            "members": [
+                {
+                    "name": "min",
+                    "type": "D8"
+                },
+                {
+                    "name": "max",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "routeplanidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                },
+                {
+                    "name": "version",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "missionplanidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                },
+                {
+                    "name": "version",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "pathidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                },
+                {
+                    "name": "version",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "segmentidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                },
+                {
+                    "name": "version",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "entityidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "systemidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "operatorlocationofinterestidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "signalidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "oppointidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "opzoneidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "opvolumeidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "oplineidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "serviceidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                },
+                {
+                    "name": "serviceversionlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "serviceversion",
+                    "type": "U8[serviceversionlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "rollholdorconstraintchoicetype",
+            "members": [
+                {
+                    "name": "rollhold",
+                    "type": "D8"
+                },
+                {
+                    "name": "rollholdconstraintlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "rollholdconstraint",
+                    "type": "U8[rollholdconstraintlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "pitchholdorconstraintchoicetype",
+            "members": [
+                {
+                    "name": "pitchhold",
+                    "type": "D8"
+                },
+                {
+                    "name": "pitchholdconstraintlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "pitchholdconstraint",
+                    "type": "U8[pitchholdconstraintlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "altituderangetype",
+            "members": [
+                {
+                    "name": "min",
+                    "type": "D8"
+                },
+                {
+                    "name": "max",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "accelerationrangetype",
+            "members": [
+                {
+                    "name": "minimumacceleration",
+                    "type": "D8"
+                },
+                {
+                    "name": "maximumacceleration",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "anglehalfpairtype",
+            "members": [
+                {
+                    "name": "min",
+                    "type": "D8"
+                },
+                {
+                    "name": "max",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "turnraterangetype",
+            "members": [
+                {
+                    "name": "minturnrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "maxturnrate",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "turnradiusrangetype",
+            "members": [
+                {
+                    "name": "minimumturnradius",
+                    "type": "D8"
+                },
+                {
+                    "name": "maximumturnradius",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "bankanglerangetype",
+            "members": [
+                {
+                    "name": "minimumbankangle",
+                    "type": "D8"
+                },
+                {
+                    "name": "maximumbankangle",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "bankraterangetype",
+            "members": [
+                {
+                    "name": "minimumrollrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "maximumrollrate",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "velocitytwodtype",
+            "members": [
+                {
+                    "name": "northspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "eastspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "downspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "orbitregimetype",
+            "members": [
+                {
+                    "name": "orbitregime",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10",
+                    "type": "U32"
+                },
+                {
+                    "name": "orbitclass",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "targetoffsettype",
+            "members": [
+                {
+                    "name": "offsetx",
+                    "type": "D8"
+                },
+                {
+                    "name": "offsety",
+                    "type": "D8"
+                },
+                {
+                    "name": "offsetz",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "altitudereferencetype",
+            "members": [
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "orbitdurationtype",
+            "members": [
+                {
+                    "name": "time",
+                    "type": "U32"
+                },
+                {
+                    "name": "numberoforbits",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "pathsegmentspeedvaluetype",
+            "members": [
+                {
+                    "name": "reference",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "valuex",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "machrangetype",
+            "members": [
+                {
+                    "name": "minvalue",
+                    "type": "D8"
+                },
+                {
+                    "name": "maxvalue",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "climbraterangetype",
+            "members": [
+                {
+                    "name": "minimumclimbrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "maximumclimbrate",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "ellipsetype",
+            "members": [
+                {
+                    "name": "semimajoraxislength",
+                    "type": "D8"
+                },
+                {
+                    "name": "semiminoraxislength",
+                    "type": "D8"
+                },
+                {
+                    "name": "orientation",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "navigationbyvectorchoicetype",
+            "members": [
+                {
+                    "name": "vectorbycourse",
+                    "type": "D8"
+                },
+                {
+                    "name": "vectorbyheading",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointthreedtype",
+            "members": [
+                {
+                    "name": "latitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "longitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "speedrangetype",
+            "members": [
+                {
+                    "name": "min",
+                    "type": "D8"
+                },
+                {
+                    "name": "max",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "referenceframeidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "jtwokpositiontype",
+            "members": [
+                {
+                    "name": "x",
+                    "type": "D8"
+                },
+                {
+                    "name": "y",
+                    "type": "D8"
+                },
+                {
+                    "name": "z",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "orbitalkinematicsvelocitytype",
+            "members": [
+                {
+                    "name": "x",
+                    "type": "D8"
+                },
+                {
+                    "name": "y",
+                    "type": "D8"
+                },
+                {
+                    "name": "z",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "orbitalkinematicsaccelerationtype",
+            "members": [
+                {
+                    "name": "x",
+                    "type": "D8"
+                },
+                {
+                    "name": "y",
+                    "type": "D8"
+                },
+                {
+                    "name": "z",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "quaterniontype",
+            "members": [
+                {
+                    "name": "qs",
+                    "type": "D8"
+                },
+                {
+                    "name": "qx",
+                    "type": "D8"
+                },
+                {
+                    "name": "qy",
+                    "type": "D8"
+                },
+                {
+                    "name": "qz",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "covariancematrixtype",
+            "members": [
+                {
+                    "name": "category",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "covariance",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "gcrspositiontype",
+            "members": [
+                {
+                    "name": "x",
+                    "type": "D8"
+                },
+                {
+                    "name": "y",
+                    "type": "D8"
+                },
+                {
+                    "name": "z",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "bcrspositiontype",
+            "members": [
+                {
+                    "name": "x",
+                    "type": "D8"
+                },
+                {
+                    "name": "y",
+                    "type": "D8"
+                },
+                {
+                    "name": "z",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "rtnpositiontype",
+            "members": [
+                {
+                    "name": "radial",
+                    "type": "D8"
+                },
+                {
+                    "name": "transverse",
+                    "type": "D8"
+                },
+                {
+                    "name": "normal",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "rtnvelocitytype",
+            "members": [
+                {
+                    "name": "radial",
+                    "type": "D8"
+                },
+                {
+                    "name": "transverse",
+                    "type": "D8"
+                },
+                {
+                    "name": "normal",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "rtnaccelerationtype",
+            "members": [
+                {
+                    "name": "radial",
+                    "type": "D8"
+                },
+                {
+                    "name": "transverse",
+                    "type": "D8"
+                },
+                {
+                    "name": "normal",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "slantrangeconstraintstype",
+            "members": [
+                {
+                    "name": "min",
+                    "type": "D8"
+                },
+                {
+                    "name": "max",
+                    "type": "D8"
+                },
+                {
+                    "name": "absolutelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "absolute",
+                    "type": "U8[absolutelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "spheretype",
+            "members": [
+                {
+                    "name": "radius",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "dometype",
+            "members": [
+                {
+                    "name": "radius",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "cylindertype",
+            "members": [
+                {
+                    "name": "length",
+                    "type": "D8"
+                },
+                {
+                    "name": "radius",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "conetype",
+            "members": [
+                {
+                    "name": "halfangle",
+                    "type": "D8"
+                },
+                {
+                    "name": "range",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "complexconetype",
+            "members": [
+                {
+                    "name": "innerconehalfangle",
+                    "type": "D8"
+                },
+                {
+                    "name": "outerconehalfangle",
+                    "type": "D8"
+                },
+                {
+                    "name": "minclockangle",
+                    "type": "D8"
+                },
+                {
+                    "name": "maxclockangle",
+                    "type": "D8"
+                },
+                {
+                    "name": "range",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "rectangularconetype",
+            "members": [
+                {
+                    "name": "length",
+                    "type": "D8"
+                },
+                {
+                    "name": "width",
+                    "type": "D8"
+                },
+                {
+                    "name": "range",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "incraperiodvolumetype",
+            "members": [
+                {
+                    "name": "deltainclination",
+                    "type": "D8"
+                },
+                {
+                    "name": "deltarightascension",
+                    "type": "D8"
+                },
+                {
+                    "name": "deltaperiod",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "alongorbitalarcdeltatype",
+            "members": [
+                {
+                    "name": "meananomaly",
+                    "type": "D8"
+                },
+                {
+                    "name": "timedelta",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "altitudeoffsetreferencetype",
+            "members": [
+                {
+                    "name": "altitudeoffsetreference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "altitudeoffset",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "accelerationthreedtype",
+            "members": [
+                {
+                    "name": "northacceleration",
+                    "type": "D8"
+                },
+                {
+                    "name": "eastacceleration",
+                    "type": "D8"
+                },
+                {
+                    "name": "downacceleration",
+                    "type": "D8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "orientationtype",
+            "members": [
+                {
+                    "name": "yaw",
+                    "type": "D8"
+                },
+                {
+                    "name": "pitch",
+                    "type": "D8"
+                },
+                {
+                    "name": "roll",
+                    "type": "D8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "orientationcovariancetype",
+            "members": [
+                {
+                    "name": "rrrr",
+                    "type": "D8"
+                },
+                {
+                    "name": "rrrp",
+                    "type": "D8"
+                },
+                {
+                    "name": "rrry",
+                    "type": "D8"
+                },
+                {
+                    "name": "rprp",
+                    "type": "D8"
+                },
+                {
+                    "name": "rpry",
+                    "type": "D8"
+                },
+                {
+                    "name": "ryry",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "positionpositioncovariancetype",
+            "members": [
+                {
+                    "name": "pnpn",
+                    "type": "D8"
+                },
+                {
+                    "name": "pnpe",
+                    "type": "D8"
+                },
+                {
+                    "name": "pnpd",
+                    "type": "D8"
+                },
+                {
+                    "name": "pepe",
+                    "type": "D8"
+                },
+                {
+                    "name": "pepd",
+                    "type": "D8"
+                },
+                {
+                    "name": "pdpd",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "positionvelocitycovariancetype",
+            "members": [
+                {
+                    "name": "pnvn",
+                    "type": "D8"
+                },
+                {
+                    "name": "pnve",
+                    "type": "D8"
+                },
+                {
+                    "name": "pnvd",
+                    "type": "D8"
+                },
+                {
+                    "name": "pevn",
+                    "type": "D8"
+                },
+                {
+                    "name": "peve",
+                    "type": "D8"
+                },
+                {
+                    "name": "pevd",
+                    "type": "D8"
+                },
+                {
+                    "name": "pdvn",
+                    "type": "D8"
+                },
+                {
+                    "name": "pdve",
+                    "type": "D8"
+                },
+                {
+                    "name": "pdvd",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "velocityvelocitycovariancetype",
+            "members": [
+                {
+                    "name": "vnvn",
+                    "type": "D8"
+                },
+                {
+                    "name": "vnve",
+                    "type": "D8"
+                },
+                {
+                    "name": "vnvd",
+                    "type": "D8"
+                },
+                {
+                    "name": "veve",
+                    "type": "D8"
+                },
+                {
+                    "name": "vevd",
+                    "type": "D8"
+                },
+                {
+                    "name": "vdvd",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "accelerationaccelerationcovariancetype",
+            "members": [
+                {
+                    "name": "anan",
+                    "type": "D8"
+                },
+                {
+                    "name": "anae",
+                    "type": "D8"
+                },
+                {
+                    "name": "anad",
+                    "type": "D8"
+                },
+                {
+                    "name": "aeae",
+                    "type": "D8"
+                },
+                {
+                    "name": "aead",
+                    "type": "D8"
+                },
+                {
+                    "name": "adad",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "positionaccelerationcovariancetype",
+            "members": [
+                {
+                    "name": "pnan",
+                    "type": "D8"
+                },
+                {
+                    "name": "pnae",
+                    "type": "D8"
+                },
+                {
+                    "name": "pnad",
+                    "type": "D8"
+                },
+                {
+                    "name": "pean",
+                    "type": "D8"
+                },
+                {
+                    "name": "peae",
+                    "type": "D8"
+                },
+                {
+                    "name": "pead",
+                    "type": "D8"
+                },
+                {
+                    "name": "pdan",
+                    "type": "D8"
+                },
+                {
+                    "name": "pdae",
+                    "type": "D8"
+                },
+                {
+                    "name": "pdad",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "velocityaccelerationcovariancetype",
+            "members": [
+                {
+                    "name": "vnan",
+                    "type": "D8"
+                },
+                {
+                    "name": "vnae",
+                    "type": "D8"
+                },
+                {
+                    "name": "vnad",
+                    "type": "D8"
+                },
+                {
+                    "name": "vean",
+                    "type": "D8"
+                },
+                {
+                    "name": "veae",
+                    "type": "D8"
+                },
+                {
+                    "name": "vead",
+                    "type": "D8"
+                },
+                {
+                    "name": "vdan",
+                    "type": "D8"
+                },
+                {
+                    "name": "vdae",
+                    "type": "D8"
+                },
+                {
+                    "name": "vdad",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "losuncertaintytype",
+            "members": [
+                {
+                    "name": "slantrangeerror",
+                    "type": "D8"
+                },
+                {
+                    "name": "azimutherror",
+                    "type": "D8"
+                },
+                {
+                    "name": "elevationerror",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "losthreedrelativeslantrangetype",
+            "members": [
+                {
+                    "name": "slantrange",
+                    "type": "D8"
+                },
+                {
+                    "name": "slantrangeerror",
+                    "type": "D8"
+                },
+                {
+                    "name": "slantrangerate",
+                    "type": "D8"
+                },
+                {
+                    "name": "slantrangerateerror",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "losthreedcovariancetype",
+            "members": [
+                {
+                    "name": "rvrv",
+                    "type": "D8"
+                },
+                {
+                    "name": "rvrh",
+                    "type": "D8"
+                },
+                {
+                    "name": "rhrh",
+                    "type": "D8"
+                },
+                {
+                    "name": "psrv",
+                    "type": "D8"
+                },
+                {
+                    "name": "psrh",
+                    "type": "D8"
+                },
+                {
+                    "name": "psps",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "arrivaldatatype",
+            "members": [
+                {
+                    "name": "timeofarrival",
+                    "type": "U32"
+                },
+                {
+                    "name": "timedifferenceofarrival",
+                    "type": "U32"
+                },
+                {
+                    "name": "frequencyofarrival",
+                    "type": "D8"
+                },
+                {
+                    "name": "frequencydifferenceofarrival",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "unitvectortype",
+            "members": [
+                {
+                    "name": "x",
+                    "type": "F32"
+                },
+                {
+                    "name": "y",
+                    "type": "F32"
+                },
+                {
+                    "name": "z",
+                    "type": "F32"
+                }
+            ]
+        },
+        {
+            "struct_name": "losthreedrelativeangleuncertaintytype",
+            "members": [
+                {
+                    "name": "loscrossverticalangleerror",
+                    "type": "D8"
+                },
+                {
+                    "name": "loscrosshorizontalangleerror",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "losthreedrelativeanglerateuncertaintytype",
+            "members": [
+                {
+                    "name": "loscrossverticalanglerateerror",
+                    "type": "D8"
+                },
+                {
+                    "name": "loscrosshorizontalanglerateerror",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "losazelratestype",
+            "members": [
+                {
+                    "name": "azimuthrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "elevationrate",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "coneangleratestype",
+            "members": [
+                {
+                    "name": "cosconeyrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "cosconezrate",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "slantrangeratesandaccelerationtype",
+            "members": [
+                {
+                    "name": "slantrangerate",
+                    "type": "D8"
+                },
+                {
+                    "name": "deltaslantrangerate",
+                    "type": "D8"
+                },
+                {
+                    "name": "slantrangeacceleration",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "arrivaldatavariancetype",
+            "members": [
+                {
+                    "name": "timeofarrival",
+                    "type": "D8"
+                },
+                {
+                    "name": "timedifferenceofarrival",
+                    "type": "D8"
+                },
+                {
+                    "name": "frequencyofarrival",
+                    "type": "D8"
+                },
+                {
+                    "name": "frequencydifferenceofarrival",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "slantrangecovariancetype",
+            "members": [
+                {
+                    "name": "slantrangeslantrangerate",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "losvarianceratestype",
+            "members": [
+                {
+                    "name": "azimuthrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "elevationrate",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "loscovariancesratestype",
+            "members": [
+                {
+                    "name": "azimuthazimuthrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "elevationelevationrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "azimuthelevationrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "elevationazimuthrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "azimuthrateelevationrate",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "coneanglevarianceratestype",
+            "members": [
+                {
+                    "name": "cosconeyrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "cosconezrate",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "coneanglecovarianceratestype",
+            "members": [
+                {
+                    "name": "cosconeycosconeyrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "cosconeycosconezrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "cosconezcosconeyrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "cosconezcosconezrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "cosconeyratecosconezrate",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "slantrangevarianceratesandaccelerationtype",
+            "members": [
+                {
+                    "name": "slantrangerate",
+                    "type": "D8"
+                },
+                {
+                    "name": "slantrangeacceleration",
+                    "type": "D8"
+                },
+                {
+                    "name": "deltaslantrange",
+                    "type": "D8"
+                },
+                {
+                    "name": "deltaslantrangerate",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "coneangleslantrangecovarianceratestype",
+            "members": [
+                {
+                    "name": "cosconeyslantrangerate",
+                    "type": "D8"
+                },
+                {
+                    "name": "cosconezslantrangerate",
+                    "type": "D8"
+                },
+                {
+                    "name": "slantrangecosconeyrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "slantrangecosconezrate",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "losslantrangecovarianceratestype",
+            "members": [
+                {
+                    "name": "slantrangeazimuthrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "slantrangeelevationrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "azimuthslantrangerate",
+                    "type": "D8"
+                },
+                {
+                    "name": "elevationslantrangerate",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "ownshipnavigationtype",
+            "members": [
+                {
+                    "name": "dynamiclength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "dynamic",
+                    "type": "U8[dynamiclength]"
+                },
+                {
+                    "name": "swarmlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "swarm",
+                    "type": "U8[swarmlength]"
+                },
+                {
+                    "name": "teamlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "team",
+                    "type": "U8[teamlength]"
+                },
+                {
+                    "name": "other",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "navigationbyvectorpairchoicetype",
+            "members": [
+                {
+                    "name": "vectorbycourse",
+                    "type": "D8"
+                },
+                {
+                    "name": "vectorbycourserange",
+                    "type": "anglepairtype"
+                },
+                {
+                    "name": "vectorbyheading",
+                    "type": "D8"
+                },
+                {
+                    "name": "vectorbyheadingrange",
+                    "type": "anglepairtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "geocentricvolumetype",
+            "members": [
+                {
+                    "name": "altituderange",
+                    "type": "altituderangetype"
+                },
+                {
+                    "name": "longituderange",
+                    "type": "anglepairtype"
+                },
+                {
+                    "name": "latituderange",
+                    "type": "anglehalfpairtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointtwodtype",
+            "members": [
+                {
+                    "name": "latitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "longitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altituderange",
+                    "type": "altituderangetype"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "assettype",
+            "members": [
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "entityid",
+                    "type": "entityidtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "linepointtwodtype",
+            "members": [
+                {
+                    "name": "latitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "longitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altituderange",
+                    "type": "altituderangetype"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                },
+                {
+                    "name": "leftwidth",
+                    "type": "D8"
+                },
+                {
+                    "name": "rightwidth",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "pathsegmentspeedchoicetype",
+            "members": [
+                {
+                    "name": "speedvalue",
+                    "type": "pathsegmentspeedvaluetype"
+                },
+                {
+                    "name": "machvalue",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "ellipsoidtype",
+            "members": [
+                {
+                    "name": "semimajoraxislengtha",
+                    "type": "D8"
+                },
+                {
+                    "name": "semiminoraxislengthb",
+                    "type": "D8"
+                },
+                {
+                    "name": "semiminoraxislengthc",
+                    "type": "D8"
+                },
+                {
+                    "name": "attitude",
+                    "type": "quaterniontype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointtwodreportedtype",
+            "members": [
+                {
+                    "name": "latitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "longitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altituderange",
+                    "type": "altituderangetype"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                },
+                {
+                    "name": "haeadjustment",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitudesource",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "depthcontact",
+                    "value": "0|1|2|3|4|5|6|7",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "referenceobjecttype",
+            "members": [
+                {
+                    "name": "entityid",
+                    "type": "entityidtype"
+                },
+                {
+                    "name": "oppointid",
+                    "type": "oppointidtype"
+                },
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "navigationactivitycommandtype",
+            "members": [
+                {
+                    "name": "commandid",
+                    "type": "commandidtype"
+                },
+                {
+                    "name": "commandstate",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "activityid",
+                    "type": "activityidtype"
+                },
+                {
+                    "name": "changeactivityrank",
+                    "type": "comparablerankingtype"
+                },
+                {
+                    "name": "changeactivitystate",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "deleteactivitylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "deleteactivity",
+                    "type": "U8[deleteactivitylength]"
+                },
+                {
+                    "name": "unassignactivitylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "unassignactivity",
+                    "type": "U8[unassignactivitylength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "capabilitycommandrankingtype",
+            "members": [
+                {
+                    "name": "rank",
+                    "type": "comparablerankingtype"
+                },
+                {
+                    "name": "interruptotheractivities",
+                    "type": "I32"
+                },
+                {
+                    "name": "capabilityrankoverride",
+                    "type": "comparablerankingtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "capabilitycommandtemporalconstraintstype",
+            "members": [
+                {
+                    "name": "temporalcriticality",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "starttimewindow",
+                    "type": "datetimerangetype"
+                },
+                {
+                    "name": "windowonfirstonlylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "windowonfirstonly",
+                    "type": "U8[windowonfirstonlylength]"
+                },
+                {
+                    "name": "endtimewindow",
+                    "type": "datetimerangetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "securityinformationtype",
+            "members": [
+                {
+                    "name": "classification",
+                    "value": "0|1|2|3|4",
+                    "type": "U32"
+                },
+                {
+                    "name": "ownerproducer",
+                    "type": "ownerproducerchoicetype"
+                },
+                {
+                    "name": "joint",
+                    "type": "I32"
+                },
+                {
+                    "name": "scicontrols",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19",
+                    "type": "U32"
+                },
+                {
+                    "name": "saridentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "saridentifier",
+                    "type": "U8[saridentifierlength]"
+                },
+                {
+                    "name": "atomicenergymarkings",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13",
+                    "type": "U32"
+                },
+                {
+                    "name": "disseminationcontrols",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21",
+                    "type": "U32"
+                },
+                {
+                    "name": "displayonlyto",
+                    "type": "releasabletochoicetype"
+                },
+                {
+                    "name": "fgisourceopen",
+                    "type": "fgisourceopenchoicetype"
+                },
+                {
+                    "name": "fgisourceprotected",
+                    "type": "fgisourceprotectedchoicetype"
+                },
+                {
+                    "name": "releasableto",
+                    "type": "releasabletochoicetype"
+                },
+                {
+                    "name": "nonicmarkings",
+                    "value": "0|1|2|3|4|5|6|7|8",
+                    "type": "U32"
+                },
+                {
+                    "name": "classifiedbylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "classifiedby",
+                    "type": "U8[classifiedbylength]"
+                },
+                {
+                    "name": "compilationreasonlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "compilationreason",
+                    "type": "U8[compilationreasonlength]"
+                },
+                {
+                    "name": "derivativelyclassifiedbylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "derivativelyclassifiedby",
+                    "type": "U8[derivativelyclassifiedbylength]"
+                },
+                {
+                    "name": "classificationreasonlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "classificationreason",
+                    "type": "U8[classificationreasonlength]"
+                },
+                {
+                    "name": "nonuscontrols",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "derivedfromlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "derivedfrom",
+                    "type": "U8[derivedfromlength]"
+                },
+                {
+                    "name": "declassdate",
+                    "type": "U32"
+                },
+                {
+                    "name": "declasseventlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "declassevent",
+                    "type": "U8[declasseventlength]"
+                },
+                {
+                    "name": "declassexception",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24",
+                    "type": "U32"
+                },
+                {
+                    "name": "hasapproximatemarkings",
+                    "type": "I32"
+                },
+                {
+                    "name": "highwaternato",
+                    "value": "0|1|2|3|4",
+                    "type": "U32"
+                },
+                {
+                    "name": "cuibasic",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92",
+                    "type": "U32"
+                },
+                {
+                    "name": "cuispecified",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56",
+                    "type": "U32"
+                },
+                {
+                    "name": "cuidecontroldate",
+                    "type": "U32"
+                },
+                {
+                    "name": "cuidecontroleventlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "cuidecontrolevent",
+                    "type": "U8[cuidecontroleventlength]"
+                },
+                {
+                    "name": "cuicontrolledbylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "cuicontrolledby",
+                    "type": "U8[cuicontrolledbylength]"
+                },
+                {
+                    "name": "cuicontrolledbyofficelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "cuicontrolledbyoffice",
+                    "type": "U8[cuicontrolledbyofficelength]"
+                },
+                {
+                    "name": "cuipoclength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "cuipoc",
+                    "type": "U8[cuipoclength]"
+                },
+                {
+                    "name": "secondbannerline",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "handleviachannelslength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "handleviachannels",
+                    "type": "U8[handleviachannelslength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "requirementinstanceidchoicetype",
+            "members": [
+                {
+                    "name": "effectid",
+                    "type": "effectidtype"
+                },
+                {
+                    "name": "actionid",
+                    "type": "actionidtype"
+                },
+                {
+                    "name": "taskid",
+                    "type": "taskidtype"
+                },
+                {
+                    "name": "capabilitycommandid",
+                    "type": "commandidtype"
+                },
+                {
+                    "name": "responseid",
+                    "type": "responseidtype"
+                },
+                {
+                    "name": "commsupportid",
+                    "type": "commsupportidtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "routeplanreferencetype",
+            "members": [
+                {
+                    "name": "routeplanid",
+                    "type": "routeplanidtype"
+                },
+                {
+                    "name": "missionplanid",
+                    "type": "missionplanidtype"
+                },
+                {
+                    "name": "pathid",
+                    "type": "pathidtype"
+                },
+                {
+                    "name": "segmentid",
+                    "type": "segmentidtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "altitudeconstrainttype",
+            "members": [
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altituderange",
+                    "type": "altituderangetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "accelerationchoicetype",
+            "members": [
+                {
+                    "name": "accelerationvalue",
+                    "type": "D8"
+                },
+                {
+                    "name": "accelerationvaluerange",
+                    "type": "accelerationrangetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "anglechoicetype",
+            "members": [
+                {
+                    "name": "anglevalue",
+                    "type": "D8"
+                },
+                {
+                    "name": "anglevaluerange",
+                    "type": "anglehalfpairtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "turnratetype",
+            "members": [
+                {
+                    "name": "turnratevalue",
+                    "type": "D8"
+                },
+                {
+                    "name": "turnraterange",
+                    "type": "turnraterangetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "turngeometrychoicetype",
+            "members": [
+                {
+                    "name": "turnradiusvalue",
+                    "type": "D8"
+                },
+                {
+                    "name": "turnradiusrange",
+                    "type": "turnradiusrangetype"
+                },
+                {
+                    "name": "bankanglevalue",
+                    "type": "D8"
+                },
+                {
+                    "name": "bankanglerange",
+                    "type": "bankanglerangetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "rollratetype",
+            "members": [
+                {
+                    "name": "rollratevalue",
+                    "type": "D8"
+                },
+                {
+                    "name": "rollraterange",
+                    "type": "bankraterangetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "altitudeholdorconstraintchoicetype",
+            "members": [
+                {
+                    "name": "altitudehold",
+                    "type": "altitudereferencetype"
+                },
+                {
+                    "name": "altitudeholdconstraintlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "altitudeholdconstraint",
+                    "type": "U8[altitudeholdconstraintlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "climbratetype",
+            "members": [
+                {
+                    "name": "climbratevalue",
+                    "type": "D8"
+                },
+                {
+                    "name": "climbraterange",
+                    "type": "climbraterangetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "uncertaintytype",
+            "members": [
+                {
+                    "name": "uncertaintyellipse",
+                    "type": "ellipsetype"
+                },
+                {
+                    "name": "uncertaintyvertical",
+                    "type": "D8"
+                },
+                {
+                    "name": "uncertaintytilt",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "navigationbyvectortype",
+            "members": [
+                {
+                    "name": "vectorframeofreference",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "vector",
+                    "type": "navigationbyvectorchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pathsegmentspeedvaluerangetype",
+            "members": [
+                {
+                    "name": "reference",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "valuerange",
+                    "type": "speedrangetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "jtwokkinematicstype",
+            "members": [
+                {
+                    "name": "epoch",
+                    "type": "U32"
+                },
+                {
+                    "name": "position",
+                    "type": "jtwokpositiontype"
+                },
+                {
+                    "name": "velocity",
+                    "type": "orbitalkinematicsvelocitytype"
+                },
+                {
+                    "name": "acceleration",
+                    "type": "orbitalkinematicsaccelerationtype"
+                },
+                {
+                    "name": "attitude",
+                    "type": "quaterniontype"
+                },
+                {
+                    "name": "covariance",
+                    "type": "covariancematrixtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "gcrskinematicstype",
+            "members": [
+                {
+                    "name": "epoch",
+                    "type": "U32"
+                },
+                {
+                    "name": "position",
+                    "type": "gcrspositiontype"
+                },
+                {
+                    "name": "velocity",
+                    "type": "orbitalkinematicsvelocitytype"
+                },
+                {
+                    "name": "acceleration",
+                    "type": "orbitalkinematicsaccelerationtype"
+                },
+                {
+                    "name": "attitude",
+                    "type": "quaterniontype"
+                },
+                {
+                    "name": "covariance",
+                    "type": "covariancematrixtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "bcrskinematicstype",
+            "members": [
+                {
+                    "name": "epoch",
+                    "type": "U32"
+                },
+                {
+                    "name": "position",
+                    "type": "bcrspositiontype"
+                },
+                {
+                    "name": "velocity",
+                    "type": "orbitalkinematicsvelocitytype"
+                },
+                {
+                    "name": "acceleration",
+                    "type": "orbitalkinematicsaccelerationtype"
+                },
+                {
+                    "name": "attitude",
+                    "type": "quaterniontype"
+                },
+                {
+                    "name": "covariance",
+                    "type": "covariancematrixtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "rtnkinematicstype",
+            "members": [
+                {
+                    "name": "epoch",
+                    "type": "U32"
+                },
+                {
+                    "name": "position",
+                    "type": "rtnpositiontype"
+                },
+                {
+                    "name": "velocity",
+                    "type": "rtnvelocitytype"
+                },
+                {
+                    "name": "acceleration",
+                    "type": "rtnaccelerationtype"
+                },
+                {
+                    "name": "attitude",
+                    "type": "quaterniontype"
+                },
+                {
+                    "name": "covariance",
+                    "type": "covariancematrixtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "arcvolumetype",
+            "members": [
+                {
+                    "name": "radialdelta",
+                    "type": "D8"
+                },
+                {
+                    "name": "alongorbitalarcdelta",
+                    "type": "alongorbitalarcdeltatype"
+                },
+                {
+                    "name": "crosstrackdelta",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "zchoicetype",
+            "members": [
+                {
+                    "name": "z",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitudeoffset",
+                    "type": "altitudeoffsetreferencetype"
+                },
+                {
+                    "name": "absolutealtitude",
+                    "type": "altitudereferencetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "statecovariancenedtype",
+            "members": [
+                {
+                    "name": "positionposition",
+                    "type": "positionpositioncovariancetype"
+                },
+                {
+                    "name": "positionvelocity",
+                    "type": "positionvelocitycovariancetype"
+                },
+                {
+                    "name": "velocityvelocity",
+                    "type": "velocityvelocitycovariancetype"
+                },
+                {
+                    "name": "accelerationacceleration",
+                    "type": "accelerationaccelerationcovariancetype"
+                },
+                {
+                    "name": "positionacceleration",
+                    "type": "positionaccelerationcovariancetype"
+                },
+                {
+                    "name": "velocityacceleration",
+                    "type": "velocityaccelerationcovariancetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "losthreedrelativeanglestype",
+            "members": [
+                {
+                    "name": "losreferenceframe",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "capabilityid",
+                    "type": "capabilityidtype"
+                },
+                {
+                    "name": "losunitvector",
+                    "type": "unitvectortype"
+                },
+                {
+                    "name": "losreferenceframeroll",
+                    "type": "D8"
+                },
+                {
+                    "name": "relativeangleuncertaintylosthreed",
+                    "type": "losthreedrelativeangleuncertaintytype"
+                },
+                {
+                    "name": "losreferenceframerollrate",
+                    "type": "D8"
+                },
+                {
+                    "name": "loscrossverticalanglerate",
+                    "type": "D8"
+                },
+                {
+                    "name": "loscrosshorizontalanglerate",
+                    "type": "D8"
+                },
+                {
+                    "name": "relativeanglerateuncertaintylosthreed",
+                    "type": "losthreedrelativeanglerateuncertaintytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "losazeltype",
+            "members": [
+                {
+                    "name": "azimuth",
+                    "type": "D8"
+                },
+                {
+                    "name": "elevation",
+                    "type": "D8"
+                },
+                {
+                    "name": "rates",
+                    "type": "losazelratestype"
+                }
+            ]
+        },
+        {
+            "struct_name": "coneangletype",
+            "members": [
+                {
+                    "name": "cosconey",
+                    "type": "D8"
+                },
+                {
+                    "name": "cosconez",
+                    "type": "D8"
+                },
+                {
+                    "name": "rates",
+                    "type": "coneangleratestype"
+                }
+            ]
+        },
+        {
+            "struct_name": "slantrangetype",
+            "members": [
+                {
+                    "name": "slantrange",
+                    "type": "D8"
+                },
+                {
+                    "name": "deltaslantrange",
+                    "type": "D8"
+                },
+                {
+                    "name": "ratesandacceleration",
+                    "type": "slantrangeratesandaccelerationtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "arrivaldatauncertaintytype",
+            "members": [
+                {
+                    "name": "variance",
+                    "type": "arrivaldatavariancetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "losvariancetype",
+            "members": [
+                {
+                    "name": "azimuth",
+                    "type": "D8"
+                },
+                {
+                    "name": "elevation",
+                    "type": "D8"
+                },
+                {
+                    "name": "rates",
+                    "type": "losvarianceratestype"
+                }
+            ]
+        },
+        {
+            "struct_name": "loscovariancetype",
+            "members": [
+                {
+                    "name": "azimuthelevation",
+                    "type": "D8"
+                },
+                {
+                    "name": "rates",
+                    "type": "loscovariancesratestype"
+                }
+            ]
+        },
+        {
+            "struct_name": "coneanglevariancetype",
+            "members": [
+                {
+                    "name": "cosconey",
+                    "type": "D8"
+                },
+                {
+                    "name": "cosconez",
+                    "type": "D8"
+                },
+                {
+                    "name": "rates",
+                    "type": "coneanglevarianceratestype"
+                }
+            ]
+        },
+        {
+            "struct_name": "coneanglecovariancetype",
+            "members": [
+                {
+                    "name": "cosconeycosconez",
+                    "type": "D8"
+                },
+                {
+                    "name": "rates",
+                    "type": "coneanglecovarianceratestype"
+                }
+            ]
+        },
+        {
+            "struct_name": "slantrangevariancetype",
+            "members": [
+                {
+                    "name": "slantrange",
+                    "type": "D8"
+                },
+                {
+                    "name": "ratesandacceleration",
+                    "type": "slantrangevarianceratesandaccelerationtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "coneangleslantrangecovariancetype",
+            "members": [
+                {
+                    "name": "slantrangecosconey",
+                    "type": "D8"
+                },
+                {
+                    "name": "slantrangecosconez",
+                    "type": "D8"
+                },
+                {
+                    "name": "rates",
+                    "type": "coneangleslantrangecovarianceratestype"
+                }
+            ]
+        },
+        {
+            "struct_name": "losslantrangecovariancetype",
+            "members": [
+                {
+                    "name": "slantrangeazimuth",
+                    "type": "D8"
+                },
+                {
+                    "name": "slantrangeelevation",
+                    "type": "D8"
+                },
+                {
+                    "name": "rates",
+                    "type": "losslantrangecovarianceratestype"
+                }
+            ]
+        },
+        {
+            "struct_name": "navigationconstraintbyvectortype",
+            "members": [
+                {
+                    "name": "vectorframeofreference",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "vector",
+                    "type": "navigationbyvectorpairchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "navigationstarttype",
+            "members": [
+                {
+                    "name": "assoonaspossiblelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "assoonaspossible",
+                    "type": "U8[assoonaspossiblelength]"
+                },
+                {
+                    "name": "time",
+                    "type": "U32"
+                },
+                {
+                    "name": "distance",
+                    "type": "D8"
+                },
+                {
+                    "name": "routecompletion",
+                    "type": "routeplanreferencetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "airspeedholdtype",
+            "members": [
+                {
+                    "name": "speedchoice",
+                    "type": "pathsegmentspeedchoicetype"
+                },
+                {
+                    "name": "speedoptimization",
+                    "value": "0|1",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "velocitytwoduncertaintytype",
+            "members": [
+                {
+                    "name": "northspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "eastspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "downspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                },
+                {
+                    "name": "uncertainty",
+                    "type": "uncertaintytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "fixedpositiontype",
+            "members": [
+                {
+                    "name": "fixedpoint",
+                    "type": "pointtwodreportedtype"
+                },
+                {
+                    "name": "uncertainty",
+                    "type": "uncertaintytype"
+                },
+                {
+                    "name": "datumerror",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "traceabilitytype",
+            "members": [
+                {
+                    "name": "ordersmetadataid",
+                    "type": "ordersmetadataidtype"
+                },
+                {
+                    "name": "requirement",
+                    "type": "requirementinstanceidchoicetype"
+                },
+                {
+                    "name": "requestid",
+                    "type": "requestidtype"
+                },
+                {
+                    "name": "eeiid",
+                    "type": "eeiidtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "climbtype",
+            "members": [
+                {
+                    "name": "climbrate",
+                    "type": "climbratetype"
+                },
+                {
+                    "name": "climbtype",
+                    "value": "0|1",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "headingholdorconstraintchoicetype",
+            "members": [
+                {
+                    "name": "headinghold",
+                    "type": "navigationbyvectortype"
+                },
+                {
+                    "name": "headingholdconstraintlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "headingholdconstraint",
+                    "type": "U8[headingholdconstraintlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "speedchoicetype",
+            "members": [
+                {
+                    "name": "speedvalue",
+                    "type": "pathsegmentspeedvaluetype"
+                },
+                {
+                    "name": "speedvaluerange",
+                    "type": "pathsegmentspeedvaluerangetype"
+                },
+                {
+                    "name": "machvalue",
+                    "type": "D8"
+                },
+                {
+                    "name": "machrange",
+                    "type": "machrangetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "orbitalkinematicsstandardframechoicetype",
+            "members": [
+                {
+                    "name": "jtwok",
+                    "type": "jtwokkinematicstype"
+                },
+                {
+                    "name": "gcrs",
+                    "type": "gcrskinematicstype"
+                },
+                {
+                    "name": "bcrs",
+                    "type": "bcrskinematicstype"
+                }
+            ]
+        },
+        {
+            "struct_name": "shapethreedchoicetype",
+            "members": [
+                {
+                    "name": "sphere",
+                    "type": "spheretype"
+                },
+                {
+                    "name": "dome",
+                    "type": "dometype"
+                },
+                {
+                    "name": "ellipsoid",
+                    "type": "ellipsoidtype"
+                },
+                {
+                    "name": "cylinder",
+                    "type": "cylindertype"
+                },
+                {
+                    "name": "cone",
+                    "type": "conetype"
+                },
+                {
+                    "name": "complexcone",
+                    "type": "complexconetype"
+                },
+                {
+                    "name": "rectangularcone",
+                    "type": "rectangularconetype"
+                },
+                {
+                    "name": "arcvolume",
+                    "type": "arcvolumetype"
+                },
+                {
+                    "name": "incraperiodvolume",
+                    "type": "incraperiodvolumetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "relativeoffsettwodtype",
+            "members": [
+                {
+                    "name": "rotation",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "xyoffsets",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "x",
+                    "type": "D8"
+                },
+                {
+                    "name": "y",
+                    "type": "D8"
+                },
+                {
+                    "name": "z",
+                    "type": "zchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "relativeoffsetthreedtype",
+            "members": [
+                {
+                    "name": "rotation",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "xyoffsets",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "x",
+                    "type": "D8"
+                },
+                {
+                    "name": "y",
+                    "type": "D8"
+                },
+                {
+                    "name": "z",
+                    "type": "zchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "losthreedkinematicstype",
+            "members": [
+                {
+                    "name": "relativeangleslosthreed",
+                    "type": "losthreedrelativeanglestype"
+                },
+                {
+                    "name": "relativeslantrangelosthreed",
+                    "type": "losthreedrelativeslantrangetype"
+                },
+                {
+                    "name": "losthreedorientationcovariance",
+                    "type": "losthreedcovariancetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "losmeasurementtype",
+            "members": [
+                {
+                    "name": "lineofsight",
+                    "type": "losazeltype"
+                },
+                {
+                    "name": "coneangle",
+                    "type": "coneangletype"
+                },
+                {
+                    "name": "arrivaldata",
+                    "type": "arrivaldatatype"
+                },
+                {
+                    "name": "slantrange",
+                    "type": "slantrangetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "losvarianceandcovariancetype",
+            "members": [
+                {
+                    "name": "variance",
+                    "type": "losvariancetype"
+                },
+                {
+                    "name": "covariance",
+                    "type": "loscovariancetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "coneangleuncertaintytype",
+            "members": [
+                {
+                    "name": "variance",
+                    "type": "coneanglevariancetype"
+                },
+                {
+                    "name": "covariance",
+                    "type": "coneanglecovariancetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "slantrangeuncertaintytype",
+            "members": [
+                {
+                    "name": "variance",
+                    "type": "slantrangevariancetype"
+                },
+                {
+                    "name": "covariance",
+                    "type": "slantrangecovariancetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "coneangleslantrangeuncertaintytype",
+            "members": [
+                {
+                    "name": "covariance",
+                    "type": "coneangleslantrangecovariancetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "losslantrangeuncertaintytype",
+            "members": [
+                {
+                    "name": "covariance",
+                    "type": "losslantrangecovariancetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "airspeedholdorconstraintchoicetype",
+            "members": [
+                {
+                    "name": "airspeedhold",
+                    "type": "airspeedholdtype"
+                },
+                {
+                    "name": "airspeedholdconstraintlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "airspeedholdconstraint",
+                    "type": "U8[airspeedholdconstraintlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "orbitalkinematicsobjectrelativetype",
+            "members": [
+                {
+                    "name": "relativeobjectkinematics",
+                    "type": "rtnkinematicstype"
+                },
+                {
+                    "name": "referenceobjectkinematics",
+                    "type": "orbitalkinematicsstandardframechoicetype"
+                },
+                {
+                    "name": "referenceasset",
+                    "type": "assettype"
+                }
+            ]
+        },
+        {
+            "struct_name": "polygonrelativetype",
+            "members": [
+                {
+                    "name": "referenceframeid",
+                    "type": "referenceframeidtype"
+                },
+                {
+                    "name": "vertex",
+                    "type": "relativeoffsettwodtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pathsegmentspeedtype",
+            "members": [
+                {
+                    "name": "speedchoice",
+                    "type": "speedchoicetype"
+                },
+                {
+                    "name": "speedoptimization",
+                    "value": "0|1",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointtwodrelativetype",
+            "members": [
+                {
+                    "name": "referenceframeid",
+                    "type": "referenceframeidtype"
+                },
+                {
+                    "name": "relativeoffset",
+                    "type": "relativeoffsettwodtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "linerelativetype",
+            "members": [
+                {
+                    "name": "referenceframeid",
+                    "type": "referenceframeidtype"
+                },
+                {
+                    "name": "positionoffset",
+                    "type": "relativeoffsettwodtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointthreedrelativetype",
+            "members": [
+                {
+                    "name": "referenceframeid",
+                    "type": "referenceframeidtype"
+                },
+                {
+                    "name": "relativeoffset",
+                    "type": "relativeoffsetthreedtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "losmeasurementuncertaintytype",
+            "members": [
+                {
+                    "name": "losuncertainty",
+                    "type": "losvarianceandcovariancetype"
+                },
+                {
+                    "name": "coneangleuncertainty",
+                    "type": "coneangleuncertaintytype"
+                },
+                {
+                    "name": "arrivaldatauncertainty",
+                    "type": "arrivaldatauncertaintytype"
+                },
+                {
+                    "name": "slantrangeuncertainty",
+                    "type": "slantrangeuncertaintytype"
+                },
+                {
+                    "name": "coneangleslantrangeuncertainty",
+                    "type": "coneangleslantrangeuncertaintytype"
+                },
+                {
+                    "name": "losslantrangeuncertainty",
+                    "type": "losslantrangeuncertaintytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "autopilotnavigationtype",
+            "members": [
+                {
+                    "name": "airspeedhold",
+                    "type": "airspeedholdorconstraintchoicetype"
+                },
+                {
+                    "name": "headinghold",
+                    "type": "headingholdorconstraintchoicetype"
+                },
+                {
+                    "name": "altitudehold",
+                    "type": "altitudeholdorconstraintchoicetype"
+                },
+                {
+                    "name": "rollhold",
+                    "type": "rollholdorconstraintchoicetype"
+                },
+                {
+                    "name": "pitchhold",
+                    "type": "pitchholdorconstraintchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "orbitalkinematicschoicetype",
+            "members": [
+                {
+                    "name": "standardframe",
+                    "type": "orbitalkinematicsstandardframechoicetype"
+                },
+                {
+                    "name": "orbitingobjectrelative",
+                    "type": "orbitalkinematicsobjectrelativetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "polygonpointchoicetype",
+            "members": [
+                {
+                    "name": "pointtwod",
+                    "type": "pointtwodtype"
+                },
+                {
+                    "name": "relativepolygon",
+                    "type": "polygonrelativetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointchoicetype",
+            "members": [
+                {
+                    "name": "absolutepoint",
+                    "type": "pointtwodtype"
+                },
+                {
+                    "name": "relativepoint",
+                    "type": "pointtwodrelativetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "linepointchoicetype",
+            "members": [
+                {
+                    "name": "point",
+                    "type": "linepointtwodtype"
+                },
+                {
+                    "name": "relativepoint",
+                    "type": "linerelativetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointchoicethreedtype",
+            "members": [
+                {
+                    "name": "absolutepoint",
+                    "type": "pointthreedtype"
+                },
+                {
+                    "name": "relativepoint",
+                    "type": "pointthreedrelativetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "losmeasurementuncertaintyerrorsourcestype",
+            "members": [
+                {
+                    "name": "rootmeansquare",
+                    "type": "losmeasurementuncertaintytype"
+                },
+                {
+                    "name": "bias",
+                    "type": "losmeasurementuncertaintytype"
+                },
+                {
+                    "name": "random",
+                    "type": "losmeasurementuncertaintytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "circletype",
+            "members": [
+                {
+                    "name": "pointchoice",
+                    "type": "pointchoicetype"
+                },
+                {
+                    "name": "radius",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "polygontype",
+            "members": [
+                {
+                    "name": "lineprojection",
+                    "value": "0|1",
+                    "type": "U32"
+                },
+                {
+                    "name": "boundingpolygon",
+                    "type": "polygonpointchoicetype"
+                },
+                {
+                    "name": "interiorpolygon",
+                    "type": "polygonpointchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "locatedellipsetype",
+            "members": [
+                {
+                    "name": "semimajoraxislength",
+                    "type": "D8"
+                },
+                {
+                    "name": "semiminoraxislength",
+                    "type": "D8"
+                },
+                {
+                    "name": "orientation",
+                    "type": "D8"
+                },
+                {
+                    "name": "centerpointchoice",
+                    "type": "pointchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "locatedrectangletype",
+            "members": [
+                {
+                    "name": "width",
+                    "type": "D8"
+                },
+                {
+                    "name": "height",
+                    "type": "D8"
+                },
+                {
+                    "name": "orientation",
+                    "type": "D8"
+                },
+                {
+                    "name": "centerpointchoice",
+                    "type": "pointchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "slantrangeareatype",
+            "members": [
+                {
+                    "name": "radius",
+                    "type": "slantrangeconstraintstype"
+                },
+                {
+                    "name": "azimuthextent",
+                    "type": "anglepairtype"
+                },
+                {
+                    "name": "orientation",
+                    "type": "D8"
+                },
+                {
+                    "name": "pointchoice",
+                    "type": "pointchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "opvolumekinematicstype",
+            "members": [
+                {
+                    "name": "pointchoice",
+                    "type": "pointchoicetype"
+                },
+                {
+                    "name": "velocity",
+                    "type": "velocitytwodtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointtwodreferencetype",
+            "members": [
+                {
+                    "name": "pointchoice",
+                    "type": "pointchoicetype"
+                },
+                {
+                    "name": "referenceobject",
+                    "type": "referenceobjecttype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointtargettype",
+            "members": [
+                {
+                    "name": "point",
+                    "type": "pointchoicetype"
+                },
+                {
+                    "name": "velocity",
+                    "type": "velocitytwodtype"
+                },
+                {
+                    "name": "uncertainty",
+                    "type": "uncertaintytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "linetargettype",
+            "members": [
+                {
+                    "name": "pointchoice",
+                    "type": "linepointchoicetype"
+                },
+                {
+                    "name": "lineprojection",
+                    "value": "0|1",
+                    "type": "U32"
+                },
+                {
+                    "name": "leftwidth",
+                    "type": "D8"
+                },
+                {
+                    "name": "rightwidth",
+                    "type": "D8"
+                },
+                {
+                    "name": "minaltitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "maxaltitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "locidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "locidentifier",
+                    "type": "U8[locidentifierlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "hovertype",
+            "members": [
+                {
+                    "name": "pointthreed",
+                    "type": "pointchoicethreedtype"
+                },
+                {
+                    "name": "duration",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "losmeasurementanduncertaintytype",
+            "members": [
+                {
+                    "name": "measurement",
+                    "type": "losmeasurementtype"
+                },
+                {
+                    "name": "covariance",
+                    "type": "losmeasurementuncertaintyerrorsourcestype"
+                },
+                {
+                    "name": "losuncertainty",
+                    "type": "losuncertaintytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "boundarytype",
+            "members": [
+                {
+                    "name": "polygon",
+                    "type": "polygontype"
+                },
+                {
+                    "name": "ellipse",
+                    "type": "locatedellipsetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "orbittype",
+            "members": [
+                {
+                    "name": "orbittype",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "circle",
+                    "type": "circletype"
+                },
+                {
+                    "name": "turndirection",
+                    "value": "0|1",
+                    "type": "U32"
+                },
+                {
+                    "name": "duration",
+                    "type": "orbitdurationtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "areachoicetype",
+            "members": [
+                {
+                    "name": "polygon",
+                    "type": "polygontype"
+                },
+                {
+                    "name": "ellipse",
+                    "type": "locatedellipsetype"
+                },
+                {
+                    "name": "rectangle",
+                    "type": "locatedrectangletype"
+                },
+                {
+                    "name": "slantrangearea",
+                    "type": "slantrangeareatype"
+                }
+            ]
+        },
+        {
+            "struct_name": "loschoicetype",
+            "members": [
+                {
+                    "name": "losazel",
+                    "type": "losmeasurementanduncertaintytype"
+                },
+                {
+                    "name": "losthreedkinematics",
+                    "type": "losthreedkinematicstype"
+                }
+            ]
+        },
+        {
+            "struct_name": "endurancefootprinttype",
+            "members": [
+                {
+                    "name": "boundary",
+                    "type": "boundarytype"
+                },
+                {
+                    "name": "referencealtitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "duration",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "zonetype",
+            "members": [
+                {
+                    "name": "shape",
+                    "type": "areachoicetype"
+                },
+                {
+                    "name": "minaltitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "maxaltitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "loitertype",
+            "members": [
+                {
+                    "name": "orbit",
+                    "type": "orbittype"
+                },
+                {
+                    "name": "hover",
+                    "type": "hovertype"
+                }
+            ]
+        },
+        {
+            "struct_name": "zoneexternaltype",
+            "members": [
+                {
+                    "name": "shape",
+                    "type": "areachoicetype"
+                },
+                {
+                    "name": "minaltitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "maxaltitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "dsaidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "dsaidentifier",
+                    "type": "U8[dsaidentifierlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "relativepositiontype",
+            "members": [
+                {
+                    "name": "referencepoint",
+                    "type": "pointtwodreferencetype"
+                },
+                {
+                    "name": "los",
+                    "type": "loschoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "endurancetype",
+            "members": [
+                {
+                    "name": "fuel",
+                    "type": "D8"
+                },
+                {
+                    "name": "duration",
+                    "type": "U32"
+                },
+                {
+                    "name": "durationend",
+                    "type": "U32"
+                },
+                {
+                    "name": "percent",
+                    "type": "D8"
+                },
+                {
+                    "name": "footprint",
+                    "type": "endurancefootprinttype"
+                }
+            ]
+        },
+        {
+            "struct_name": "entitypositiontype",
+            "members": [
+                {
+                    "name": "fixedpositiontype",
+                    "type": "fixedpositiontype"
+                },
+                {
+                    "name": "relativeposition",
+                    "type": "relativepositiontype"
+                },
+                {
+                    "name": "zone",
+                    "type": "zonetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "enduranceremainingtype",
+            "members": [
+                {
+                    "name": "enduranceremaining",
+                    "type": "endurancetype"
+                },
+                {
+                    "name": "logicaloperator",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "kinematicstype",
+            "members": [
+                {
+                    "name": "kinematicstimestamp",
+                    "type": "U32"
+                },
+                {
+                    "name": "position",
+                    "type": "entitypositiontype"
+                },
+                {
+                    "name": "velocity",
+                    "type": "velocitytwoduncertaintytype"
+                },
+                {
+                    "name": "acceleration",
+                    "type": "accelerationthreedtype"
+                },
+                {
+                    "name": "statecovariance",
+                    "type": "statecovariancenedtype"
+                },
+                {
+                    "name": "orientation",
+                    "type": "orientationtype"
+                },
+                {
+                    "name": "orientationcovariance",
+                    "type": "orientationcovariancetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "navigationendtype",
+            "members": [
+                {
+                    "name": "time",
+                    "type": "U32"
+                },
+                {
+                    "name": "duration",
+                    "type": "U32"
+                },
+                {
+                    "name": "distance",
+                    "type": "D8"
+                },
+                {
+                    "name": "routecompletion",
+                    "type": "routeplanreferencetype"
+                },
+                {
+                    "name": "remainingendurance",
+                    "type": "enduranceremainingtype"
+                },
+                {
+                    "name": "contingencylevel",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "kinematicsmultistandardtype",
+            "members": [
+                {
+                    "name": "orbital",
+                    "type": "orbitalkinematicschoicetype"
+                },
+                {
+                    "name": "wgs",
+                    "type": "kinematicstype"
+                },
+                {
+                    "name": "deltaorbitalplanetolerance",
+                    "type": "anglehalfpairtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "navigationconstraintsbasetype",
+            "members": [
+                {
+                    "name": "altitude",
+                    "type": "altitudeconstrainttype"
+                },
+                {
+                    "name": "heading",
+                    "type": "navigationconstraintbyvectortype"
+                },
+                {
+                    "name": "speed",
+                    "type": "pathsegmentspeedtype"
+                },
+                {
+                    "name": "acceleration",
+                    "type": "accelerationchoicetype"
+                },
+                {
+                    "name": "bodyframeacceleration",
+                    "type": "bodyframeaccelerationtype"
+                },
+                {
+                    "name": "pitch",
+                    "type": "anglechoicetype"
+                },
+                {
+                    "name": "climbrate",
+                    "type": "climbtype"
+                },
+                {
+                    "name": "turnrate",
+                    "type": "turnratetype"
+                },
+                {
+                    "name": "turngeometry",
+                    "type": "turngeometrychoicetype"
+                },
+                {
+                    "name": "roll",
+                    "type": "anglechoicetype"
+                },
+                {
+                    "name": "rollrate",
+                    "type": "rollratetype"
+                },
+                {
+                    "name": "trackerror",
+                    "type": "trackerrortype"
+                },
+                {
+                    "name": "endurance",
+                    "type": "endurancebasetype"
+                },
+                {
+                    "name": "start",
+                    "type": "navigationstarttype"
+                },
+                {
+                    "name": "end",
+                    "type": "navigationendtype"
+                },
+                {
+                    "name": "ingress",
+                    "type": "anglepairtype"
+                },
+                {
+                    "name": "egress",
+                    "type": "anglepairtype"
+                },
+                {
+                    "name": "reconnect",
+                    "type": "routeplanreferencetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "kinematicsoptionstype",
+            "members": [
+                {
+                    "name": "referenceasset",
+                    "type": "assettype"
+                },
+                {
+                    "name": "kinematicsoverride",
+                    "type": "kinematicsmultistandardtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "rtnlocalpositiontype",
+            "members": [
+                {
+                    "name": "position",
+                    "type": "rtnpositiontype"
+                },
+                {
+                    "name": "attitude",
+                    "type": "quaterniontype"
+                },
+                {
+                    "name": "relativekinematics",
+                    "type": "kinematicsoptionstype"
+                }
+            ]
+        },
+        {
+            "struct_name": "kinematicschoicetype",
+            "members": [
+                {
+                    "name": "volumekinematics",
+                    "type": "opvolumekinematicstype"
+                },
+                {
+                    "name": "orbitalkinematics",
+                    "type": "orbitalkinematicschoicetype"
+                },
+                {
+                    "name": "localbodyposition",
+                    "type": "rtnlocalpositiontype"
+                }
+            ]
+        },
+        {
+            "struct_name": "geometricvolumetype",
+            "members": [
+                {
+                    "name": "shape",
+                    "type": "shapethreedchoicetype"
+                },
+                {
+                    "name": "kinematicschoice",
+                    "type": "kinematicschoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "opvolumetype",
+            "members": [
+                {
+                    "name": "geometricvolume",
+                    "type": "geometricvolumetype"
+                },
+                {
+                    "name": "geocentricvolume",
+                    "type": "geocentricvolumetype"
+                },
+                {
+                    "name": "orbitregime",
+                    "type": "orbitregimetype"
+                },
+                {
+                    "name": "orbitaltitude",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "qualitative",
+                    "value": "0|1|2",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "targettype",
+            "members": [
+                {
+                    "name": "entityid",
+                    "type": "entityidtype"
+                },
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "operatorlocationofinterestid",
+                    "type": "operatorlocationofinterestidtype"
+                },
+                {
+                    "name": "signalid",
+                    "type": "signalidtype"
+                },
+                {
+                    "name": "oppointid",
+                    "type": "oppointidtype"
+                },
+                {
+                    "name": "opzoneid",
+                    "type": "opzoneidtype"
+                },
+                {
+                    "name": "opvolumeid",
+                    "type": "opvolumeidtype"
+                },
+                {
+                    "name": "oplineid",
+                    "type": "oplineidtype"
+                },
+                {
+                    "name": "pointtarget",
+                    "type": "pointtargettype"
+                },
+                {
+                    "name": "orbitpointtarget",
+                    "type": "orbitalkinematicschoicetype"
+                },
+                {
+                    "name": "zonetarget",
+                    "type": "zoneexternaltype"
+                },
+                {
+                    "name": "volumetarget",
+                    "type": "opvolumetype"
+                },
+                {
+                    "name": "linetarget",
+                    "type": "linetargettype"
+                }
+            ]
+        },
+        {
+            "struct_name": "slavedtotargettype",
+            "members": [
+                {
+                    "name": "targettype",
+                    "type": "targettype"
+                },
+                {
+                    "name": "targetoffset",
+                    "type": "targetoffsettype"
+                }
+            ]
+        },
+        {
+            "struct_name": "slavednavigationtype",
+            "members": [
+                {
+                    "name": "slavedtotarget",
+                    "type": "slavedtotargettype"
+                },
+                {
+                    "name": "slavedbyserviceid",
+                    "type": "serviceidtype"
+                },
+                {
+                    "name": "slavedbycapabilityid",
+                    "type": "capabilityidtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "navigationchoicetype",
+            "members": [
+                {
+                    "name": "missionplannavigation",
+                    "type": "routeplanreferencetype"
+                },
+                {
+                    "name": "fixedpositionnavigation",
+                    "type": "targettype"
+                },
+                {
+                    "name": "slavednavigation",
+                    "type": "slavednavigationtype"
+                },
+                {
+                    "name": "autopilotnavigation",
+                    "type": "autopilotnavigationtype"
+                },
+                {
+                    "name": "ownshipnavigation",
+                    "type": "ownshipnavigationtype"
+                },
+                {
+                    "name": "loiternavigation",
+                    "type": "loitertype"
+                }
+            ]
+        },
+        {
+            "struct_name": "navigationcommanddetailstype",
+            "members": [
+                {
+                    "name": "capabilitytype",
+                    "type": "navigationchoicetype"
+                },
+                {
+                    "name": "tactic",
+                    "type": "foreignkeytype"
+                },
+                {
+                    "name": "source",
+                    "value": "0|1|2|3|4",
+                    "type": "U32"
+                },
+                {
+                    "name": "remarks",
+                    "type": "remarkstype"
+                },
+                {
+                    "name": "constraints",
+                    "type": "navigationconstraintsbasetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "navigationcapabilitycommandtype",
+            "members": [
+                {
+                    "name": "commandid",
+                    "type": "commandidtype"
+                },
+                {
+                    "name": "commandstate",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "capabilityid",
+                    "type": "capabilityidtype"
+                },
+                {
+                    "name": "ranking",
+                    "type": "capabilitycommandrankingtype"
+                },
+                {
+                    "name": "temporalconstraints",
+                    "type": "capabilitycommandtemporalconstraintstype"
+                },
+                {
+                    "name": "overriderejectionlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "overriderejection",
+                    "type": "U8[overriderejectionlength]"
+                },
+                {
+                    "name": "traceability",
+                    "type": "traceabilitytype"
+                },
+                {
+                    "name": "classification",
+                    "type": "securityinformationtype"
+                },
+                {
+                    "name": "commanddetails",
+                    "type": "navigationcommanddetailstype"
+                }
+            ]
+        },
+        {
+            "struct_name": "navigationcommandtype",
+            "members": [
+                {
+                    "name": "capability",
+                    "type": "navigationcapabilitycommandtype"
+                },
+                {
+                    "name": "activity",
+                    "type": "navigationactivitycommandtype"
+                }
+            ]
+        }
+    ],
+    "protocol_types": [
+        {
+            "name": "navigationcommandmdt",
+            "fields": [
+                {
+                    "name": "command",
+                    "type": "navigationcommandtype"
+                }
+            ]
+        }
+    ]
+}

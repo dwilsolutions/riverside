@@ -1,0 +1,2325 @@
+
+{
+    "structs": [
+        {
+            "struct_name": "opdescriptiontype",
+            "members": [
+                {
+                    "name": "namexlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "namex",
+                    "type": "U8[namexlength]"
+                },
+                {
+                    "name": "remarkslength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "remarks",
+                    "type": "U8[remarkslength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "missiontraceabilitytype",
+            "members": [
+                {
+                    "name": "missiontraceability",
+                    "value": "0|1|2|3|4",
+                    "type": "U32"
+                },
+                {
+                    "name": "traceabilitydescriptionlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "traceabilitydescription",
+                    "type": "U8[traceabilitydescriptionlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "timefunctiontype",
+            "members": [
+                {
+                    "name": "function",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15",
+                    "type": "U32"
+                },
+                {
+                    "name": "valuex",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "systemidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "opzoneidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "datetimerangetype",
+            "members": [
+                {
+                    "name": "begin",
+                    "type": "U32"
+                },
+                {
+                    "name": "end",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "constrainedentryexittype",
+            "members": [
+                {
+                    "name": "gateindex",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "opzonenoflytype",
+            "members": [
+                {
+                    "name": "percentrestricted",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "velocitytwodtype",
+            "members": [
+                {
+                    "name": "northspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "eastspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "downspeed",
+                    "type": "D8"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "serviceidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                },
+                {
+                    "name": "serviceversionlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "serviceversion",
+                    "type": "U8[serviceversionlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "activityidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "networklinkidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "comparablerankingtype",
+            "members": [
+                {
+                    "name": "priority",
+                    "type": "U32"
+                },
+                {
+                    "name": "precedencewithinpriority",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "frequencyrangetype",
+            "members": [
+                {
+                    "name": "min",
+                    "type": "D8"
+                },
+                {
+                    "name": "max",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointthreedtype",
+            "members": [
+                {
+                    "name": "latitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "longitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "percentrangetype",
+            "members": [
+                {
+                    "name": "minimum",
+                    "type": "D8"
+                },
+                {
+                    "name": "maximum",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "entityidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "iffmodetype",
+            "members": [
+                {
+                    "name": "code",
+                    "value": "(0, 4095)",
+                    "type": "U32"
+                },
+                {
+                    "name": "enabled",
+                    "type": "I32"
+                }
+            ]
+        },
+        {
+            "struct_name": "iffmodefourtype",
+            "members": [
+                {
+                    "name": "modefourindicator",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "modefourcode",
+                    "value": "0|1|2",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "iffmodestype",
+            "members": [
+                {
+                    "name": "icao",
+                    "value": "(0, 16777215)",
+                    "type": "U32"
+                },
+                {
+                    "name": "aircraftidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "aircraftidentifier",
+                    "type": "U8[aircraftidentifierlength]"
+                },
+                {
+                    "name": "enabled",
+                    "type": "I32"
+                }
+            ]
+        },
+        {
+            "struct_name": "iffmodectype",
+            "members": [
+                {
+                    "name": "codelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "code",
+                    "type": "U8[codelength]"
+                },
+                {
+                    "name": "enabled",
+                    "type": "I32"
+                }
+            ]
+        },
+        {
+            "struct_name": "platformidentitytype",
+            "members": [
+                {
+                    "name": "platformtype",
+                    "type": "U32"
+                },
+                {
+                    "name": "platformtypecategory",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "threattype",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21",
+                    "type": "U32"
+                },
+                {
+                    "name": "unittype",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30",
+                    "type": "U32"
+                },
+                {
+                    "name": "launchcapability",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "submarineconfidencelevel",
+                    "value": "0|1|2|3|4|5|6|7|8|9",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "specificidentitytype",
+            "members": [
+                {
+                    "name": "specifictype",
+                    "type": "U32"
+                },
+                {
+                    "name": "specifictypecategory",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "sitetype",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60",
+                    "type": "U32"
+                },
+                {
+                    "name": "specifictypemodellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "specifictypemodel",
+                    "type": "U8[specifictypemodellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "cloudstype",
+            "members": [
+                {
+                    "name": "cloudcover",
+                    "value": "0|1|2|3|4",
+                    "type": "U32"
+                },
+                {
+                    "name": "cloudcoveramplification",
+                    "value": "(0, 8)",
+                    "type": "U8"
+                },
+                {
+                    "name": "cloudfloor",
+                    "type": "D8"
+                },
+                {
+                    "name": "cloudceiling",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "weathereffectstype",
+            "members": [
+                {
+                    "name": "roadstate",
+                    "value": "0|1|2|3|4|5|6",
+                    "type": "U32"
+                },
+                {
+                    "name": "terrainstate",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "seastate",
+                    "value": "0|1|2|3|4|5|6|7|8|9",
+                    "type": "U32"
+                },
+                {
+                    "name": "seastateamplification",
+                    "value": "0|1",
+                    "type": "U32"
+                },
+                {
+                    "name": "systemicingstate",
+                    "type": "I32"
+                }
+            ]
+        },
+        {
+            "struct_name": "slantrangeconstraintstype",
+            "members": [
+                {
+                    "name": "min",
+                    "type": "D8"
+                },
+                {
+                    "name": "max",
+                    "type": "D8"
+                },
+                {
+                    "name": "absolutelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "absolute",
+                    "type": "U8[absolutelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "anglepairtype",
+            "members": [
+                {
+                    "name": "min",
+                    "type": "D8"
+                },
+                {
+                    "name": "max",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "countrycodetype",
+            "members": [
+                {
+                    "name": "countryname",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99|100|101|102|103|104|105|106|107|108|109|110|111|112|113|114|115|116|117|118|119|120|121|122|123|124|125|126|127|128|129|130|131|132|133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152|153|154|155|156|157|158|159|160|161|162|163|164|165|166|167|168|169|170|171|172|173|174|175|176|177|178|179|180|181|182|183|184|185|186|187|188|189|190|191|192|193|194|195|196|197|198|199|200|201|202|203|204|205|206|207|208|209|210|211|212|213|214|215|216|217|218|219|220|221|222|223|224|225|226|227|228|229|230|231|232|233|234|235|236|237|238|239|240|241|242|243|244|245|246|247|248|249|250|251|252|253|254|255|256|257|258|259|260|261|262|263|264|265|266|267|268|269|270|271|272|273|274|275|276|277|278|279",
+                    "type": "U32"
+                },
+                {
+                    "name": "operatoruniqueassetname",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "foreignkeytype",
+            "members": [
+                {
+                    "name": "keylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "key",
+                    "type": "U8[keylength]"
+                },
+                {
+                    "name": "systemnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "systemname",
+                    "type": "U8[systemnamelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "orbitregimetype",
+            "members": [
+                {
+                    "name": "orbitregime",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10",
+                    "type": "U32"
+                },
+                {
+                    "name": "orbitclass",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "callsigntype",
+            "members": [
+                {
+                    "name": "keylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "key",
+                    "type": "U8[keylength]"
+                },
+                {
+                    "name": "systemnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "systemname",
+                    "type": "U8[systemnamelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "usmtfaircraftcallsignpairtype",
+            "members": [
+                {
+                    "name": "callsignlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "callsign",
+                    "type": "U8[callsignlength]"
+                },
+                {
+                    "name": "abbreviatedcallsignlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "abbreviatedcallsign",
+                    "type": "U8[abbreviatedcallsignlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "aistype",
+            "members": [
+                {
+                    "name": "mmsinumberlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "mmsinumber",
+                    "type": "U8[mmsinumberlength]"
+                },
+                {
+                    "name": "imonumberlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "imonumber",
+                    "type": "U8[imonumberlength]"
+                },
+                {
+                    "name": "vesselnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "vesselname",
+                    "type": "U8[vesselnamelength]"
+                },
+                {
+                    "name": "callsignlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "callsign",
+                    "type": "U8[callsignlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "eobfacilitypintype",
+            "members": [
+                {
+                    "name": "keylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "key",
+                    "type": "U8[keylength]"
+                },
+                {
+                    "name": "systemnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "systemname",
+                    "type": "U8[systemnamelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "idtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "basicencyclopedianumbertype",
+            "members": [
+                {
+                    "name": "worldareacodelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "worldareacode",
+                    "type": "U8[worldareacodelength]"
+                },
+                {
+                    "name": "recordoriginatorlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "recordoriginator",
+                    "type": "U8[recordoriginatorlength]"
+                },
+                {
+                    "name": "oneupnumberlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "oneupnumber",
+                    "type": "U8[oneupnumberlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "eobequipmenttype",
+            "members": [
+                {
+                    "name": "keylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "key",
+                    "type": "U8[keylength]"
+                },
+                {
+                    "name": "systemnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "systemname",
+                    "type": "U8[systemnamelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "windmagnitudetype",
+            "members": [
+                {
+                    "name": "winddirection",
+                    "type": "D8"
+                },
+                {
+                    "name": "windspeed",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "altituderangetype",
+            "members": [
+                {
+                    "name": "min",
+                    "type": "D8"
+                },
+                {
+                    "name": "max",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "referenceframeidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "internationaldesignatortype",
+            "members": [
+                {
+                    "name": "year",
+                    "type": "U8"
+                },
+                {
+                    "name": "number",
+                    "type": "U32"
+                },
+                {
+                    "name": "piecelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "piece",
+                    "type": "U8[piecelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "missioninformationtype",
+            "members": [
+                {
+                    "name": "missionnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "missionname",
+                    "type": "U8[missionnamelength]"
+                },
+                {
+                    "name": "missiondescriptionlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "missiondescription",
+                    "type": "U8[missiondescriptionlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "altitudeoffsetreferencetype",
+            "members": [
+                {
+                    "name": "altitudeoffsetreference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "altitudeoffset",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "altitudereferencetype",
+            "members": [
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "weekdayintervaltype",
+            "members": [
+                {
+                    "name": "timespan",
+                    "type": "datetimerangetype"
+                },
+                {
+                    "name": "weekday",
+                    "value": "0|1|2|3|4|5|6",
+                    "type": "U32"
+                },
+                {
+                    "name": "weeklyintervalperiod",
+                    "type": "U32"
+                },
+                {
+                    "name": "starttime",
+                    "type": "U32"
+                },
+                {
+                    "name": "duration",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "linkonesixtrackidentifiertype",
+            "members": [
+                {
+                    "name": "tracknumberlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "tracknumber",
+                    "type": "U8[tracknumberlength]"
+                },
+                {
+                    "name": "externalinterfaceid",
+                    "type": "networklinkidtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "radaremitteridentitytype",
+            "members": [
+                {
+                    "name": "elnotidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "elnotidentifier",
+                    "type": "U8[elnotidentifierlength]"
+                },
+                {
+                    "name": "dieqpkey",
+                    "type": "foreignkeytype"
+                },
+                {
+                    "name": "radarmode",
+                    "value": "0|1|2|3|4|5|6|7|8",
+                    "type": "U32"
+                },
+                {
+                    "name": "trackmode",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "emitterindex",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "communicationsemitteridentitytype",
+            "members": [
+                {
+                    "name": "cenotidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "cenotidentifier",
+                    "type": "U8[cenotidentifierlength]"
+                },
+                {
+                    "name": "commmode",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10",
+                    "type": "U32"
+                },
+                {
+                    "name": "emitterindex",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "jammeremitteridentitytype",
+            "members": [
+                {
+                    "name": "elnotidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "elnotidentifier",
+                    "type": "U8[elnotidentifierlength]"
+                },
+                {
+                    "name": "receivedpower",
+                    "type": "D8"
+                },
+                {
+                    "name": "jammode",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19",
+                    "type": "U32"
+                },
+                {
+                    "name": "emitterindex",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "missileemitteridentitytype",
+            "members": [
+                {
+                    "name": "elnotidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "elnotidentifier",
+                    "type": "U8[elnotidentifierlength]"
+                },
+                {
+                    "name": "missilemode",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "emitterindex",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "systemmessageidentifiertype",
+            "members": [
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "serviceid",
+                    "type": "serviceidtype"
+                },
+                {
+                    "name": "activityid",
+                    "type": "activityidtype"
+                },
+                {
+                    "name": "networklinkid",
+                    "type": "networklinkidtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "opzonefilterareapet",
+            "members": [
+                {
+                    "name": "filtertype",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "ranking",
+                    "type": "comparablerankingtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "opzonejammingtype",
+            "members": [
+                {
+                    "name": "allowed",
+                    "type": "I32"
+                },
+                {
+                    "name": "restrictedfrequencyband",
+                    "type": "frequencyrangetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "ingressegresstype",
+            "members": [
+                {
+                    "name": "entrypoint",
+                    "type": "pointthreedtype"
+                },
+                {
+                    "name": "exitpoint",
+                    "type": "pointthreedtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "iffmodefivetype",
+            "members": [
+                {
+                    "name": "countrycode",
+                    "type": "countrycodetype"
+                },
+                {
+                    "name": "pin",
+                    "value": "(0, 16383)",
+                    "type": "U32"
+                },
+                {
+                    "name": "interrogationstatus",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "modeonecode",
+                    "value": "(0, 4095)",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "storetype",
+            "members": [
+                {
+                    "name": "storetype",
+                    "type": "U32"
+                },
+                {
+                    "name": "storecategory",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "storetypevariant",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "standardidentitytype",
+            "members": [
+                {
+                    "name": "standardidentity",
+                    "value": "0|1|2|3|4|5|6|7",
+                    "type": "U32"
+                },
+                {
+                    "name": "allegiance",
+                    "type": "countrycodetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "environmentidentitytype",
+            "members": [
+                {
+                    "name": "environment",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "orbitregime",
+                    "type": "orbitregimetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "specificemitteridentitytype",
+            "members": [
+                {
+                    "name": "specificemitterkey",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "facilityidentificationtype",
+            "members": [
+                {
+                    "name": "siteidentifier",
+                    "type": "U32"
+                },
+                {
+                    "name": "sensoridentifier",
+                    "type": "U32"
+                },
+                {
+                    "name": "icaocodelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "icaocode",
+                    "type": "U8[icaocodelength]"
+                },
+                {
+                    "name": "foreignfacilitykey",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "eobfacilityidentitytype",
+            "members": [
+                {
+                    "name": "facilitypin",
+                    "type": "eobfacilitypintype"
+                },
+                {
+                    "name": "facilitynamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "facilityname",
+                    "type": "U8[facilitynamelength]"
+                },
+                {
+                    "name": "internalid",
+                    "type": "idtype"
+                },
+                {
+                    "name": "benumber",
+                    "type": "basicencyclopedianumbertype"
+                },
+                {
+                    "name": "osuffixlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "osuffix",
+                    "type": "U8[osuffixlength]"
+                },
+                {
+                    "name": "categorylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "category",
+                    "type": "U8[categorylength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "eobequipmentidentitytype",
+            "members": [
+                {
+                    "name": "facilitypin",
+                    "type": "eobfacilitypintype"
+                },
+                {
+                    "name": "facilitynamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "facilityname",
+                    "type": "U8[facilitynamelength]"
+                },
+                {
+                    "name": "internalid",
+                    "type": "idtype"
+                },
+                {
+                    "name": "equipmentidentifiernumber",
+                    "type": "eobequipmenttype"
+                }
+            ]
+        },
+        {
+            "struct_name": "winddatachoicetype",
+            "members": [
+                {
+                    "name": "windvelocity",
+                    "type": "velocitytwodtype"
+                },
+                {
+                    "name": "windmagnitude",
+                    "type": "windmagnitudetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointtwodtype",
+            "members": [
+                {
+                    "name": "latitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "longitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altituderange",
+                    "type": "altituderangetype"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "satelliteidentifiertype",
+            "members": [
+                {
+                    "name": "satellitenumber",
+                    "value": "(1, 4294967295)",
+                    "type": "U32"
+                },
+                {
+                    "name": "satellitenamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "satellitename",
+                    "type": "U8[satellitenamelength]"
+                },
+                {
+                    "name": "internationaldesignator",
+                    "type": "internationaldesignatortype"
+                },
+                {
+                    "name": "missioninformation",
+                    "type": "missioninformationtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "zchoicetype",
+            "members": [
+                {
+                    "name": "z",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitudeoffset",
+                    "type": "altitudeoffsetreferencetype"
+                },
+                {
+                    "name": "absolutealtitude",
+                    "type": "altitudereferencetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "scheduletype",
+            "members": [
+                {
+                    "name": "timespan",
+                    "type": "datetimerangetype"
+                },
+                {
+                    "name": "weekdayinterval",
+                    "type": "weekdayintervaltype"
+                }
+            ]
+        },
+        {
+            "struct_name": "tracknumberorentitytype",
+            "members": [
+                {
+                    "name": "entityid",
+                    "type": "entityidtype"
+                },
+                {
+                    "name": "tracknumber",
+                    "type": "linkonesixtrackidentifiertype"
+                }
+            ]
+        },
+        {
+            "struct_name": "emitteridentitycategorytype",
+            "members": [
+                {
+                    "name": "radar",
+                    "type": "radaremitteridentitytype"
+                },
+                {
+                    "name": "communications",
+                    "type": "communicationsemitteridentitytype"
+                },
+                {
+                    "name": "jammer",
+                    "type": "jammeremitteridentitytype"
+                },
+                {
+                    "name": "missile",
+                    "type": "missileemitteridentitytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "qualifyingtagstype",
+            "members": [
+                {
+                    "name": "qualifiedspecial",
+                    "type": "U32"
+                },
+                {
+                    "name": "processspeciallength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "processspecial",
+                    "type": "U8[processspeciallength]"
+                },
+                {
+                    "name": "filteroverridelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "filteroverride",
+                    "type": "U8[filteroverridelength]"
+                },
+                {
+                    "name": "highinterestlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "highinterest",
+                    "type": "U8[highinterestlength]"
+                },
+                {
+                    "name": "retainlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "retain",
+                    "type": "U8[retainlength]"
+                },
+                {
+                    "name": "qualifyingsource",
+                    "type": "systemmessageidentifiertype"
+                }
+            ]
+        },
+        {
+            "struct_name": "ifftype",
+            "members": [
+                {
+                    "name": "modeone",
+                    "type": "iffmodetype"
+                },
+                {
+                    "name": "modetwo",
+                    "type": "iffmodetype"
+                },
+                {
+                    "name": "modethreea",
+                    "type": "iffmodetype"
+                },
+                {
+                    "name": "modethreelc",
+                    "type": "iffmodetype"
+                },
+                {
+                    "name": "modefour",
+                    "type": "iffmodefourtype"
+                },
+                {
+                    "name": "modefive",
+                    "type": "iffmodefivetype"
+                },
+                {
+                    "name": "modes",
+                    "type": "iffmodestype"
+                },
+                {
+                    "name": "modec",
+                    "type": "iffmodectype"
+                }
+            ]
+        },
+        {
+            "struct_name": "weaponrestrictiontype",
+            "members": [
+                {
+                    "name": "weaponsallowed",
+                    "type": "storetype"
+                },
+                {
+                    "name": "weaponsnotallowed",
+                    "type": "storetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "eobidentitytype",
+            "members": [
+                {
+                    "name": "facility",
+                    "type": "eobfacilityidentitytype"
+                },
+                {
+                    "name": "equipment",
+                    "type": "eobequipmentidentitytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "winddatatype",
+            "members": [
+                {
+                    "name": "windchoice",
+                    "type": "winddatachoicetype"
+                },
+                {
+                    "name": "windgust",
+                    "type": "D8"
+                },
+                {
+                    "name": "windshearlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "windshear",
+                    "type": "U8[windshearlength]"
+                },
+                {
+                    "name": "variablewindslength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "variablewinds",
+                    "type": "U8[variablewindslength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "vehicleuniqueidentifiertype",
+            "members": [
+                {
+                    "name": "ais",
+                    "type": "aistype"
+                },
+                {
+                    "name": "tailnumberlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "tailnumber",
+                    "type": "U8[tailnumberlength]"
+                },
+                {
+                    "name": "satellite",
+                    "type": "satelliteidentifiertype"
+                },
+                {
+                    "name": "alternateidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "alternateidentifier",
+                    "type": "U8[alternateidentifierlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "relativeoffsettwodtype",
+            "members": [
+                {
+                    "name": "rotation",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "xyoffsets",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "x",
+                    "type": "D8"
+                },
+                {
+                    "name": "y",
+                    "type": "D8"
+                },
+                {
+                    "name": "z",
+                    "type": "zchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "schedulestatetype",
+            "members": [
+                {
+                    "name": "state",
+                    "value": "0|1",
+                    "type": "U32"
+                },
+                {
+                    "name": "schedule",
+                    "type": "scheduletype"
+                }
+            ]
+        },
+        {
+            "struct_name": "opzonemissiledatatype",
+            "members": [
+                {
+                    "name": "spaceobject",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23",
+                    "type": "U32"
+                },
+                {
+                    "name": "confidence",
+                    "type": "percentrangetype"
+                },
+                {
+                    "name": "relatedtrack",
+                    "type": "tracknumberorentitytype"
+                },
+                {
+                    "name": "launchpointcalculation",
+                    "value": "0|1",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "emitteridentitytype",
+            "members": [
+                {
+                    "name": "emittercategory",
+                    "type": "emitteridentitycategorytype"
+                },
+                {
+                    "name": "natospotnumberlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "natospotnumber",
+                    "type": "U8[natospotnumberlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "vehiclecommanddatatype",
+            "members": [
+                {
+                    "name": "vehicleaction",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18",
+                    "type": "U32"
+                },
+                {
+                    "name": "iffsettings",
+                    "type": "ifftype"
+                },
+                {
+                    "name": "survivabilitymode",
+                    "value": "0|1",
+                    "type": "U32"
+                },
+                {
+                    "name": "lostcommtimeout",
+                    "type": "U32"
+                },
+                {
+                    "name": "loslength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "los",
+                    "type": "U8[loslength]"
+                },
+                {
+                    "name": "lossoflinkprocessing",
+                    "value": "0|1",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "weatherareadatatype",
+            "members": [
+                {
+                    "name": "source",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "stationcodelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "stationcode",
+                    "type": "U8[stationcodelength]"
+                },
+                {
+                    "name": "temperature",
+                    "type": "D8"
+                },
+                {
+                    "name": "precipitationpotential",
+                    "type": "D8"
+                },
+                {
+                    "name": "precipitationamount",
+                    "type": "D8"
+                },
+                {
+                    "name": "typeofprecipitation",
+                    "value": "0|1|2|3|4|5|6",
+                    "type": "U32"
+                },
+                {
+                    "name": "precipitationamplification",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "visibility",
+                    "type": "D8"
+                },
+                {
+                    "name": "visibilitystatus",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "dewpoint",
+                    "type": "D8"
+                },
+                {
+                    "name": "clouds",
+                    "type": "cloudstype"
+                },
+                {
+                    "name": "weathereffects",
+                    "type": "weathereffectstype"
+                },
+                {
+                    "name": "barometricpressure",
+                    "type": "F32"
+                },
+                {
+                    "name": "kollsmansetting",
+                    "type": "F32"
+                },
+                {
+                    "name": "icing",
+                    "value": "0|1|2|3|4",
+                    "type": "U32"
+                },
+                {
+                    "name": "turbulence",
+                    "value": "0|1|2|3|4",
+                    "type": "U32"
+                },
+                {
+                    "name": "thunderstormpotential",
+                    "type": "D8"
+                },
+                {
+                    "name": "remarkslength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "remarks",
+                    "type": "U8[remarkslength]"
+                },
+                {
+                    "name": "kind",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20",
+                    "type": "U32"
+                },
+                {
+                    "name": "description",
+                    "value": "0|1|2|3|4|5|6",
+                    "type": "U32"
+                },
+                {
+                    "name": "qualifier",
+                    "value": "0|1|2|3|4",
+                    "type": "U32"
+                },
+                {
+                    "name": "winddata",
+                    "type": "winddatatype"
+                },
+                {
+                    "name": "relativehumidity",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "vehicleidentificationtype",
+            "members": [
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "vehicleuniqueidentifier",
+                    "type": "vehicleuniqueidentifiertype"
+                },
+                {
+                    "name": "iff",
+                    "type": "ifftype"
+                },
+                {
+                    "name": "callsign",
+                    "type": "callsigntype"
+                },
+                {
+                    "name": "radarcrosssection",
+                    "type": "foreignkeytype"
+                },
+                {
+                    "name": "sortienumberlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "sortienumber",
+                    "type": "U8[sortienumberlength]"
+                },
+                {
+                    "name": "atocallsign",
+                    "type": "usmtfaircraftcallsignpairtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "polygonrelativetype",
+            "members": [
+                {
+                    "name": "referenceframeid",
+                    "type": "referenceframeidtype"
+                },
+                {
+                    "name": "vertex",
+                    "type": "relativeoffsettwodtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointtwodrelativetype",
+            "members": [
+                {
+                    "name": "referenceframeid",
+                    "type": "referenceframeidtype"
+                },
+                {
+                    "name": "relativeoffset",
+                    "type": "relativeoffsettwodtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "systemschedulestatetype",
+            "members": [
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "systemschedulestate",
+                    "value": "0|1",
+                    "type": "U32"
+                },
+                {
+                    "name": "schedulestate",
+                    "type": "schedulestatetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "opzoneweathertype",
+            "members": [
+                {
+                    "name": "weatherwarningtype",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15",
+                    "type": "U32"
+                },
+                {
+                    "name": "areadata",
+                    "type": "weatherareadatatype"
+                }
+            ]
+        },
+        {
+            "struct_name": "identitytype",
+            "members": [
+                {
+                    "name": "standard",
+                    "type": "standardidentitytype"
+                },
+                {
+                    "name": "environment",
+                    "type": "environmentidentitytype"
+                },
+                {
+                    "name": "platform",
+                    "type": "platformidentitytype"
+                },
+                {
+                    "name": "specific",
+                    "type": "specificidentitytype"
+                },
+                {
+                    "name": "emitter",
+                    "type": "emitteridentitytype"
+                },
+                {
+                    "name": "specificemitter",
+                    "type": "specificemitteridentitytype"
+                },
+                {
+                    "name": "specificfacility",
+                    "type": "facilityidentificationtype"
+                },
+                {
+                    "name": "specificvehicle",
+                    "type": "vehicleidentificationtype"
+                },
+                {
+                    "name": "eob",
+                    "type": "eobidentitytype"
+                },
+                {
+                    "name": "weapon",
+                    "type": "storetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "entityidentitychoicetype",
+            "members": [
+                {
+                    "name": "standard",
+                    "type": "standardidentitytype"
+                },
+                {
+                    "name": "environment",
+                    "type": "environmentidentitytype"
+                },
+                {
+                    "name": "platform",
+                    "type": "platformidentitytype"
+                },
+                {
+                    "name": "specific",
+                    "type": "specificidentitytype"
+                },
+                {
+                    "name": "emitter",
+                    "type": "emitteridentitytype"
+                },
+                {
+                    "name": "specificemitter",
+                    "type": "specificemitteridentitytype"
+                },
+                {
+                    "name": "specificvehicle",
+                    "type": "vehicleidentificationtype"
+                },
+                {
+                    "name": "specificfacility",
+                    "type": "facilityidentificationtype"
+                },
+                {
+                    "name": "eob",
+                    "type": "eobidentitytype"
+                },
+                {
+                    "name": "weapon",
+                    "type": "storetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "polygonpointchoicetype",
+            "members": [
+                {
+                    "name": "pointtwod",
+                    "type": "pointtwodtype"
+                },
+                {
+                    "name": "relativepolygon",
+                    "type": "polygonrelativetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "pointchoicetype",
+            "members": [
+                {
+                    "name": "absolutepoint",
+                    "type": "pointtwodtype"
+                },
+                {
+                    "name": "relativepoint",
+                    "type": "pointtwodrelativetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "opzoneweaponrestrictiontype",
+            "members": [
+                {
+                    "name": "weapon",
+                    "type": "weaponrestrictiontype"
+                },
+                {
+                    "name": "identity",
+                    "type": "identitytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "identitycomparisontype",
+            "members": [
+                {
+                    "name": "typex",
+                    "type": "entityidentitychoicetype"
+                },
+                {
+                    "name": "confidence",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "polygontype",
+            "members": [
+                {
+                    "name": "lineprojection",
+                    "value": "0|1",
+                    "type": "U32"
+                },
+                {
+                    "name": "boundingpolygon",
+                    "type": "polygonpointchoicetype"
+                },
+                {
+                    "name": "interiorpolygon",
+                    "type": "polygonpointchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "locatedellipsetype",
+            "members": [
+                {
+                    "name": "semimajoraxislength",
+                    "type": "D8"
+                },
+                {
+                    "name": "semiminoraxislength",
+                    "type": "D8"
+                },
+                {
+                    "name": "orientation",
+                    "type": "D8"
+                },
+                {
+                    "name": "centerpointchoice",
+                    "type": "pointchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "locatedrectangletype",
+            "members": [
+                {
+                    "name": "width",
+                    "type": "D8"
+                },
+                {
+                    "name": "height",
+                    "type": "D8"
+                },
+                {
+                    "name": "orientation",
+                    "type": "D8"
+                },
+                {
+                    "name": "centerpointchoice",
+                    "type": "pointchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "slantrangeareatype",
+            "members": [
+                {
+                    "name": "radius",
+                    "type": "slantrangeconstraintstype"
+                },
+                {
+                    "name": "azimuthextent",
+                    "type": "anglepairtype"
+                },
+                {
+                    "name": "orientation",
+                    "type": "D8"
+                },
+                {
+                    "name": "pointchoice",
+                    "type": "pointchoicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "opzonenofiretype",
+            "members": [
+                {
+                    "name": "entityclass",
+                    "type": "identitycomparisontype"
+                }
+            ]
+        },
+        {
+            "struct_name": "areachoicetype",
+            "members": [
+                {
+                    "name": "polygon",
+                    "type": "polygontype"
+                },
+                {
+                    "name": "ellipse",
+                    "type": "locatedellipsetype"
+                },
+                {
+                    "name": "rectangle",
+                    "type": "locatedrectangletype"
+                },
+                {
+                    "name": "slantrangearea",
+                    "type": "slantrangeareatype"
+                }
+            ]
+        },
+        {
+            "struct_name": "opzonecategorytype",
+            "members": [
+                {
+                    "name": "constrainedentryexit",
+                    "type": "constrainedentryexittype"
+                },
+                {
+                    "name": "filterarea",
+                    "type": "opzonefilterareapet"
+                },
+                {
+                    "name": "jamming",
+                    "type": "opzonejammingtype"
+                },
+                {
+                    "name": "keepin",
+                    "type": "ingressegresstype"
+                },
+                {
+                    "name": "missilelaunchpoint",
+                    "type": "opzonemissiledatatype"
+                },
+                {
+                    "name": "nofire",
+                    "type": "opzonenofiretype"
+                },
+                {
+                    "name": "nofly",
+                    "type": "opzonenoflytype"
+                },
+                {
+                    "name": "orderofbattle",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11",
+                    "type": "U32"
+                },
+                {
+                    "name": "vehicleconfiguration",
+                    "type": "vehiclecommanddatatype"
+                },
+                {
+                    "name": "weaponrestriction",
+                    "type": "opzoneweaponrestrictiontype"
+                },
+                {
+                    "name": "weatherconditions",
+                    "type": "opzoneweathertype"
+                }
+            ]
+        },
+        {
+            "struct_name": "opzonetype",
+            "members": [
+                {
+                    "name": "shape",
+                    "type": "areachoicetype"
+                },
+                {
+                    "name": "minaltitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "maxaltitude",
+                    "type": "D8"
+                },
+                {
+                    "name": "altitudereference",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "velocity",
+                    "type": "velocitytwodtype"
+                }
+            ]
+        }
+    ],
+    "protocol_types": [
+        {
+            "name": "opzonemdt",
+            "fields": [
+                {
+                    "name": "opdescription",
+                    "type": "opdescriptiontype"
+                },
+                {
+                    "name": "missiontraceability",
+                    "type": "missiontraceabilitytype"
+                },
+                {
+                    "name": "source",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "schedule",
+                    "type": "scheduletype"
+                },
+                {
+                    "name": "associatedtime",
+                    "type": "timefunctiontype"
+                },
+                {
+                    "name": "priority",
+                    "type": "U32"
+                },
+                {
+                    "name": "qualifyingtags",
+                    "type": "qualifyingtagstype"
+                },
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "systemscheduleoverride",
+                    "type": "systemschedulestatetype"
+                },
+                {
+                    "name": "opzoneid",
+                    "type": "opzoneidtype"
+                },
+                {
+                    "name": "category",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38",
+                    "type": "U32"
+                },
+                {
+                    "name": "categoryuniquedata",
+                    "type": "opzonecategorytype"
+                },
+                {
+                    "name": "zone",
+                    "type": "opzonetype"
+                },
+                {
+                    "name": "situationalawareness",
+                    "type": "I32"
+                }
+            ]
+        }
+    ]
+}

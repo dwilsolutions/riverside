@@ -1,0 +1,1706 @@
+
+{
+    "structs": [
+        {
+            "struct_name": "systemidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "subsystemidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "capabilityidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "serviceidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                },
+                {
+                    "name": "serviceversionlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "serviceversion",
+                    "type": "U8[serviceversionlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "voicecontroltype",
+            "members": [
+                {
+                    "name": "voicefrequency",
+                    "type": "D8"
+                },
+                {
+                    "name": "voicechannela",
+                    "value": "(0, 127)",
+                    "type": "U8"
+                },
+                {
+                    "name": "voicechannelb",
+                    "value": "(0, 127)",
+                    "type": "U8"
+                }
+            ]
+        },
+        {
+            "struct_name": "idtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "datetimerangetype",
+            "members": [
+                {
+                    "name": "begin",
+                    "type": "U32"
+                },
+                {
+                    "name": "end",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "platformidentitytype",
+            "members": [
+                {
+                    "name": "platformtype",
+                    "type": "U32"
+                },
+                {
+                    "name": "platformtypecategory",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "threattype",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21",
+                    "type": "U32"
+                },
+                {
+                    "name": "unittype",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30",
+                    "type": "U32"
+                },
+                {
+                    "name": "launchcapability",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "submarineconfidencelevel",
+                    "value": "0|1|2|3|4|5|6|7|8|9",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "specificidentitytype",
+            "members": [
+                {
+                    "name": "specifictype",
+                    "type": "U32"
+                },
+                {
+                    "name": "specifictypecategory",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "sitetype",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60",
+                    "type": "U32"
+                },
+                {
+                    "name": "specifictypemodellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "specifictypemodel",
+                    "type": "U8[specifictypemodellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "timefunctiontype",
+            "members": [
+                {
+                    "name": "function",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15",
+                    "type": "U32"
+                },
+                {
+                    "name": "valuex",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "operatoridtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "operatorroleidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "operatorstationidentifiertype",
+            "members": [
+                {
+                    "name": "keylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "key",
+                    "type": "U8[keylength]"
+                },
+                {
+                    "name": "systemnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "systemname",
+                    "type": "U8[systemnamelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "platformstatussamtype",
+            "members": [
+                {
+                    "name": "hotinventory",
+                    "type": "U32"
+                },
+                {
+                    "name": "coldinventory",
+                    "type": "U32"
+                },
+                {
+                    "name": "sammode",
+                    "value": "0|1|2|3|4|5|6|7",
+                    "type": "U32"
+                },
+                {
+                    "name": "operationalimpairment",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16",
+                    "type": "U32"
+                },
+                {
+                    "name": "communicationsimpairment",
+                    "value": "0|1|2|3|4|5|6|7",
+                    "type": "U32"
+                },
+                {
+                    "name": "controlpositions",
+                    "type": "U32"
+                },
+                {
+                    "name": "radiationmode",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "surfacerecoverytype",
+            "members": [
+                {
+                    "name": "flightdeckstatus",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "approachconditionstatus",
+                    "value": "0|1|2",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "platformmodetype",
+            "members": [
+                {
+                    "name": "mode",
+                    "type": "U32"
+                },
+                {
+                    "name": "descriptionlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "description",
+                    "type": "U8[descriptionlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "foreignkeytype",
+            "members": [
+                {
+                    "name": "keylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "key",
+                    "type": "U8[keylength]"
+                },
+                {
+                    "name": "systemnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "systemname",
+                    "type": "U8[systemnamelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "strengthrangetype",
+            "members": [
+                {
+                    "name": "minimum",
+                    "type": "U32"
+                },
+                {
+                    "name": "maximum",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "percentrangetype",
+            "members": [
+                {
+                    "name": "minimum",
+                    "type": "D8"
+                },
+                {
+                    "name": "maximum",
+                    "type": "D8"
+                }
+            ]
+        },
+        {
+            "struct_name": "countrycodetype",
+            "members": [
+                {
+                    "name": "countryname",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|62|63|64|65|66|67|68|69|70|71|72|73|74|75|76|77|78|79|80|81|82|83|84|85|86|87|88|89|90|91|92|93|94|95|96|97|98|99|100|101|102|103|104|105|106|107|108|109|110|111|112|113|114|115|116|117|118|119|120|121|122|123|124|125|126|127|128|129|130|131|132|133|134|135|136|137|138|139|140|141|142|143|144|145|146|147|148|149|150|151|152|153|154|155|156|157|158|159|160|161|162|163|164|165|166|167|168|169|170|171|172|173|174|175|176|177|178|179|180|181|182|183|184|185|186|187|188|189|190|191|192|193|194|195|196|197|198|199|200|201|202|203|204|205|206|207|208|209|210|211|212|213|214|215|216|217|218|219|220|221|222|223|224|225|226|227|228|229|230|231|232|233|234|235|236|237|238|239|240|241|242|243|244|245|246|247|248|249|250|251|252|253|254|255|256|257|258|259|260|261|262|263|264|265|266|267|268|269|270|271|272|273|274|275|276|277|278|279",
+                    "type": "U32"
+                },
+                {
+                    "name": "operatoruniqueassetname",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "orbitregimetype",
+            "members": [
+                {
+                    "name": "orbitregime",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10",
+                    "type": "U32"
+                },
+                {
+                    "name": "orbitclass",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "callsigntype",
+            "members": [
+                {
+                    "name": "keylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "key",
+                    "type": "U8[keylength]"
+                },
+                {
+                    "name": "systemnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "systemname",
+                    "type": "U8[systemnamelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "usmtfaircraftcallsignpairtype",
+            "members": [
+                {
+                    "name": "callsignlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "callsign",
+                    "type": "U8[callsignlength]"
+                },
+                {
+                    "name": "abbreviatedcallsignlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "abbreviatedcallsign",
+                    "type": "U8[abbreviatedcallsignlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "platformfunctionstatuscategorytype",
+            "members": [
+                {
+                    "name": "air",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17",
+                    "type": "U32"
+                },
+                {
+                    "name": "seasurface",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32",
+                    "type": "U32"
+                },
+                {
+                    "name": "ground",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13",
+                    "type": "U32"
+                },
+                {
+                    "name": "ew",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "networklinkidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "aistype",
+            "members": [
+                {
+                    "name": "mmsinumberlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "mmsinumber",
+                    "type": "U8[mmsinumberlength]"
+                },
+                {
+                    "name": "imonumberlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "imonumber",
+                    "type": "U8[imonumberlength]"
+                },
+                {
+                    "name": "vesselnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "vesselname",
+                    "type": "U8[vesselnamelength]"
+                },
+                {
+                    "name": "callsignlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "callsign",
+                    "type": "U8[callsignlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "iffmodetype",
+            "members": [
+                {
+                    "name": "code",
+                    "value": "(0, 4095)",
+                    "type": "U32"
+                },
+                {
+                    "name": "enabled",
+                    "type": "I32"
+                }
+            ]
+        },
+        {
+            "struct_name": "iffmodefourtype",
+            "members": [
+                {
+                    "name": "modefourindicator",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "modefourcode",
+                    "value": "0|1|2",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "iffmodestype",
+            "members": [
+                {
+                    "name": "icao",
+                    "value": "(0, 16777215)",
+                    "type": "U32"
+                },
+                {
+                    "name": "aircraftidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "aircraftidentifier",
+                    "type": "U8[aircraftidentifierlength]"
+                },
+                {
+                    "name": "enabled",
+                    "type": "I32"
+                }
+            ]
+        },
+        {
+            "struct_name": "iffmodectype",
+            "members": [
+                {
+                    "name": "codelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "code",
+                    "type": "U8[codelength]"
+                },
+                {
+                    "name": "enabled",
+                    "type": "I32"
+                }
+            ]
+        },
+        {
+            "struct_name": "eobfacilitypintype",
+            "members": [
+                {
+                    "name": "keylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "key",
+                    "type": "U8[keylength]"
+                },
+                {
+                    "name": "systemnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "systemname",
+                    "type": "U8[systemnamelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "basicencyclopedianumbertype",
+            "members": [
+                {
+                    "name": "worldareacodelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "worldareacode",
+                    "type": "U8[worldareacodelength]"
+                },
+                {
+                    "name": "recordoriginatorlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "recordoriginator",
+                    "type": "U8[recordoriginatorlength]"
+                },
+                {
+                    "name": "oneupnumberlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "oneupnumber",
+                    "type": "U8[oneupnumberlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "eobequipmenttype",
+            "members": [
+                {
+                    "name": "keylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "key",
+                    "type": "U8[keylength]"
+                },
+                {
+                    "name": "systemnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "systemname",
+                    "type": "U8[systemnamelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "activityidtype",
+            "members": [
+                {
+                    "name": "uuidlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "uuid",
+                    "type": "U8[uuidlength]"
+                },
+                {
+                    "name": "descriptivelabellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "descriptivelabel",
+                    "type": "U8[descriptivelabellength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "internationaldesignatortype",
+            "members": [
+                {
+                    "name": "year",
+                    "type": "U8"
+                },
+                {
+                    "name": "number",
+                    "type": "U32"
+                },
+                {
+                    "name": "piecelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "piece",
+                    "type": "U8[piecelength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "missioninformationtype",
+            "members": [
+                {
+                    "name": "missionnamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "missionname",
+                    "type": "U8[missionnamelength]"
+                },
+                {
+                    "name": "missiondescriptionlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "missiondescription",
+                    "type": "U8[missiondescriptionlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "systemservicetype",
+            "members": [
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "serviceid",
+                    "type": "serviceidtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "radaremitteridentitytype",
+            "members": [
+                {
+                    "name": "elnotidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "elnotidentifier",
+                    "type": "U8[elnotidentifierlength]"
+                },
+                {
+                    "name": "dieqpkey",
+                    "type": "foreignkeytype"
+                },
+                {
+                    "name": "radarmode",
+                    "value": "0|1|2|3|4|5|6|7|8",
+                    "type": "U32"
+                },
+                {
+                    "name": "trackmode",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "emitterindex",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "communicationsemitteridentitytype",
+            "members": [
+                {
+                    "name": "cenotidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "cenotidentifier",
+                    "type": "U8[cenotidentifierlength]"
+                },
+                {
+                    "name": "commmode",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10",
+                    "type": "U32"
+                },
+                {
+                    "name": "emitterindex",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "jammeremitteridentitytype",
+            "members": [
+                {
+                    "name": "elnotidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "elnotidentifier",
+                    "type": "U8[elnotidentifierlength]"
+                },
+                {
+                    "name": "receivedpower",
+                    "type": "D8"
+                },
+                {
+                    "name": "jammode",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19",
+                    "type": "U32"
+                },
+                {
+                    "name": "emitterindex",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "missileemitteridentitytype",
+            "members": [
+                {
+                    "name": "elnotidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "elnotidentifier",
+                    "type": "U8[elnotidentifierlength]"
+                },
+                {
+                    "name": "missilemode",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "emitterindex",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "iffmodefivetype",
+            "members": [
+                {
+                    "name": "countrycode",
+                    "type": "countrycodetype"
+                },
+                {
+                    "name": "pin",
+                    "value": "(0, 16383)",
+                    "type": "U32"
+                },
+                {
+                    "name": "interrogationstatus",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "modeonecode",
+                    "value": "(0, 4095)",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "cannotcomplytype",
+            "members": [
+                {
+                    "name": "reason",
+                    "value": "0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36|37|38|39|40|41|42|43|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60",
+                    "type": "U32"
+                },
+                {
+                    "name": "descriptionlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "description",
+                    "type": "U8[descriptionlength]"
+                },
+                {
+                    "name": "associatedid",
+                    "type": "idtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "systemcommunicationstype",
+            "members": [
+                {
+                    "name": "missioncommunicationsstate",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "commtimeout",
+                    "type": "U32"
+                },
+                {
+                    "name": "preplannedcommreturntime",
+                    "type": "U32"
+                },
+                {
+                    "name": "commsupportcapabilityid",
+                    "type": "capabilityidtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "activitybytype",
+            "members": [
+                {
+                    "name": "activity",
+                    "type": "U32"
+                },
+                {
+                    "name": "activityamplification",
+                    "type": "U32"
+                },
+                {
+                    "name": "activitycategory",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "customactivity",
+                    "type": "foreignkeytype"
+                },
+                {
+                    "name": "activitysubcategory",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "strengthtype",
+            "members": [
+                {
+                    "name": "strengthvalue",
+                    "type": "strengthrangetype"
+                },
+                {
+                    "name": "vehiclecount",
+                    "type": "strengthrangetype"
+                },
+                {
+                    "name": "percenttracked",
+                    "type": "percentrangetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "standardidentitytype",
+            "members": [
+                {
+                    "name": "standardidentity",
+                    "value": "0|1|2|3|4|5|6|7",
+                    "type": "U32"
+                },
+                {
+                    "name": "allegiance",
+                    "type": "countrycodetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "environmentidentitytype",
+            "members": [
+                {
+                    "name": "environment",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "orbitregime",
+                    "type": "orbitregimetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "specificemitteridentitytype",
+            "members": [
+                {
+                    "name": "specificemitterkey",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "facilityidentificationtype",
+            "members": [
+                {
+                    "name": "siteidentifier",
+                    "type": "U32"
+                },
+                {
+                    "name": "sensoridentifier",
+                    "type": "U32"
+                },
+                {
+                    "name": "icaocodelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "icaocode",
+                    "type": "U8[icaocodelength]"
+                },
+                {
+                    "name": "foreignfacilitykey",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "storetype",
+            "members": [
+                {
+                    "name": "storetype",
+                    "type": "U32"
+                },
+                {
+                    "name": "storecategory",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                },
+                {
+                    "name": "storetypevariant",
+                    "type": "foreignkeytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "platformfunctionstatustype",
+            "members": [
+                {
+                    "name": "category",
+                    "type": "platformfunctionstatuscategorytype"
+                },
+                {
+                    "name": "status",
+                    "value": "0|1|2|3|4|5",
+                    "type": "U32"
+                }
+            ]
+        },
+        {
+            "struct_name": "datalinkcontroltype",
+            "members": [
+                {
+                    "name": "status",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "networklinkid",
+                    "type": "networklinkidtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "eobfacilityidentitytype",
+            "members": [
+                {
+                    "name": "facilitypin",
+                    "type": "eobfacilitypintype"
+                },
+                {
+                    "name": "facilitynamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "facilityname",
+                    "type": "U8[facilitynamelength]"
+                },
+                {
+                    "name": "internalid",
+                    "type": "idtype"
+                },
+                {
+                    "name": "benumber",
+                    "type": "basicencyclopedianumbertype"
+                },
+                {
+                    "name": "osuffixlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "osuffix",
+                    "type": "U8[osuffixlength]"
+                },
+                {
+                    "name": "categorylength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "category",
+                    "type": "U8[categorylength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "eobequipmentidentitytype",
+            "members": [
+                {
+                    "name": "facilitypin",
+                    "type": "eobfacilitypintype"
+                },
+                {
+                    "name": "facilitynamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "facilityname",
+                    "type": "U8[facilitynamelength]"
+                },
+                {
+                    "name": "internalid",
+                    "type": "idtype"
+                },
+                {
+                    "name": "equipmentidentifiernumber",
+                    "type": "eobequipmenttype"
+                }
+            ]
+        },
+        {
+            "struct_name": "systemmessageidentifiertype",
+            "members": [
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "serviceid",
+                    "type": "serviceidtype"
+                },
+                {
+                    "name": "activityid",
+                    "type": "activityidtype"
+                },
+                {
+                    "name": "networklinkid",
+                    "type": "networklinkidtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "satelliteidentifiertype",
+            "members": [
+                {
+                    "name": "satellitenumber",
+                    "value": "(1, 4294967295)",
+                    "type": "U32"
+                },
+                {
+                    "name": "satellitenamelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "satellitename",
+                    "type": "U8[satellitenamelength]"
+                },
+                {
+                    "name": "internationaldesignator",
+                    "type": "internationaldesignatortype"
+                },
+                {
+                    "name": "missioninformation",
+                    "type": "missioninformationtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "systemstatewindowtype",
+            "members": [
+                {
+                    "name": "state",
+                    "value": "0|1|2|3|4",
+                    "type": "U32"
+                },
+                {
+                    "name": "window",
+                    "type": "datetimerangetype"
+                },
+                {
+                    "name": "statereason",
+                    "type": "cannotcomplytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "operatorreferencetype",
+            "members": [
+                {
+                    "name": "operatorid",
+                    "type": "operatoridtype"
+                },
+                {
+                    "name": "operatorroleid",
+                    "type": "operatorroleidtype"
+                },
+                {
+                    "name": "operatorstation",
+                    "type": "operatorstationidentifiertype"
+                },
+                {
+                    "name": "operatorsystem",
+                    "type": "systemservicetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "emitteridentitycategorytype",
+            "members": [
+                {
+                    "name": "radar",
+                    "type": "radaremitteridentitytype"
+                },
+                {
+                    "name": "communications",
+                    "type": "communicationsemitteridentitytype"
+                },
+                {
+                    "name": "jammer",
+                    "type": "jammeremitteridentitytype"
+                },
+                {
+                    "name": "missile",
+                    "type": "missileemitteridentitytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "ifftype",
+            "members": [
+                {
+                    "name": "modeone",
+                    "type": "iffmodetype"
+                },
+                {
+                    "name": "modetwo",
+                    "type": "iffmodetype"
+                },
+                {
+                    "name": "modethreea",
+                    "type": "iffmodetype"
+                },
+                {
+                    "name": "modethreelc",
+                    "type": "iffmodetype"
+                },
+                {
+                    "name": "modefour",
+                    "type": "iffmodefourtype"
+                },
+                {
+                    "name": "modefive",
+                    "type": "iffmodefivetype"
+                },
+                {
+                    "name": "modes",
+                    "type": "iffmodestype"
+                },
+                {
+                    "name": "modec",
+                    "type": "iffmodectype"
+                }
+            ]
+        },
+        {
+            "struct_name": "platformstatustype",
+            "members": [
+                {
+                    "name": "bailoutindicatorlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "bailoutindicator",
+                    "type": "U8[bailoutindicatorlength]"
+                },
+                {
+                    "name": "commandandcontrolindicatorlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "commandandcontrolindicator",
+                    "type": "U8[commandandcontrolindicatorlength]"
+                },
+                {
+                    "name": "emergencyindicatorlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "emergencyindicator",
+                    "type": "U8[emergencyindicatorlength]"
+                },
+                {
+                    "name": "functionstatus",
+                    "type": "platformfunctionstatustype"
+                },
+                {
+                    "name": "samstatus",
+                    "type": "platformstatussamtype"
+                },
+                {
+                    "name": "surfacerecovery",
+                    "type": "surfacerecoverytype"
+                },
+                {
+                    "name": "surfacestatus",
+                    "type": "surfacerecoverytype"
+                },
+                {
+                    "name": "datalinkcontrolstatus",
+                    "type": "datalinkcontroltype"
+                },
+                {
+                    "name": "airborne",
+                    "type": "I32"
+                },
+                {
+                    "name": "platformmode",
+                    "type": "platformmodetype"
+                }
+            ]
+        },
+        {
+            "struct_name": "eobidentitytype",
+            "members": [
+                {
+                    "name": "facility",
+                    "type": "eobfacilityidentitytype"
+                },
+                {
+                    "name": "equipment",
+                    "type": "eobequipmentidentitytype"
+                }
+            ]
+        },
+        {
+            "struct_name": "qualifyingtagstype",
+            "members": [
+                {
+                    "name": "qualifiedspecial",
+                    "type": "U32"
+                },
+                {
+                    "name": "processspeciallength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "processspecial",
+                    "type": "U8[processspeciallength]"
+                },
+                {
+                    "name": "filteroverridelength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "filteroverride",
+                    "type": "U8[filteroverridelength]"
+                },
+                {
+                    "name": "highinterestlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "highinterest",
+                    "type": "U8[highinterestlength]"
+                },
+                {
+                    "name": "retainlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "retain",
+                    "type": "U8[retainlength]"
+                },
+                {
+                    "name": "qualifyingsource",
+                    "type": "systemmessageidentifiertype"
+                }
+            ]
+        },
+        {
+            "struct_name": "vehicleuniqueidentifiertype",
+            "members": [
+                {
+                    "name": "ais",
+                    "type": "aistype"
+                },
+                {
+                    "name": "tailnumberlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "tailnumber",
+                    "type": "U8[tailnumberlength]"
+                },
+                {
+                    "name": "satellite",
+                    "type": "satelliteidentifiertype"
+                },
+                {
+                    "name": "alternateidentifierlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "alternateidentifier",
+                    "type": "U8[alternateidentifierlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "emitteridentitytype",
+            "members": [
+                {
+                    "name": "emittercategory",
+                    "type": "emitteridentitycategorytype"
+                },
+                {
+                    "name": "natospotnumberlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "natospotnumber",
+                    "type": "U8[natospotnumberlength]"
+                }
+            ]
+        },
+        {
+            "struct_name": "vehicleidentificationtype",
+            "members": [
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "vehicleuniqueidentifier",
+                    "type": "vehicleuniqueidentifiertype"
+                },
+                {
+                    "name": "iff",
+                    "type": "ifftype"
+                },
+                {
+                    "name": "callsign",
+                    "type": "callsigntype"
+                },
+                {
+                    "name": "radarcrosssection",
+                    "type": "foreignkeytype"
+                },
+                {
+                    "name": "sortienumberlength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "sortienumber",
+                    "type": "U8[sortienumberlength]"
+                },
+                {
+                    "name": "atocallsign",
+                    "type": "usmtfaircraftcallsignpairtype"
+                }
+            ]
+        },
+        {
+            "struct_name": "systemidentitytype",
+            "members": [
+                {
+                    "name": "standard",
+                    "type": "standardidentitytype"
+                },
+                {
+                    "name": "environment",
+                    "type": "environmentidentitytype"
+                },
+                {
+                    "name": "platform",
+                    "type": "platformidentitytype"
+                },
+                {
+                    "name": "specific",
+                    "type": "specificidentitytype"
+                },
+                {
+                    "name": "emitter",
+                    "type": "emitteridentitytype"
+                },
+                {
+                    "name": "specificemitter",
+                    "type": "specificemitteridentitytype"
+                },
+                {
+                    "name": "specificfacility",
+                    "type": "facilityidentificationtype"
+                },
+                {
+                    "name": "specificvehicle",
+                    "type": "vehicleidentificationtype"
+                },
+                {
+                    "name": "eob",
+                    "type": "eobidentitytype"
+                },
+                {
+                    "name": "weapon",
+                    "type": "storetype"
+                },
+                {
+                    "name": "qualifyingtags",
+                    "type": "qualifyingtagstype"
+                },
+                {
+                    "name": "associatedtime",
+                    "type": "timefunctiontype"
+                }
+            ]
+        }
+    ],
+    "protocol_types": [
+        {
+            "name": "systemstatusmdt",
+            "fields": [
+                {
+                    "name": "systemid",
+                    "type": "systemidtype"
+                },
+                {
+                    "name": "systemstate",
+                    "value": "0|1|2|3|4",
+                    "type": "U32"
+                },
+                {
+                    "name": "systemstatereason",
+                    "type": "cannotcomplytype"
+                },
+                {
+                    "name": "predictedsystemstate",
+                    "type": "systemstatewindowtype"
+                },
+                {
+                    "name": "source",
+                    "value": "0|1|2",
+                    "type": "U32"
+                },
+                {
+                    "name": "fusioneligibility",
+                    "value": "0|1|2|3",
+                    "type": "U32"
+                },
+                {
+                    "name": "modellength",
+                    "type": "U32",
+                    "dependee": "true"
+                },
+                {
+                    "name": "model",
+                    "type": "U8[modellength]"
+                },
+                {
+                    "name": "identity",
+                    "type": "systemidentitytype"
+                },
+                {
+                    "name": "communications",
+                    "type": "systemcommunicationstype"
+                },
+                {
+                    "name": "operator",
+                    "type": "operatorreferencetype"
+                },
+                {
+                    "name": "subsystemid",
+                    "type": "subsystemidtype"
+                },
+                {
+                    "name": "capabilityid",
+                    "type": "capabilityidtype"
+                },
+                {
+                    "name": "serviceid",
+                    "type": "serviceidtype"
+                },
+                {
+                    "name": "platformstatus",
+                    "type": "platformstatustype"
+                },
+                {
+                    "name": "voicecontrol",
+                    "type": "voicecontroltype"
+                },
+                {
+                    "name": "activityby",
+                    "type": "activitybytype"
+                },
+                {
+                    "name": "strength",
+                    "type": "strengthtype"
+                }
+            ]
+        }
+    ]
+}
