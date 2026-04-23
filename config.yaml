@@ -1,0 +1,18 @@
+model:
+  skayl: data/models/UCI_2_5.skayl
+  face:  data/models/UCI_2_5.face
+
+output:
+  dir: output/json
+  bundle: false       # true = one combined protocol.json, false = one file per message
+
+messages:
+  filter: endswith    # endswith | startswith | contains | all
+  value: "MDT"
+
+# Alternative: select specific messages by name
+# messages:
+#   explicit:
+#     - NavigationCommandMDT
+#     - MissionPlanMDT
+#     - SystemStatusMDT
