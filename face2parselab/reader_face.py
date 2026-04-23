@@ -1,9 +1,10 @@
 """
-Reader for FACE UDDL model files (.face + .skayl).
+Reader for FACE UDDL model files (.skayl + optional .face or templates list).
 
 Key facts about the UCI model structure:
 - .skayl file contains: platform:View (structs), platform types, enumerations, constraints
-- .face file contains: uop:Template definitions (message names)
+- .face file contains: uop:Template definitions (message names) - optional, can use
+  a lightweight templates .txt file instead (one template name per line)
 - Every MDT template name has a matching platform:View of the same name in .skayl
 - Constraints are separate elements linked by xmi:id from platform type elements
 - Enumerations store their literals as direct children
@@ -55,9 +56,17 @@ def _safe_name(name: str) -> str:
 
 
 class FaceReader:
-    def __init__(self, skayl_path: str, face_path: str):
+    def __init__(self, skayl_path: str, face_path: str = None, templates_path: str = None):
+        """
+        Args:
+            skayl_path:     Path to the .skayl model file (required)
+            face_path:      Path to the .face file (optional if templates_path given)
+            templates_path: Path to a plain text file with one template name per line
+                            (lightweight alternative to the full .face file)
+        """
         self.skayl_path = skayl_path
         self.face_path = face_path
+        self.templates_path = templates_path
         self._constraints = {}
         self._platform_types = {}
         self._views = {}
@@ -169,15 +178,25 @@ class FaceReader:
             self._view_by_name[name] = xid
 
     def _load_template_names(self, message_filter) -> list:
-        tree = ET.parse(self.face_path)
-        root = tree.getroot()
-        names = []
-        for elem in root.iter():
-            if elem.get(f'{XMI}type') == 'uop:Template':
-                name = elem.get('name', '')
-                if name and (message_filter is None or message_filter(name)):
-                    names.append(name)
-        return names
+        """Load template names from .face XML or a plain text file."""
+        if self.templates_path:
+            # Lightweight path: plain text file, one name per line
+            with open(self.templates_path) as f:
+                all_names = [line.strip() for line in f if line.strip()]
+        elif self.face_path:
+            # Full path: parse the .face XML
+            tree = ET.parse(self.face_path)
+            root = tree.getroot()
+            all_names = []
+            for elem in root.iter():
+                if elem.get(f'{XMI}type') == 'uop:Template':
+                    name = elem.get('name', '')
+                    if name:
+                        all_names.append(name)
+        else:
+            raise ValueError("Either face_path or templates_path must be provided")
+
+        return [n for n in all_names if message_filter is None or message_filter(n)]
 
     def _build_all_structs(self) -> dict:
         structs = {}
