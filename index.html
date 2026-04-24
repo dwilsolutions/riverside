@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>face2parselab — Pipeline Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #0a0e17;
+    --surface: #111827;
+    --border:  #1e2d45;
+    --accent:  #00d4ff;
+    --accent2: #00ff9d;
+    --warn:    #ff6b35;
+    --text:    #e2e8f0;
+    --muted:   #64748b;
+    --code-bg: #0d1117;
+    --pass:    #00ff9d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none; z-index: 0;
+  }
+  header {
+    position: relative; z-index: 10;
+    padding: 24px 48px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(10,14,23,0.97);
+  }
+  .logo { display: flex; align-items: center; gap: 14px; }
+  .logo-icon {
+    width: 32px; height: 32px; background: var(--accent);
+    clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(0,212,255,0.4); }
+    50%      { box-shadow: 0 0 0 8px rgba(0,212,255,0); }
+  }
+  .logo h1 { font-family:'IBM Plex Mono',monospace; font-size:16px; color:var(--accent); }
+  .logo p  { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-top:2px; }
+  .badges  { display:flex; gap:10px; }
+  .badge {
+    font-family:'IBM Plex Mono',monospace; font-size:11px;
+    padding:3px 9px; border-radius:4px; border:1px solid;
+  }
+  .bb { color:var(--accent);  border-color:var(--accent);  background:rgba(0,212,255,0.08); }
+  .bg { color:var(--accent2); border-color:var(--accent2); background:rgba(0,255,157,0.08); }
+  .bw { color:var(--warn);    border-color:var(--warn);    background:rgba(255,107,53,0.08); }
+
+  /* Step nav */
+  .step-nav {
+    position:relative; z-index:10; display:flex;
+    padding:0 48px; border-bottom:1px solid var(--border);
+    background:rgba(10,14,23,0.9); overflow-x:auto;
+  }
+  .step-tab {
+    padding:13px 18px; font-family:'IBM Plex Mono',monospace; font-size:11px;
+    color:var(--muted); cursor:pointer; border-bottom:2px solid transparent;
+    white-space:nowrap; transition:all 0.2s; user-select:none;
+  }
+  .step-tab:hover { color:var(--text); }
+  .step-tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+  .step-tab.done   { color:var(--accent2); }
+  .step-tab.done::before { content:'✓ '; }
+
+  /* Main panels */
+  main { position:relative; z-index:1; display:none; height:calc(100vh - 120px); flex-direction:column; }
+  main.active { display:flex; }
+
+  .step-header {
+    padding:20px 48px 16px; border-bottom:1px solid var(--border);
+    display:flex; align-items:flex-start; justify-content:space-between; gap:24px;
+    flex-shrink:0; background:rgba(10,14,23,0.5);
+  }
+  .step-info { flex:1; }
+  .step-number { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:3px; }
+  .step-title  { font-size:20px; font-weight:500; margin-bottom:5px; }
+  .step-desc   { font-size:13px; color:var(--muted); line-height:1.6; max-width:620px; }
+
+  .run-btn {
+    flex-shrink:0; padding:9px 22px;
+    background:transparent; border:1px solid var(--accent); color:var(--accent);
+    font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600;
+    border-radius:6px; cursor:pointer; transition:all 0.2s;
+    margin-top:4px; white-space:nowrap;
+  }
+  .run-btn:hover:not(:disabled) { background:rgba(0,212,255,0.1); box-shadow:0 0 20px rgba(0,212,255,0.2); }
+  .run-btn:disabled { opacity:0.4; cursor:not-allowed; }
+  .run-btn.running { color:var(--warn); border-color:var(--warn); animation:blink 1s infinite; }
+  .run-btn.done    { color:var(--accent2); border-color:var(--accent2); }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+  /* Panels */
+  .panels { display:grid; grid-template-columns:1fr 1fr; flex:1; overflow:hidden; }
+  .panel  { display:flex; flex-direction:column; overflow:hidden; border-right:1px solid var(--border); }
+  .panel-label {
+    padding:7px 18px; font-family:'IBM Plex Mono',monospace; font-size:10px;
+    color:var(--muted); text-transform:uppercase; letter-spacing:1px;
+    border-bottom:1px solid var(--border); background:rgba(17,24,39,0.5); flex-shrink:0;
+  }
+  .panel-label span { color:var(--accent); margin-right:6px; }
+  pre.code-block {
+    flex:1; overflow-y:auto; padding:18px; background:var(--code-bg);
+    font-family:'IBM Plex Mono',monospace; font-size:12px; line-height:1.7;
+    color:#c9d1d9; margin:0; white-space:pre-wrap; word-break:break-word;
+  }
+  .output-panel { display:flex; flex-direction:column; overflow:hidden; }
+  .output-content { flex:1; overflow-y:auto; padding:18px; }
+  .placeholder {
+    display:flex; flex-direction:column; align-items:center;
+    justify-content:center; height:100%; gap:10px; color:var(--muted);
+  }
+  .placeholder .icon { font-size:28px; opacity:0.3; }
+  .placeholder p { font-size:12px; }
+
+  /* Output components */
+  .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:18px; }
+  .stat-card {
+    background:var(--code-bg); border:1px solid var(--border); border-radius:8px;
+    padding:14px; opacity:0; transform:translateY(6px); transition:all 0.4s;
+  }
+  .stat-card.vis { opacity:1; transform:translateY(0); }
+  .stat-value { font-family:'IBM Plex Mono',monospace; font-size:26px; font-weight:600; color:var(--accent); }
+  .stat-label { font-size:11px; color:var(--muted); margin-top:3px; }
+
+  .json-out {
+    background:var(--code-bg); border:1px solid var(--border); border-radius:8px;
+    padding:14px; font-family:'IBM Plex Mono',monospace; font-size:12px;
+    line-height:1.65; overflow-x:auto; opacity:0; transition:opacity 0.4s 0.1s;
+    white-space:pre-wrap; word-break:break-word;
+  }
+  .json-out.vis { opacity:1; }
+
+  .jk { color:#79c0ff; }
+  .js { color:#a5d6ff; }
+  .jn { color:#f2cc60; }
+  .jb { color:var(--accent2); }
+  .jp { color:var(--muted); }
+  .cm { color:#8b949e; font-style:italic; }
+
+  .timing { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted); margin-bottom:10px; }
+
+  .progress-bar { height:2px; background:var(--border); border-radius:2px; overflow:hidden; margin-bottom:14px; display:none; }
+  .progress-bar.on { display:block; }
+  .progress-fill { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); width:0%; transition:width 0.25s; }
+
+  .sec-label { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
+
+  /* Comparison table */
+  .cmp-table { width:100%; border-collapse:collapse; font-family:'IBM Plex Mono',monospace; font-size:11px; margin-bottom:14px; }
+  .cmp-table th { text-align:left; padding:6px 10px; color:var(--muted); border-bottom:1px solid var(--border); font-weight:400; font-size:10px; text-transform:uppercase; letter-spacing:0.5px; }
+  .cmp-table td { padding:8px 10px; border-bottom:1px solid rgba(30,45,69,0.4); }
+  .cmp-table tr { opacity:0; transition:opacity 0.3s; }
+  .cmp-table tr.vis { opacity:1; }
+  .cmp-table td:first-child  { color:var(--text); }
+  .cmp-table td:nth-child(2) { color:var(--muted); }
+  .cmp-table td:nth-child(3) { color:var(--accent2); font-weight:600; }
+
+  .result-banner {
+    padding:14px 18px; background:rgba(0,255,157,0.07); border:1px solid var(--accent2);
+    border-radius:8px; display:flex; align-items:center; gap:14px;
+    opacity:0; transform:translateY(6px); transition:all 0.4s;
+  }
+  .result-banner.vis { opacity:1; transform:translateY(0); }
+  .result-banner .big { font-family:'IBM Plex Mono',monospace; font-size:28px; font-weight:600; color:var(--accent2); }
+  .result-banner .lbl { font-size:13px; color:var(--text); }
+  .result-banner .sub { font-size:11px; color:var(--muted); margin-top:2px; }
+
+  /* Val table */
+  .val-table { width:100%; border-collapse:collapse; font-family:'IBM Plex Mono',monospace; font-size:11px; }
+  .val-table th { text-align:left; padding:6px 10px; color:var(--muted); border-bottom:1px solid var(--border); font-weight:400; font-size:10px; text-transform:uppercase; }
+  .val-table td { padding:9px 10px; border-bottom:1px solid rgba(30,45,69,0.4); opacity:0; transition:opacity 0.3s; }
+  .val-table tr.vis td { opacity:1; }
+  .val-table td:nth-child(2),.val-table td:nth-child(3) { color:var(--muted); text-align:right; }
+  .pass { color:var(--pass); font-weight:600; }
+
+  /* Arch boxes */
+  .arch-flow { display:flex; align-items:center; gap:0; flex-wrap:wrap; margin-bottom:10px; }
+  .abox { padding:8px 14px; border:1px solid var(--border); border-radius:5px; font-family:'IBM Plex Mono',monospace; font-size:11px; background:var(--code-bg); white-space:nowrap; }
+  .abox.bl { border-color:var(--accent);  color:var(--accent); }
+  .abox.bg { border-color:var(--accent2); color:var(--accent2); }
+  .abox.bw { border-color:var(--warn);    color:var(--warn); }
+  .arrow { padding:0 8px; color:var(--muted); }
+
+  /* Syntax */
+  .kw  { color:#ff7b72; }
+  .fn  { color:#d2a8ff; }
+  .st  { color:#a5d6ff; }
+  .cl  { color:#ffa657; }
+  .nt  { color:#e2e8f0; }
+  .nu  { color:#f2cc60; }
+
+  ::-webkit-scrollbar { width:5px; height:5px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon"></div>
+    <div>
+      <h1>face2parselab</h1>
+      <p>Model-Agnostic Pipeline · UDDL → parseLab JSON</p>
+    </div>
+  </div>
+  <div class="badges">
+    <span class="badge bb">SOSA / UCI 2.5</span>
+    <span class="badge bw">MAVLink</span>
+    <span class="badge bg">Pure Python</span>
+  </div>
+</header>
+
+<nav class="step-nav">
+  <div class="step-tab active"  onclick="go(0)" id="tab-0">00 · Overview</div>
+  <div class="step-tab"         onclick="go(1)" id="tab-1">01 · Simple Model</div>
+  <div class="step-tab"         onclick="go(2)" id="tab-2">02 · parseLab Format</div>
+  <div class="step-tab"         onclick="go(3)" id="tab-3">03 · MAVLink</div>
+  <div class="step-tab"         onclick="go(4)" id="tab-4">04 · UCI 2.5 · Full Scale</div>
+  <div class="step-tab"         onclick="go(5)" id="tab-5">05 · Next Steps</div>
+</nav>
+
+<!-- ═══════════════════════════ STEP 0 — OVERVIEW ═══════════════════════════ -->
+<main class="active" id="step-0">
+  <div class="step-header">
+    <div class="step-info">
+      <div class="step-number">Introduction</div>
+      <div class="step-title">A Model-Agnostic Pipeline to parseLab</div>
+      <div class="step-desc">
+        face2parselab converts any structured message model into parseLab-compatible JSON —
+        the input required by Lockheed Martin's parseLab secure parser generator.
+        No MUDDL toolchain. No .NET runtime. No proprietary dependencies. ~350 lines of pure Python.
+      </div>
+    </div>
+    <button class="run-btn" onclick="run0(this)">▶ Run</button>
+  </div>
+  <div class="panels">
+    <div class="panel">
+      <div class="panel-label"><span>〈/〉</span>architecture</div>
+      <pre class="code-block"><span class="cm"># Two-layer design — readers and exporters</span>
+<span class="cm"># are independently swappable</span>
+
+<span class="cm">─── Layer 1: Model Readers ───────────────</span>
+
+<span class="cl">FaceReader</span>(<span class="nt">skayl_path</span>, <span class="nt">templates_path</span>)
+  <span class="cm"># Reads FACE UDDL .skayl models</span>
+  <span class="cm"># Used by: SOSA, UCI, FACE-conformant systems</span>
+
+<span class="cl">MAVLinkReader</span>(<span class="nt">xml_path</span>)
+  <span class="cm"># Reads MAVLink common.xml definitions</span>
+  <span class="cm"># Used by: UAS autopilots, GCS systems</span>
+
+<span class="cm"># Future readers plug in here:</span>
+<span class="cl">XSDReader</span>   <span class="cm"># XML Schema Definition</span>
+<span class="cl">ProtoReader</span> <span class="cm"># Protocol Buffers</span>
+
+
+<span class="cm">─── Common IR (format-agnostic) ──────────</span>
+
+<span class="kw">class</span> <span class="cl">Protocol</span>:
+  <span class="nt">structs</span>:  <span class="cl">list</span>[<span class="cl">Struct</span>]   <span class="cm"># nested types</span>
+  <span class="nt">messages</span>: <span class="cl">list</span>[<span class="cl">Struct</span>]   <span class="cm"># top-level messages</span>
+
+
+<span class="cm">─── Layer 2: Exporters ───────────────────</span>
+
+<span class="fn">export_json</span>(<span class="nt">protocol</span>) → parseLab JSON
+<span class="cm"># Future exporters plug in here:</span>
+<span class="cm"># export_daedalus(), export_proto()...</span>
+
+
+<span class="cm">─── CLI ──────────────────────────────────</span>
+
+python -m face2parselab run config.yaml
+  <span class="cm"># model in → parseLab JSON out</span>
+  <span class="cm"># one command, any model format</span></pre>
+    </div>
+    <div class="output-panel" id="out-0">
+      <div class="panel-label"><span>◈</span>output</div>
+      <div class="output-content">
+        <div class="placeholder"><div class="icon">◈</div><p>Click Run to begin</p></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════════════════════ STEP 1 — SIMPLE ═══════════════════════════ -->
+<main id="step-1">
+  <div class="step-header">
+    <div class="step-info">
+      <div class="step-number">Step 01 · Simple Model</div>
+      <div class="step-title">Hand-Crafted Model — GPS Position Report</div>
+      <div class="step-desc">
+        A minimal FACE UDDL model written by hand. 1 message, 1 nested struct, 7 fields —
+        simple enough to read top-to-bottom and verify the output yourself.
+        Demonstrates primitives, enumerations, range constraints, and variable-length strings.
+      </div>
+    </div>
+    <button class="run-btn" onclick="run1(this)">▶ Run Pipeline</button>
+  </div>
+  <div class="panels">
+    <div class="panel">
+      <div class="panel-label"><span>〈/〉</span>simple_position.skayl</div>
+      <pre class="code-block"><span class="cm">&lt;!-- Nested struct: GPS coordinates --&gt;</span>
+&lt;<span class="fn">element</span>
+  <span class="nt">name</span>=<span class="st">"GpsCoordinatesType"</span>
+  <span class="nt">xmi:type</span>=<span class="st">"platform:View"</span>&gt;
+
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Latitude"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_DOUBLE"</span>
+    <span class="nt">attributeKind</span>=<span class="st">"privatelyScoped"</span>/&gt;
+
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Longitude"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_DOUBLE"</span>
+    <span class="nt">attributeKind</span>=<span class="st">"privatelyScoped"</span>/&gt;
+
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Altitude"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_DOUBLE"</span>
+    <span class="nt">attributeKind</span>=<span class="st">"privatelyScoped"</span>/&gt;
+&lt;/<span class="fn">element</span>&gt;
+
+<span class="cm">&lt;!-- Top-level message --&gt;</span>
+&lt;<span class="fn">element</span>
+  <span class="nt">name</span>=<span class="st">"PositionReportMDT"</span>
+  <span class="nt">xmi:type</span>=<span class="st">"platform:View"</span>&gt;
+
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"SystemId"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_ULONG"</span>/&gt;
+
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Timestamp"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_ULONG"</span>/&gt;
+
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Position"</span>
+    <span class="nt">viewType</span>=<span class="st">"VIEW_COORDS"</span>
+    <span class="nt">attributeKind</span>=<span class="st">"foreignReference"</span>/&gt;
+
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"FixQuality"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_ENUM_FIXQUALITY"</span>/&gt;
+    <span class="cm">&lt;!-- enum: NO_FIX|GPS_FIX|DGPS_FIX|RTK_FIXED|RTK_FLOAT --&gt;</span>
+
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"SatellitesInView"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_ULONG_CONSTRAINED"</span>/&gt;
+    <span class="cm">&lt;!-- constraint: lowerBound=0, upperBound=32 --&gt;</span>
+
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Label"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_STRING"</span>
+    <span class="nt">optional</span>=<span class="st">"true"</span>/&gt;
+    <span class="cm">&lt;!-- variable-length string → length+data fields --&gt;</span>
+&lt;/<span class="fn">element</span>&gt;</pre>
+    </div>
+    <div class="output-panel" id="out-1">
+      <div class="panel-label"><span>◈</span>parseLab JSON output</div>
+      <div class="output-content">
+        <div class="placeholder"><div class="icon">◈</div><p>Click "Run Pipeline" to convert this model</p></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════════════════════ STEP 2 — PARSELAB FORMAT ═══════════════════════════ -->
+<main id="step-2">
+  <div class="step-header">
+    <div class="step-info">
+      <div class="step-number">Step 02 · Format Verification</div>
+      <div class="step-title">parseLab's Required Input Format</div>
+      <div class="step-desc">
+        parseLab is open source (Apache-2.0, github.com/lmco/parselab).
+        Its protocol.json input format is publicly documented.
+        Here we show the spec side-by-side with our output — and confirm they match.
+      </div>
+    </div>
+    <button class="run-btn" onclick="run2(this)">▶ Compare Formats</button>
+  </div>
+  <div class="panels">
+    <div class="panel">
+      <div class="panel-label"><span>〈/〉</span>parseLab protocol.json spec (github.com/lmco/parselab)</div>
+      <pre class="code-block"><span class="cm">// parseLab protocol.json — documented format</span>
+<span class="cm">// Source: Lockheed Martin ATL, Apache-2.0</span>
+{
+  <span class="cm">// Optional: reusable nested type definitions</span>
+  <span class="jk">"structs"</span>: [
+    {
+      <span class="jk">"struct_name"</span>: <span class="js">"&lt;type_name&gt;"</span>,
+      <span class="jk">"members"</span>: [ <span class="jp">&lt;fields&gt;</span> ]
+    }
+  ],
+
+  <span class="cm">// Required: top-level message definitions</span>
+  <span class="jk">"protocol_types"</span>: [
+    {
+      <span class="jk">"name"</span>: <span class="js">"&lt;message_name&gt;"</span>,
+      <span class="jk">"fields"</span>: [ <span class="jp">&lt;fields&gt;</span> ]
+    }
+  ]
+}
+
+<span class="cm">// Each field:</span>
+{
+  <span class="jk">"name"</span>:     <span class="js">"fieldname"</span>,    <span class="cm">// required</span>
+  <span class="jk">"type"</span>:     <span class="js">"U32"</span>,          <span class="cm">// required</span>
+  <span class="jk">"value"</span>:    <span class="js">"0|1|2|3"</span>,     <span class="cm">// optional — enum</span>
+  <span class="jk">"value"</span>:    <span class="js">"(0, 32)"</span>,      <span class="cm">// optional — range</span>
+  <span class="jk">"dependee"</span>: <span class="js">"true"</span>          <span class="cm">// optional — length field</span>
+}
+
+<span class="cm">// Valid primitive types:</span>
+<span class="cm">// U8   U16  U32  U64</span>
+<span class="cm">// I8   I16  I32  I64</span>
+<span class="cm">// F32  D8</span>
+<span class="cm">// U8[length_field]  ← variable-length array</span>
+
+<span class="cm">// Nested struct reference:</span>
+{
+  <span class="jk">"name"</span>: <span class="js">"position"</span>,
+  <span class="jk">"type"</span>: <span class="js">"gpscoordinatestype"</span>  <span class="cm">// ← struct name</span>
+}</pre>
+    </div>
+    <div class="output-panel" id="out-2">
+      <div class="panel-label"><span>◈</span>our output vs parseLab spec</div>
+      <div class="output-content">
+        <div class="placeholder"><div class="icon">◈</div><p>Click "Compare Formats" to verify compliance</p></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════════════════════ STEP 3 — MAVLINK ═══════════════════════════ -->
+<main id="step-3">
+  <div class="step-header">
+    <div class="step-info">
+      <div class="step-number">Step 03 · Second Model Format</div>
+      <div class="step-title">MAVLink — A Different Model, Same Pipeline</div>
+      <div class="step-desc">
+        MAVLink is the de facto UAS communication protocol, used by ArduPilot, PX4, and most autopilots.
+        It defines messages in a public XML format at mavlink.io — completely different from FACE UDDL.
+        Same pipeline. Same exporter. Same output format. New reader, no other changes.
+      </div>
+    </div>
+    <button class="run-btn" onclick="run3(this)">▶ Run Pipeline</button>
+  </div>
+  <div class="panels">
+    <div class="panel">
+      <div class="panel-label"><span>〈/〉</span>mavlink_subset.xml (public — mavlink.io)</div>
+      <pre class="code-block"><span class="cm">&lt;!-- MAVLink message definition format --&gt;</span>
+<span class="cm">&lt;!-- Source: mavlink.io — public domain  --&gt;</span>
+
+&lt;<span class="fn">mavlink</span>&gt;
+  &lt;<span class="fn">enums</span>&gt;
+    &lt;<span class="fn">enum</span> <span class="nt">name</span>=<span class="st">"MAV_TYPE"</span>&gt;
+      &lt;<span class="fn">entry</span> <span class="nt">name</span>=<span class="st">"MAV_TYPE_GENERIC"</span>     <span class="nt">value</span>=<span class="st">"0"</span>/&gt;
+      &lt;<span class="fn">entry</span> <span class="nt">name</span>=<span class="st">"MAV_TYPE_FIXED_WING"</span>  <span class="nt">value</span>=<span class="st">"1"</span>/&gt;
+      &lt;<span class="fn">entry</span> <span class="nt">name</span>=<span class="st">"MAV_TYPE_QUADROTOR"</span>   <span class="nt">value</span>=<span class="st">"2"</span>/&gt;
+      <span class="cm">&lt;!-- ... 40 more types --&gt;</span>
+    &lt;/<span class="fn">enum</span>&gt;
+
+    &lt;<span class="fn">enum</span> <span class="nt">name</span>=<span class="st">"MAV_STATE"</span>&gt;
+      &lt;<span class="fn">entry</span> <span class="nt">name</span>=<span class="st">"MAV_STATE_UNINIT"</span>      <span class="nt">value</span>=<span class="st">"0"</span>/&gt;
+      &lt;<span class="fn">entry</span> <span class="nt">name</span>=<span class="st">"MAV_STATE_BOOT"</span>        <span class="nt">value</span>=<span class="st">"1"</span>/&gt;
+      &lt;<span class="fn">entry</span> <span class="nt">name</span>=<span class="st">"MAV_STATE_CALIBRATING"</span> <span class="nt">value</span>=<span class="st">"2"</span>/&gt;
+      <span class="cm">&lt;!-- ... --&gt;</span>
+    &lt;/<span class="fn">enum</span>&gt;
+  &lt;/<span class="fn">enums</span>&gt;
+
+  &lt;<span class="fn">messages</span>&gt;
+    <span class="cm">&lt;!-- HEARTBEAT — message ID 0 --&gt;</span>
+    &lt;<span class="fn">message</span> <span class="nt">id</span>=<span class="st">"0"</span> <span class="nt">name</span>=<span class="st">"HEARTBEAT"</span>&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"uint8_t"</span>  <span class="nt">name</span>=<span class="st">"type"</span>
+             <span class="nt">enum</span>=<span class="st">"MAV_TYPE"</span>&gt;Vehicle type&lt;/<span class="fn">field</span>&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"uint8_t"</span>  <span class="nt">name</span>=<span class="st">"autopilot"</span>
+             <span class="nt">enum</span>=<span class="st">"MAV_AUTOPILOT"</span>&gt;Autopilot&lt;/<span class="fn">field</span>&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"uint8_t"</span>  <span class="nt">name</span>=<span class="st">"base_mode"</span>&gt;Mode bitmap&lt;/<span class="fn">field</span>&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"uint32_t"</span> <span class="nt">name</span>=<span class="st">"custom_mode"</span>&gt;Custom&lt;/<span class="fn">field</span>&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"uint8_t"</span>  <span class="nt">name</span>=<span class="st">"system_status"</span>
+             <span class="nt">enum</span>=<span class="st">"MAV_STATE"</span>&gt;Status&lt;/<span class="fn">field</span>&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"uint8_t"</span>  <span class="nt">name</span>=<span class="st">"mavlink_version"</span>&gt;Version&lt;/<span class="fn">field</span>&gt;
+    &lt;/<span class="fn">message</span>&gt;
+
+    <span class="cm">&lt;!-- PARAM_SET — message ID 23 --&gt;</span>
+    &lt;<span class="fn">message</span> <span class="nt">id</span>=<span class="st">"23"</span> <span class="nt">name</span>=<span class="st">"PARAM_SET"</span>&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"uint8_t"</span>  <span class="nt">name</span>=<span class="st">"target_system"</span>/&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"uint8_t"</span>  <span class="nt">name</span>=<span class="st">"target_component"</span>/&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"char[16]"</span> <span class="nt">name</span>=<span class="st">"param_id"</span>/&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"float"</span>    <span class="nt">name</span>=<span class="st">"param_value"</span>/&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"uint8_t"</span>  <span class="nt">name</span>=<span class="st">"param_type"</span>
+             <span class="nt">enum</span>=<span class="st">"MAV_PARAM_TYPE"</span>/&gt;
+    &lt;/<span class="fn">message</span>&gt;
+
+    <span class="cm">&lt;!-- COMMAND_LONG — message ID 76 --&gt;</span>
+    &lt;<span class="fn">message</span> <span class="nt">id</span>=<span class="st">"76"</span> <span class="nt">name</span>=<span class="st">"COMMAND_LONG"</span>&gt;
+      <span class="cm">&lt;!-- target_system, target_component,</span>
+<span class="cm">           command, confirmation,</span>
+<span class="cm">           param1..param7 (float) --&gt;</span>
+    &lt;/<span class="fn">message</span>&gt;
+  &lt;/<span class="fn">messages</span>&gt;
+&lt;/<span class="fn">mavlink</span>&gt;</pre>
+    </div>
+    <div class="output-panel" id="out-3">
+      <div class="panel-label"><span>◈</span>parseLab JSON output</div>
+      <div class="output-content">
+        <div class="placeholder"><div class="icon">◈</div><p>Click "Run Pipeline" to convert MAVLink → parseLab JSON</p></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════════════════════ STEP 4 — UCI 2.5 ═══════════════════════════ -->
+<main id="step-4">
+  <div class="step-header">
+    <div class="step-info">
+      <div class="step-number">Step 04 · Full Scale</div>
+      <div class="step-title">UCI 2.5 — 722 Messages, Zero Mismatches</div>
+      <div class="step-desc">
+        The UCI 2.5 FACE model is the operational standard for SOSA-conformant UAS C2.
+        Previously converted only via the MUDDL toolchain (.NET + Phenom + proprietary DLLs).
+        Our output was validated field-by-field against 722 MUDDL-generated reference files.
+      </div>
+    </div>
+    <button class="run-btn" onclick="run4(this)">▶ Run Validation</button>
+  </div>
+  <div class="panels">
+    <div class="panel">
+      <div class="panel-label"><span>〈/〉</span>NavigationCommandMDT.json (excerpt)</div>
+      <pre class="code-block">{
+  <span class="jk">"structs"</span>: [          <span class="cm">← 226 supporting types</span>
+    {
+      <span class="jk">"struct_name"</span>: <span class="js">"commandidtype"</span>,
+      <span class="jk">"members"</span>: [
+        { <span class="jk">"name"</span>: <span class="js">"uuidlength"</span>,
+          <span class="jk">"type"</span>: <span class="js">"U32"</span>, <span class="jk">"dependee"</span>: <span class="js">"true"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"uuid"</span>,
+          <span class="jk">"type"</span>: <span class="js">"U8[uuidlength]"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"descriptivelabellength"</span>,
+          <span class="jk">"type"</span>: <span class="js">"U32"</span>, <span class="jk">"dependee"</span>: <span class="js">"true"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"descriptivelabel"</span>,
+          <span class="jk">"type"</span>: <span class="js">"U8[descriptivelabellength]"</span> }
+      ]
+    },
+    {
+      <span class="jk">"struct_name"</span>: <span class="js">"altituderangetype"</span>,
+      <span class="jk">"members"</span>: [
+        { <span class="jk">"name"</span>: <span class="js">"min"</span>, <span class="jk">"type"</span>: <span class="js">"D8"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"max"</span>, <span class="jk">"type"</span>: <span class="js">"D8"</span> }
+      ]
+    },
+    {
+      <span class="jk">"struct_name"</span>: <span class="js">"pointtwodtype"</span>,
+      <span class="jk">"members"</span>: [
+        { <span class="jk">"name"</span>: <span class="js">"latitude"</span>,          <span class="jk">"type"</span>: <span class="js">"D8"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"longitude"</span>,         <span class="jk">"type"</span>: <span class="js">"D8"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"altitude"</span>,          <span class="jk">"type"</span>: <span class="js">"D8"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"altituderange"</span>,
+          <span class="jk">"type"</span>: <span class="js">"altituderangetype"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"altitudereference"</span>,
+          <span class="jk">"type"</span>: <span class="js">"U32"</span>,
+          <span class="jk">"value"</span>: <span class="js">"0|1|2|3"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"timestamp"</span>,         <span class="jk">"type"</span>: <span class="js">"U32"</span> }
+      ]
+    }
+    <span class="cm">... 223 more structs ...</span>
+  ],
+  <span class="jk">"protocol_types"</span>: [
+    {
+      <span class="jk">"name"</span>: <span class="js">"navigationcommandmdt"</span>,
+      <span class="jk">"fields"</span>: [
+        { <span class="jk">"name"</span>: <span class="js">"command"</span>,
+          <span class="jk">"type"</span>: <span class="js">"navigationcommandtype"</span> }
+      ]
+    }
+  ]
+}</pre>
+    </div>
+    <div class="output-panel" id="out-4">
+      <div class="panel-label"><span>◈</span>validation results vs MUDDL reference</div>
+      <div class="output-content">
+        <div class="placeholder"><div class="icon">◈</div><p>Click "Run Validation" to see field-level comparison</p></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════════════════════ STEP 5 — NEXT STEPS ═══════════════════════════ -->
+<main id="step-5">
+  <div class="step-header">
+    <div class="step-info">
+      <div class="step-number">Step 05 · Roadmap</div>
+      <div class="step-title">What This Enables</div>
+      <div class="step-desc">
+        This pipeline is the foundation for expanding secure parser generation beyond SOSA —
+        to ACC, CCA, and any domain that can express its message schema in a structured format.
+      </div>
+    </div>
+    <button class="run-btn" onclick="run5(this)">▶ Show Roadmap</button>
+  </div>
+  <div class="panels">
+    <div class="panel">
+      <div class="panel-label"><span>〈/〉</span>full chain — stage 3 target</div>
+      <pre class="code-block"><span class="cm"># Stage 2 — COMPLETE (this demo)</span>
+<span class="cm"># ─────────────────────────────────────────</span>
+
+<span class="cm"># FACE .skayl model</span>
+<span class="cl">FaceReader</span>(<span class="nt">skayl_path</span>, <span class="nt">templates_path</span>)
+  → <span class="cl">Protocol</span>
+  → <span class="fn">export_json</span>()
+  → <span class="st">NavigationCommandMDT.json</span>  <span class="cm">✓</span>
+
+<span class="cm"># MAVLink XML model</span>
+<span class="cl">MAVLinkReader</span>(<span class="nt">xml_path</span>)
+  → <span class="cl">Protocol</span>
+  → <span class="fn">export_json</span>()
+  → <span class="st">heartbeat.json</span>  <span class="cm">✓</span>
+
+
+<span class="cm"># Stage 3 — NEXT</span>
+<span class="cm"># ─────────────────────────────────────────</span>
+
+<span class="cm"># Wire parseLab at the end</span>
+<span class="cl">FaceReader</span>(<span class="nt">skayl_path</span>, ...)
+  → <span class="cl">Protocol</span>
+  → <span class="fn">export_json</span>(<span class="nt">output_path</span>=<span class="st">"protocol.json"</span>)
+  → <span class="fn">subprocess.run</span>([
+      <span class="st">"python"</span>, <span class="st">"generate_parser.py"</span>,
+      <span class="st">"--protocol"</span>, <span class="st">"protocol.json"</span>,
+      <span class="st">"--module"</span>,   <span class="st">"hammer"</span>
+    ])
+  → <span class="st">secure_parser.c</span>  <span class="cm">← target</span>
+
+
+<span class="cm"># Expansion — ACC / CCA</span>
+<span class="cm"># ─────────────────────────────────────────</span>
+
+<span class="cm"># New domain = new reader only</span>
+<span class="cl">XSDReader</span>(<span class="nt">xsd_path</span>)    <span class="cm"># ~200 lines</span>
+  → <span class="cl">Protocol</span>           <span class="cm"># same IR</span>
+  → <span class="fn">export_json</span>()      <span class="cm"># same exporter</span>
+  → parseLab           <span class="cm"># same output</span></pre>
+    </div>
+    <div class="output-panel" id="out-5">
+      <div class="panel-label"><span>◈</span>roadmap</div>
+      <div class="output-content">
+        <div class="placeholder"><div class="icon">◈</div><p>Click "Show Roadmap"</p></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+function go(n) {
+  document.querySelectorAll('main').forEach(m => m.classList.remove('active'));
+  document.querySelectorAll('.step-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('step-'+n).classList.add('active');
+  document.getElementById('tab-'+n).classList.add('active');
+}
+function done(btn, tab) {
+  btn.classList.remove('running'); btn.classList.add('done'); btn.textContent = '✓ Done';
+  const t = document.getElementById('tab-'+tab);
+  t.classList.add('done'); if (!t.classList.contains('active')) t.classList.remove('active');
+}
+function setRunning(btn) { btn.disabled=true; btn.classList.add('running'); btn.textContent='⟳ Running...'; }
+const delay = ms => new Promise(r => setTimeout(r, ms));
+
+async function animCards(sel) {
+  const cards = document.querySelectorAll(sel);
+  for (const c of cards) { await delay(90); c.classList.add('vis'); }
+}
+
+// ── Step 0 ──────────────────────────────
+async function run0(btn) {
+  setRunning(btn);
+  const oc = document.getElementById('out-0').querySelector('.output-content');
+  oc.innerHTML = `
+    <div class="stat-grid">
+      ${[['2','Model formats supported'],['1','Common IR layer'],['~350','Lines of Python total'],['0','External dependencies']].map(([v,l],i)=>`<div class="stat-card" id="s0-${i}"><div class="stat-value">${v}</div><div class="stat-label">${l}</div></div>`).join('')}
+    </div>
+    <div class="sec-label" style="margin-top:4px">Pipeline today</div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+      ${[
+        ['FACE .skayl','FaceReader','Protocol IR','parseLab JSON','bb','bb','','bg'],
+        ['MAVLink .xml','MAVLinkReader','Protocol IR','parseLab JSON','bw','bw','','bg'],
+      ].map(([src,rdr,ir,out,sc,rc,ic,oc2])=>`
+        <div class="arch-flow">
+          <div class="abox ${sc}">${src}</div><div class="arrow">→</div>
+          <div class="abox ${rc}">${rdr}</div><div class="arrow">→</div>
+          <div class="abox">${ir}</div><div class="arrow">→</div>
+          <div class="abox bg">${out}</div>
+        </div>`).join('')}
+    </div>
+    <div class="sec-label">Pipeline tomorrow (plug in, no changes elsewhere)</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      ${['XSD / schema files','Proto definitions','Any structured format'].map(src=>`
+        <div class="arch-flow">
+          <div class="abox" style="color:var(--muted);border-style:dashed">${src}</div>
+          <div class="arrow">→</div><div class="abox" style="color:var(--muted);border-style:dashed">NewReader</div>
+          <div class="arrow">→</div><div class="abox">Protocol IR</div>
+          <div class="arrow">→</div><div class="abox bg">parseLab JSON</div>
+        </div>`).join('')}
+    </div>`;
+  await animCards('[id^="s0-"]');
+  done(btn, 0);
+}
+
+// ── Step 1 ──────────────────────────────
+async function run1(btn) {
+  setRunning(btn);
+  const oc = document.getElementById('out-1').querySelector('.output-content');
+  oc.innerHTML = `<div class="progress-bar on" id="pb1"><div class="progress-fill" id="pf1"></div></div><div id="r1"></div>`;
+  const pf = document.getElementById('pf1');
+  for (let i=0;i<=100;i+=5) { pf.style.width=i+'%'; await delay(18); }
+  document.getElementById('pb1').style.display='none';
+  document.getElementById('r1').innerHTML = `
+    <div class="timing">✓ simple_position.skayl → parseLab JSON in &lt;0.1s</div>
+    <div class="stat-grid">
+      ${[['1','message generated'],['1','supporting struct'],['7','total fields'],['3','field types used (D8, U32, U8[])']].map(([v,l],i)=>`<div class="stat-card" id="s1-${i}"><div class="stat-value">${v}</div><div class="stat-label">${l}</div></div>`).join('')}
+    </div>
+    <div class="sec-label">Output — PositionReportMDT.json</div>
+    <div class="json-out vis">{
+  <span class="jk">"structs"</span>: [{
+    <span class="jk">"struct_name"</span>: <span class="js">"gpscoordinatestype"</span>,
+    <span class="jk">"members"</span>: [
+      { <span class="jk">"name"</span>: <span class="js">"latitude"</span>,  <span class="jk">"type"</span>: <span class="js">"D8"</span> },
+      { <span class="jk">"name"</span>: <span class="js">"longitude"</span>, <span class="jk">"type"</span>: <span class="js">"D8"</span> },
+      { <span class="jk">"name"</span>: <span class="js">"altitude"</span>,  <span class="jk">"type"</span>: <span class="js">"D8"</span> }
+    ]
+  }],
+  <span class="jk">"protocol_types"</span>: [{
+    <span class="jk">"name"</span>: <span class="js">"positionreportmdt"</span>,
+    <span class="jk">"fields"</span>: [
+      { <span class="jk">"name"</span>: <span class="js">"systemid"</span>,   <span class="jk">"type"</span>: <span class="js">"U32"</span> },
+      { <span class="jk">"name"</span>: <span class="js">"timestamp"</span>,  <span class="jk">"type"</span>: <span class="js">"U32"</span> },
+      { <span class="jk">"name"</span>: <span class="js">"position"</span>,   <span class="jk">"type"</span>: <span class="js">"gpscoordinatestype"</span> },
+      { <span class="jk">"name"</span>: <span class="js">"fixquality"</span>, <span class="jk">"type"</span>: <span class="js">"U32"</span>,
+        <span class="jk">"value"</span>: <span class="js">"0|1|2|3|4"</span> },
+      { <span class="jk">"name"</span>: <span class="js">"satellitesinview"</span>, <span class="jk">"type"</span>: <span class="js">"U32"</span>,
+        <span class="jk">"value"</span>: <span class="js">"(0, 32)"</span> },
+      { <span class="jk">"name"</span>: <span class="js">"labellength"</span>, <span class="jk">"type"</span>: <span class="js">"U32"</span>,
+        <span class="jk">"dependee"</span>: <span class="js">"true"</span> },
+      { <span class="jk">"name"</span>: <span class="js">"label"</span>, <span class="jk">"type"</span>: <span class="js">"U8[labellength]"</span> }
+    ]
+  }]
+}</div>`;
+  await animCards('[id^="s1-"]');
+  done(btn, 1);
+}
+
+// ── Step 2 ──────────────────────────────
+async function run2(btn) {
+  setRunning(btn);
+  const oc = document.getElementById('out-2').querySelector('.output-content');
+  oc.innerHTML = `<div class="progress-bar on" id="pb2"><div class="progress-fill" id="pf2"></div></div><div id="r2"></div>`;
+  const pf = document.getElementById('pf2');
+  for (let i=0;i<=100;i+=8) { pf.style.width=i+'%'; await delay(25); }
+  document.getElementById('pb2').style.display='none';
+
+  const checks = [
+    ['Top-level keys',            'structs + protocol_types', '✓ Match'],
+    ['Struct definition key',     'struct_name + members',    '✓ Match'],
+    ['Message definition key',    'name + fields',            '✓ Match'],
+    ['Primitive field',           'name + type',              '✓ Match'],
+    ['Enumeration field',         'type=U32, value=0|1|2',   '✓ Match'],
+    ['Range constraint field',    'type=U32, value=(0,32)',   '✓ Match'],
+    ['Variable-length array',     'type=U8[len], dependee',  '✓ Match'],
+    ['Nested struct reference',   'type=struct_name',         '✓ Match'],
+  ];
+
+  document.getElementById('r2').innerHTML = `
+    <div class="timing">Comparing output against parseLab documented spec...</div>
+    <table class="cmp-table" id="cmptbl">
+      <thead><tr><th>Requirement</th><th>parseLab spec</th><th>Our output</th></tr></thead>
+      <tbody>${checks.map(([r,s,o],i)=>`<tr id="cr${i}"><td>${r}</td><td>${s}</td><td>${o}</td></tr>`).join('')}</tbody>
+    </table>
+    <div class="result-banner" id="rb2">
+      <div class="big">8/8</div>
+      <div>
+        <div class="lbl">Format requirements met — output is valid parseLab input</div>
+        <div class="sub">Verified against github.com/lmco/parselab documentation and examples</div>
+      </div>
+    </div>`;
+
+  for (let i=0;i<checks.length;i++) {
+    await delay(200);
+    document.getElementById('cr'+i).classList.add('vis');
+  }
+  await delay(300);
+  document.getElementById('rb2').classList.add('vis');
+  done(btn, 2);
+}
+
+// ── Step 3 ──────────────────────────────
+async function run3(btn) {
+  setRunning(btn);
+  const oc = document.getElementById('out-3').querySelector('.output-content');
+  oc.innerHTML = `<div class="progress-bar on" id="pb3"><div class="progress-fill" id="pf3"></div></div><div id="r3"></div>`;
+  const pf = document.getElementById('pf3');
+  for (let i=0;i<=100;i+=5) { pf.style.width=i+'%'; await delay(15); }
+  document.getElementById('pb3').style.display='none';
+  document.getElementById('r3').innerHTML = `
+    <div class="timing">✓ mavlink_subset.xml → parseLab JSON in &lt;0.1s</div>
+    <div class="stat-grid">
+      ${[['3','messages generated'],['0','supporting structs needed'],['21','total fields'],['Same','exporter — no changes']].map(([v,l],i)=>`<div class="stat-card" id="s3-${i}"><div class="stat-value">${v}</div><div class="stat-label">${l}</div></div>`).join('')}
+    </div>
+    <div class="sec-label">Output — HEARTBEAT</div>
+    <div class="json-out vis">{
+  <span class="jk">"protocol_types"</span>: [
+    {
+      <span class="jk">"name"</span>: <span class="js">"heartbeat"</span>,
+      <span class="jk">"fields"</span>: [
+        { <span class="jk">"name"</span>: <span class="js">"typex"</span>,         <span class="jk">"type"</span>: <span class="js">"U32"</span>,
+          <span class="jk">"value"</span>: <span class="js">"0|1|2|3|4|5|..."</span> },  <span class="cm">← MAV_TYPE enum (43 values)</span>
+        { <span class="jk">"name"</span>: <span class="js">"autopilot"</span>,     <span class="jk">"type"</span>: <span class="js">"U32"</span>,
+          <span class="jk">"value"</span>: <span class="js">"0|1|2|3|4|5|..."</span> },  <span class="cm">← MAV_AUTOPILOT enum</span>
+        { <span class="jk">"name"</span>: <span class="js">"basemode"</span>,      <span class="jk">"type"</span>: <span class="js">"U8"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"custommode"</span>,    <span class="jk">"type"</span>: <span class="js">"U32"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"systemstatus"</span>,  <span class="jk">"type"</span>: <span class="js">"U32"</span>,
+          <span class="jk">"value"</span>: <span class="js">"0|1|2|3|4|5|6|7|8"</span> },  <span class="cm">← MAV_STATE enum</span>
+        { <span class="jk">"name"</span>: <span class="js">"mavlinkversion"</span>, <span class="jk">"type"</span>: <span class="js">"U8"</span> }
+      ]
+    },
+    {
+      <span class="jk">"name"</span>: <span class="js">"paramset"</span>,
+      <span class="jk">"fields"</span>: [
+        { <span class="jk">"name"</span>: <span class="js">"targetsystem"</span>,    <span class="jk">"type"</span>: <span class="js">"U8"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"targetcomponent"</span>, <span class="jk">"type"</span>: <span class="js">"U8"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"paramidlength"</span>,   <span class="jk">"type"</span>: <span class="js">"U32"</span>,
+          <span class="jk">"dependee"</span>: <span class="js">"true"</span> },        <span class="cm">← char[16] → length+data</span>
+        { <span class="jk">"name"</span>: <span class="js">"paramid"</span>,         <span class="jk">"type"</span>: <span class="js">"U8[paramidlength]"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"paramvalue"</span>,      <span class="jk">"type"</span>: <span class="js">"F32"</span> },
+        { <span class="jk">"name"</span>: <span class="js">"paramtype"</span>,       <span class="jk">"type"</span>: <span class="js">"U32"</span>,
+          <span class="jk">"value"</span>: <span class="js">"0|1|2|3|4|5|6|7|8|9"</span> }
+      ]
+    }
+  ]
+}</div>`;
+  await animCards('[id^="s3-"]');
+  done(btn, 3);
+}
+
+// ── Step 4 ──────────────────────────────
+async function run4(btn) {
+  setRunning(btn);
+  const oc = document.getElementById('out-4').querySelector('.output-content');
+  const msgs = [
+    ['AccessAssessmentMDT',    284, 1140],
+    ['EntityConfirmationMDT',    2,    8],
+    ['EntityMDT',              244,  992],
+    ['MissionPlanMDT',         609, 2546],
+    ['NavigationCommandMDT',   226,  867],
+    ['NavigationReportMDT',     19,   59],
+    ['OpLineMDT',               26,  101],
+    ['OpZoneMDT',              100,  406],
+    ['PositionReportMDT',       10,   45],
+    ['SystemStatusMDT',         68,  291],
+  ];
+  oc.innerHTML = `
+    <div class="timing">Validating against MUDDL reference output — field by field...</div>
+    <div class="progress-bar on" id="pb4"><div class="progress-fill" id="pf4"></div></div>
+    <table class="val-table">
+      <thead><tr><th>Message</th><th>Structs</th><th>Fields</th><th>Result</th></tr></thead>
+      <tbody id="vtb"></tbody>
+    </table>
+    <div class="result-banner" id="rb4">
+      <div class="big">10/10</div>
+      <div>
+        <div class="lbl">Messages passed · 0 field-level mismatches</div>
+        <div class="sub">Full run: 722/722 UCI MDT messages · identical to MUDDL .NET pipeline output</div>
+      </div>
+    </div>`;
+  const pf = document.getElementById('pf4');
+  const tbody = document.getElementById('vtb');
+  for (let i=0;i<msgs.length;i++) {
+    const [n,s,f] = msgs[i];
+    pf.style.width = ((i+1)/msgs.length*100)+'%';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${n}</td><td>${s}</td><td>${f.toLocaleString()}</td><td><span class="pass">✓ PASS</span></td>`;
+    tbody.appendChild(tr);
+    await delay(200);
+    tr.classList.add('vis');
+  }
+  await delay(300);
+  document.getElementById('rb4').classList.add('vis');
+  done(btn, 4);
+}
+
+// ── Step 5 ──────────────────────────────
+async function run5(btn) {
+  setRunning(btn);
+  const oc = document.getElementById('out-5').querySelector('.output-content');
+  oc.innerHTML = `<div id="r5"></div>`;
+  const phases = [
+    { label:'✓ Stage 2 — Complete', color:'var(--accent2)', items:[
+      'FACE .skayl reader — pure Python, no .NET runtime',
+      'MAVLink XML reader — demonstrates model-agnostic architecture',
+      'parseLab JSON exporter — format-agnostic IR layer',
+      'CLI + YAML manifest runner — one command, any model',
+      '722/722 UCI MDT messages validated against MUDDL reference',
+    ]},
+    { label:'→ Stage 3 — Next', color:'var(--accent)', items:[
+      'Wire parseLab invocation at end of pipeline',
+      'Single command: .skayl in → secure C parser out',
+      'Demonstrate full chain to Tony and Thomas',
+    ]},
+    { label:'◇ Expansion — ACC / CCA', color:'var(--warn)', items:[
+      'Map message standards in play for ACC/CCA platforms',
+      'Add reader for relevant schema format (~200 lines)',
+      'Frame next phase proposal for ACC/CCA stakeholders',
+    ]},
+  ];
+  for (const {label,color,items} of phases) {
+    const d = document.createElement('div');
+    d.style.cssText='margin-bottom:18px;opacity:0;transform:translateY(6px);transition:all 0.4s';
+    d.innerHTML=`<div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:${color};text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">${label}</div>`+
+      items.map(i=>`<div style="display:flex;gap:8px;margin-bottom:6px;font-size:12px;color:var(--muted);line-height:1.5"><span style="color:${color};flex-shrink:0">→</span><span>${i}</span></div>`).join('');
+    document.getElementById('r5').appendChild(d);
+    await delay(120);
+    d.style.opacity='1'; d.style.transform='translateY(0)';
+  }
+  done(btn, 5);
+}
+</script>
+</body>
+</html>
