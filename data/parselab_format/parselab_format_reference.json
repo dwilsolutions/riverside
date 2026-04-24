@@ -1,1 +1,41 @@
+{
+  "_comment": "parseLab protocol.json format — from https://github.com/lmco/parselab",
+  "_source": "Lockheed Martin ATL — Apache-2.0 license",
 
+  "_format_rules": [
+    "Top-level keys: 'structs' (optional) and 'protocol_types' (required)",
+    "structs: reusable nested type definitions, referenced by name in fields",
+    "protocol_types: the top-level message definitions parseLab generates parsers for",
+    "Each field has: name (required), type (required), value (optional), dependee (optional)",
+    "Primitive types: U8, U16, U32, U64, I8, I16, I32, I64, F32, D8",
+    "Variable-length arrays: U8[length_field_name] — requires a dependee length field",
+    "Enumerations: type=U32 with pipe-separated value string e.g. '0|1|2|3'",
+    "Range constraints: value='(min, max)' e.g. '(0, 32)'",
+    "dependee: 'true' marks a field as a length counter for a variable array"
+  ],
+
+  "structs": [
+    {
+      "struct_name": "example_nested_type",
+      "members": [
+        { "name": "field_a",      "type": "U32" },
+        { "name": "field_b",      "type": "D8" },
+        { "name": "field_c",      "type": "U32",  "value": "0|1|2|3" },
+        { "name": "field_d",      "type": "U32",  "value": "(0, 255)" },
+        { "name": "strlength",    "type": "U32",  "dependee": "true" },
+        { "name": "str",          "type": "U8[strlength]" }
+      ]
+    }
+  ],
+
+  "protocol_types": [
+    {
+      "name": "example_message",
+      "fields": [
+        { "name": "id",           "type": "U32" },
+        { "name": "timestamp",    "type": "U32" },
+        { "name": "nested",       "type": "example_nested_type" }
+      ]
+    }
+  ]
+}
