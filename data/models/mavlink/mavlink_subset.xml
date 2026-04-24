@@ -1,1 +1,146 @@
+<?xml version="1.0"?>
+<!--
+  mavlink_subset.xml
+  Subset of MAVLink common message definitions (public domain).
+  Source: https://mavlink.io/en/messages/common.html
+  
+  We include the same 3 messages parseLab uses in their own tutorial:
+  HEARTBEAT, PARAM_SET, COMMAND_LONG
+-->
+<mavlink>
+  <enums>
+    <enum name="MAV_TYPE">
+      <entry name="MAV_TYPE_GENERIC"            value="0"/>
+      <entry name="MAV_TYPE_FIXED_WING"         value="1"/>
+      <entry name="MAV_TYPE_QUADROTOR"          value="2"/>
+      <entry name="MAV_TYPE_COAXIAL"            value="3"/>
+      <entry name="MAV_TYPE_HELICOPTER"         value="4"/>
+      <entry name="MAV_TYPE_ANTENNA_TRACKER"    value="5"/>
+      <entry name="MAV_TYPE_GCS"                value="6"/>
+      <entry name="MAV_TYPE_AIRSHIP"            value="7"/>
+      <entry name="MAV_TYPE_FREE_BALLOON"       value="8"/>
+      <entry name="MAV_TYPE_ROCKET"             value="9"/>
+      <entry name="MAV_TYPE_GROUND_ROVER"       value="10"/>
+      <entry name="MAV_TYPE_SURFACE_BOAT"       value="11"/>
+      <entry name="MAV_TYPE_SUBMARINE"          value="12"/>
+      <entry name="MAV_TYPE_HEXAROTOR"          value="13"/>
+      <entry name="MAV_TYPE_OCTOROTOR"          value="14"/>
+      <entry name="MAV_TYPE_TRICOPTER"          value="15"/>
+      <entry name="MAV_TYPE_FLAPPING_WING"      value="16"/>
+      <entry name="MAV_TYPE_KITE"               value="17"/>
+      <entry name="MAV_TYPE_ONBOARD_CONTROLLER" value="18"/>
+      <entry name="MAV_TYPE_VTOL_TAILSITTER_DUOROTOR" value="19"/>
+      <entry name="MAV_TYPE_VTOL_TAILSITTER_QUADROTOR" value="20"/>
+      <entry name="MAV_TYPE_VTOL_TILTROTOR"     value="21"/>
+      <entry name="MAV_TYPE_VTOL_FIXEDROTOR"    value="22"/>
+      <entry name="MAV_TYPE_VTOL_TAILSITTER"    value="23"/>
+      <entry name="MAV_TYPE_VTOL_TILTWING"      value="24"/>
+      <entry name="MAV_TYPE_VTOL_RESERVED5"     value="25"/>
+      <entry name="MAV_TYPE_GIMBAL"             value="26"/>
+      <entry name="MAV_TYPE_ADSB"               value="27"/>
+      <entry name="MAV_TYPE_PARAFOIL"           value="28"/>
+      <entry name="MAV_TYPE_DODECAROTOR"        value="29"/>
+      <entry name="MAV_TYPE_CAMERA"             value="30"/>
+      <entry name="MAV_TYPE_CHARGING_STATION"   value="31"/>
+      <entry name="MAV_TYPE_FLARM"              value="32"/>
+      <entry name="MAV_TYPE_SERVO"              value="33"/>
+      <entry name="MAV_TYPE_ODID"               value="34"/>
+      <entry name="MAV_TYPE_DECAROTOR"          value="35"/>
+      <entry name="MAV_TYPE_BATTERY"            value="36"/>
+      <entry name="MAV_TYPE_PARACHUTE"          value="37"/>
+      <entry name="MAV_TYPE_LOG"                value="38"/>
+      <entry name="MAV_TYPE_OSD"                value="39"/>
+      <entry name="MAV_TYPE_IMU"                value="40"/>
+      <entry name="MAV_TYPE_GPS"                value="41"/>
+      <entry name="MAV_TYPE_WINCH"              value="42"/>
+    </enum>
 
+    <enum name="MAV_AUTOPILOT">
+      <entry name="MAV_AUTOPILOT_GENERIC"                                    value="0"/>
+      <entry name="MAV_AUTOPILOT_RESERVED"                                   value="1"/>
+      <entry name="MAV_AUTOPILOT_SLUGS"                                      value="2"/>
+      <entry name="MAV_AUTOPILOT_ARDUPILOTMEGA"                              value="3"/>
+      <entry name="MAV_AUTOPILOT_OPENPILOT"                                  value="4"/>
+      <entry name="MAV_AUTOPILOT_GENERIC_WAYPOINTS_ONLY"                     value="5"/>
+      <entry name="MAV_AUTOPILOT_GENERIC_WAYPOINTS_AND_SIMPLE_NAVIGATION_ONLY" value="6"/>
+      <entry name="MAV_AUTOPILOT_GENERIC_MISSION_FULL"                       value="7"/>
+      <entry name="MAV_AUTOPILOT_INVALID"                                    value="8"/>
+      <entry name="MAV_AUTOPILOT_PPZ"                                        value="9"/>
+      <entry name="MAV_AUTOPILOT_UDB"                                        value="10"/>
+      <entry name="MAV_AUTOPILOT_FP"                                         value="11"/>
+      <entry name="MAV_AUTOPILOT_PX4"                                        value="12"/>
+      <entry name="MAV_AUTOPILOT_SMACCMPILOT"                                value="13"/>
+      <entry name="MAV_AUTOPILOT_AUTOQUAD"                                   value="14"/>
+      <entry name="MAV_AUTOPILOT_ARMAZILA"                                   value="15"/>
+      <entry name="MAV_AUTOPILOT_AEROB"                                      value="16"/>
+      <entry name="MAV_AUTOPILOT_ASLUAV"                                     value="17"/>
+      <entry name="MAV_AUTOPILOT_SMARTAP"                                    value="18"/>
+      <entry name="MAV_AUTOPILOT_AIRRAILS"                                   value="19"/>
+      <entry name="MAV_AUTOPILOT_REFLEX"                                     value="20"/>
+    </enum>
+
+    <enum name="MAV_STATE">
+      <entry name="MAV_STATE_UNINIT"      value="0"/>
+      <entry name="MAV_STATE_BOOT"        value="1"/>
+      <entry name="MAV_STATE_CALIBRATING" value="2"/>
+      <entry name="MAV_STATE_STANDBY"     value="3"/>
+      <entry name="MAV_STATE_ACTIVE"      value="4"/>
+      <entry name="MAV_STATE_CRITICAL"    value="5"/>
+      <entry name="MAV_STATE_EMERGENCY"   value="6"/>
+      <entry name="MAV_STATE_POWEROFF"    value="7"/>
+      <entry name="MAV_STATE_FLIGHT_TERMINATION" value="8"/>
+    </enum>
+
+    <enum name="MAV_PARAM_TYPE">
+      <entry name="MAV_PARAM_TYPE_UINT8"  value="1"/>
+      <entry name="MAV_PARAM_TYPE_INT8"   value="2"/>
+      <entry name="MAV_PARAM_TYPE_UINT16" value="3"/>
+      <entry name="MAV_PARAM_TYPE_INT16"  value="4"/>
+      <entry name="MAV_PARAM_TYPE_UINT32" value="5"/>
+      <entry name="MAV_PARAM_TYPE_INT32"  value="6"/>
+      <entry name="MAV_PARAM_TYPE_UINT64" value="7"/>
+      <entry name="MAV_PARAM_TYPE_INT64"  value="8"/>
+      <entry name="MAV_PARAM_TYPE_REAL32" value="9"/>
+      <entry name="MAV_PARAM_TYPE_REAL64" value="10"/>
+    </enum>
+  </enums>
+
+  <messages>
+    <!-- HEARTBEAT — message ID 0 -->
+    <message id="0" name="HEARTBEAT">
+      <description>The heartbeat message shows that a system is present and responding.</description>
+      <field type="uint8_t" name="type"             enum="MAV_TYPE">Vehicle or component type.</field>
+      <field type="uint8_t" name="autopilot"        enum="MAV_AUTOPILOT">Autopilot type.</field>
+      <field type="uint8_t" name="base_mode">System mode bitmap.</field>
+      <field type="uint32_t" name="custom_mode">A bitfield for use for autopilot-specific flags.</field>
+      <field type="uint8_t" name="system_status"    enum="MAV_STATE">System status flag.</field>
+      <field type="uint8_t" name="mavlink_version">MAVLink version.</field>
+    </message>
+
+    <!-- PARAM_SET — message ID 23 -->
+    <message id="23" name="PARAM_SET">
+      <description>Set a parameter value. The receiving system should acknowledge the new parameter value.</description>
+      <field type="uint8_t"  name="target_system">System ID.</field>
+      <field type="uint8_t"  name="target_component">Component ID.</field>
+      <field type="char[16]" name="param_id">Onboard parameter id, terminated by NUL if the length is less than 16 human-readable chars.</field>
+      <field type="float"    name="param_value">Onboard parameter value.</field>
+      <field type="uint8_t"  name="param_type" enum="MAV_PARAM_TYPE">Onboard parameter type.</field>
+    </message>
+
+    <!-- COMMAND_LONG — message ID 76 -->
+    <message id="76" name="COMMAND_LONG">
+      <description>Send a command with up to seven parameters to the MAV.</description>
+      <field type="uint8_t"  name="target_system">System which should execute the command.</field>
+      <field type="uint8_t"  name="target_component">Component which should execute the command.</field>
+      <field type="uint16_t" name="command">Command ID (of MAV_CMD enum type).</field>
+      <field type="uint8_t"  name="confirmation">0: First transmission of this command. 1-255: Confirmation transmissions.</field>
+      <field type="float"    name="param1">Parameter 1.</field>
+      <field type="float"    name="param2">Parameter 2.</field>
+      <field type="float"    name="param3">Parameter 3.</field>
+      <field type="float"    name="param4">Parameter 4.</field>
+      <field type="float"    name="param5">Parameter 5 (also local North/Latitude).</field>
+      <field type="float"    name="param6">Parameter 6 (also local East/Longitude).</field>
+      <field type="float"    name="param7">Parameter 7 (also altitude).</field>
+    </message>
+  </messages>
+</mavlink>
