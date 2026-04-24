@@ -1,1 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  simple_position.skayl
+  A hand-crafted minimal FACE UDDL model demonstrating the pipeline.
+  Defines a simple GPS position report message with nested types.
+-->
+<face:DataModel
+  name="SimpleDemo"
+  xmi:id="DEMO_001"
+  xmlns:xmi="http://www.omg.org/XMI"
+  xmlns:platform="http://www.opengroup.us/face/platform/2.1"
+  xmlns:face="http://www.opengroup.us/face/2.1"
+  skayl_version="1.0.1">
 
+  <dm xmi:id="DEMO_DM_001" name="SimpleModel" xmi:type="datamodel:DataModel">
+    <pdm xmi:id="DEMO_PDM_001" name="Platform_Types" xmi:type="face:PlatformDataModel">
+
+      <!-- ═══ Platform primitive types ═══ -->
+
+      <element
+        xmi:type="platform:Double"
+        xmi:id="TYPE_DOUBLE_001"
+        name="LatitudeType"/>
+
+      <element
+        xmi:type="platform:Double"
+        xmi:id="TYPE_DOUBLE_002"
+        name="LongitudeType"/>
+
+      <element
+        xmi:type="platform:Double"
+        xmi:id="TYPE_DOUBLE_003"
+        name="AltitudeType"/>
+
+      <element
+        xmi:type="platform:ULong"
+        xmi:id="TYPE_ULONG_001"
+        name="TimestampType"/>
+
+      <element
+        xmi:type="platform:ULong"
+        xmi:id="TYPE_ULONG_002"
+        name="SystemIdType"/>
+
+      <element
+        xmi:type="platform:String"
+        xmi:id="TYPE_STRING_001"
+        name="LabelType"/>
+
+      <!-- ═══ Enumeration: fix quality ═══ -->
+
+      <element
+        xmi:type="platform:Enumeration"
+        xmi:id="TYPE_ENUM_001"
+        name="FixQualityEnum">
+        <enumerationLiteral xmi:id="ENUM_LIT_001" name="NO_FIX"       xmi:type="platform:EnumerationLiteral"/>
+        <enumerationLiteral xmi:id="ENUM_LIT_002" name="GPS_FIX"      xmi:type="platform:EnumerationLiteral"/>
+        <enumerationLiteral xmi:id="ENUM_LIT_003" name="DGPS_FIX"     xmi:type="platform:EnumerationLiteral"/>
+        <enumerationLiteral xmi:id="ENUM_LIT_004" name="RTK_FIXED"    xmi:type="platform:EnumerationLiteral"/>
+        <enumerationLiteral xmi:id="ENUM_LIT_005" name="RTK_FLOAT"    xmi:type="platform:EnumerationLiteral"/>
+      </element>
+
+      <!-- ═══ Integer range constraint ═══ -->
+
+      <element
+        xmi:type="platform:IntegerRangeConstraint"
+        xmi:id="CONSTRAINT_001"
+        name="SatelliteCountConstraint"
+        lowerBound="0"
+        upperBound="32"/>
+
+      <element
+        xmi:type="platform:ULong"
+        xmi:id="TYPE_ULONG_003"
+        name="SatelliteCountType"
+        constraint="CONSTRAINT_001"/>
+
+      <!-- ═══ View: GPS coordinates struct ═══ -->
+
+      <element
+        xmi:id="VIEW_COORDS_001"
+        name="GpsCoordinatesType"
+        xmi:type="platform:View"
+        structureKind="nesting">
+
+        <characteristic
+          xmi:id="CHAR_001"
+          rolename="Latitude"
+          xmi:type="platform:CharacteristicProjection"
+          attributeKind="privatelyScoped"
+          platformType="TYPE_DOUBLE_001"
+          optional="false"
+          upperBound="1"
+          lowerBound="1"/>
+
+        <characteristic
+          xmi:id="CHAR_002"
+          rolename="Longitude"
+          xmi:type="platform:CharacteristicProjection"
+          attributeKind="privatelyScoped"
+          platformType="TYPE_DOUBLE_002"
+          optional="false"
+          upperBound="1"
+          lowerBound="1"/>
+
+        <characteristic
+          xmi:id="CHAR_003"
+          rolename="Altitude"
+          xmi:type="platform:CharacteristicProjection"
+          attributeKind="privatelyScoped"
+          platformType="TYPE_DOUBLE_003"
+          optional="false"
+          upperBound="1"
+          lowerBound="1"/>
+
+      </element>
+
+      <!-- ═══ View: top-level PositionReportMDT message ═══ -->
+
+      <element
+        xmi:id="VIEW_MSG_001"
+        name="PositionReportMDT"
+        xmi:type="platform:View"
+        structureKind="nesting">
+
+        <characteristic
+          xmi:id="CHAR_010"
+          rolename="SystemId"
+          xmi:type="platform:CharacteristicProjection"
+          attributeKind="privatelyScoped"
+          platformType="TYPE_ULONG_002"
+          optional="false"
+          upperBound="1"
+          lowerBound="1"/>
+
+        <characteristic
+          xmi:id="CHAR_011"
+          rolename="Timestamp"
+          xmi:type="platform:CharacteristicProjection"
+          attributeKind="privatelyScoped"
+          platformType="TYPE_ULONG_001"
+          optional="false"
+          upperBound="1"
+          lowerBound="1"/>
+
+        <characteristic
+          xmi:id="CHAR_012"
+          rolename="Position"
+          xmi:type="platform:CharacteristicProjection"
+          attributeKind="foreignReference"
+          viewType="VIEW_COORDS_001"
+          optional="false"
+          upperBound="1"
+          lowerBound="1"/>
+
+        <characteristic
+          xmi:id="CHAR_013"
+          rolename="FixQuality"
+          xmi:type="platform:CharacteristicProjection"
+          attributeKind="privatelyScoped"
+          platformType="TYPE_ENUM_001"
+          optional="false"
+          upperBound="1"
+          lowerBound="1"/>
+
+        <characteristic
+          xmi:id="CHAR_014"
+          rolename="SatellitesInView"
+          xmi:type="platform:CharacteristicProjection"
+          attributeKind="privatelyScoped"
+          platformType="TYPE_ULONG_003"
+          optional="false"
+          upperBound="1"
+          lowerBound="1"/>
+
+        <characteristic
+          xmi:id="CHAR_015"
+          rolename="Label"
+          xmi:type="platform:CharacteristicProjection"
+          attributeKind="privatelyScoped"
+          platformType="TYPE_STRING_001"
+          optional="true"
+          upperBound="1"
+          lowerBound="0"/>
+
+      </element>
+
+    </pdm>
+  </dm>
+</face:DataModel>
