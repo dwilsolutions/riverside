@@ -352,7 +352,7 @@ python -m face2parselab run config.yaml</pre>
     <div class="step-info">
       <div class="step-num">Step 03 · MAVLink <span class="step-live-tag">⚡ LIVE EXECUTION</span></div>
       <div class="step-title">Different Model Format — Same Pipeline</div>
-      <div class="step-desc">MAVLink is the de facto UAS autopilot protocol — used by ArduPilot, PX4, and most ground control systems. Its XML format is completely different from FACE UDDL. The pipeline doesn't change. The exporter doesn't change. Only the reader changes — ~150 lines of Python. This is what adding ACC, CCA, or any new domain looks like.</div>
+      <div class="step-desc">MAVLink is the de facto UAS autopilot protocol — used by ArduPilot, PX4, and most ground control systems. Six message types covering the full operational picture: system health (HEARTBEAT), position and navigation (GLOBAL_POSITION_INT, ATTITUDE), parameter management (PARAM_SET), mission planning (MISSION_ITEM), and command execution (COMMAND_LONG). The pipeline doesn't change. The exporter doesn't change. Only the reader changes — ~150 lines of Python.</div>
     </div>
     <div class="btn-group">
       <button class="dl-btn" id="dl-3" onclick="download3()" title="Download generated JSON">⬇ JSON</button>
@@ -401,6 +401,34 @@ python -m face2parselab run config.yaml</pre>
       &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"char[16]"</span> <span class="nt">name</span>=<span class="st">"param_id"</span>/&gt;
       &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"float"</span>    <span class="nt">name</span>=<span class="st">"param_value"</span>/&gt;
       <span class="cm">&lt;!-- char[16] → length field + U8[...] --&gt;</span>
+    &lt;/<span class="fn">message</span>&gt;
+
+    &lt;<span class="fn">message</span> <span class="nt">id</span>=<span class="st">"30"</span> <span class="nt">name</span>=<span class="st">"ATTITUDE"</span>&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"uint32_t"</span> <span class="nt">name</span>=<span class="st">"time_boot_ms"</span>/&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"float"</span>    <span class="nt">name</span>=<span class="st">"roll"</span>/&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"float"</span>    <span class="nt">name</span>=<span class="st">"pitch"</span>/&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"float"</span>    <span class="nt">name</span>=<span class="st">"yaw"</span>/&gt;
+      <span class="cm">&lt;!-- + rollspeed, pitchspeed, yawspeed --&gt;</span>
+    &lt;/<span class="fn">message</span>&gt;
+
+    &lt;<span class="fn">message</span> <span class="nt">id</span>=<span class="st">"33"</span> <span class="nt">name</span>=<span class="st">"GLOBAL_POSITION_INT"</span>&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"int32_t"</span>  <span class="nt">name</span>=<span class="st">"lat"</span>/&gt;  <span class="cm">&lt;!-- degrees * 1E7 --&gt;</span>
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"int32_t"</span>  <span class="nt">name</span>=<span class="st">"lon"</span>/&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"int32_t"</span>  <span class="nt">name</span>=<span class="st">"alt"</span>/&gt;  <span class="cm">&lt;!-- MSL mm --&gt;</span>
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"int16_t"</span>  <span class="nt">name</span>=<span class="st">"vx"</span>/&gt;   <span class="cm">&lt;!-- m/s * 100 --&gt;</span>
+      <span class="cm">&lt;!-- + vy, vz, hdg --&gt;</span>
+    &lt;/<span class="fn">message</span>&gt;
+
+    &lt;<span class="fn">message</span> <span class="nt">id</span>=<span class="st">"39"</span> <span class="nt">name</span>=<span class="st">"MISSION_ITEM"</span>&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"uint16_t"</span> <span class="nt">name</span>=<span class="st">"seq"</span>/&gt;  <span class="cm">&lt;!-- waypoint ID --&gt;</span>
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"uint8_t"</span>  <span class="nt">name</span>=<span class="st">"frame"</span>
+             <span class="nt">enum</span>=<span class="st">"MAV_FRAME"</span>/&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"uint16_t"</span> <span class="nt">name</span>=<span class="st">"command"</span>
+             <span class="nt">enum</span>=<span class="st">"MAV_CMD"</span>/&gt;
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"float"</span>    <span class="nt">name</span>=<span class="st">"x"</span>/&gt;   <span class="cm">&lt;!-- latitude --&gt;</span>
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"float"</span>    <span class="nt">name</span>=<span class="st">"y"</span>/&gt;   <span class="cm">&lt;!-- longitude --&gt;</span>
+      &lt;<span class="fn">field</span> <span class="nt">type</span>=<span class="st">"float"</span>    <span class="nt">name</span>=<span class="st">"z"</span>/&gt;   <span class="cm">&lt;!-- altitude --&gt;</span>
+      <span class="cm">&lt;!-- + param1..4, current, autocontinue, mission_type --&gt;</span>
     &lt;/<span class="fn">message</span>&gt;
 
     &lt;<span class="fn">message</span> <span class="nt">id</span>=<span class="st">"76"</span> <span class="nt">name</span>=<span class="st">"COMMAND_LONG"</span>&gt;
@@ -911,7 +939,7 @@ json.dumps({
       <div class="stat-grid">
         ${[[data.messages,'messages'],[data.structs,'supporting structs'],[data.fields,'total fields'],[elapsed+'s','execution time']].map(([v,l],i)=>`<div class="stat-card" id="s3-${i}"><div class="stat-value">${v}</div><div class="stat-label">${l}</div></div>`).join('')}
       </div>
-      <div class="sec-label">Live Output — 3 MAVLink messages → parseLab JSON</div>
+      <div class="sec-label">Live Output — 6 MAVLink messages → parseLab JSON</div>
       <div class="json-out vis">${syntaxJSON(JSON.stringify(data.json, null, 2))}</div>
       <div class="sec-label" style="margin-top:14px">Verifying output against parseLab spec</div>
       <div id="mav-checks"></div>
