@@ -508,7 +508,7 @@ GET data/reference_json/SystemStatusMDT.json
     <div class="step-info">
       <div class="step-num">Step 05 · Roadmap</div>
       <div class="step-title">What This Enables</div>
-      <div class="step-desc">Stage 2 is complete and verified. Stage 3 — wiring parseLab at the end to produce a compiled secure parser — is the next step. The architecture is already designed for it. Adding a new domain like ACC or CCA means one new reader, ~200 lines of Python.</div>
+      <div class="step-desc">Stage 2 is complete and validated. The immediate next steps are expanding the message type coverage — DDS/IDL for FACE avionics and CoT for situational awareness — followed by wiring parseLab to complete the full chain. The architecture is already designed for all of it.</div>
     </div>
     <button class="run-btn" onclick="run5(this)">▶ Show Roadmap</button>
   </div>
@@ -1184,20 +1184,22 @@ async function run5(btn) {
   const phases = [
     {label:'✓  Stage 2 — Complete', color:'var(--accent2)', items:[
       'FACE .skayl reader — pure Python, no .NET runtime',
-      'MAVLink XML reader — model-agnostic architecture proven live',
+      'MAVLink XML reader — 6 messages, MAVLink v2 wire order validated',
       'parseLab JSON exporter — format verified live against spec',
       'CLI + YAML manifest runner',
       'SystemStatusMDT live-diffed against MUDDL reference — 0 mismatches',
-      '722/722 UCI MDT messages validated (full offline run)',
+      '722/722 UCI MDT messages validated against MUDDL reference output',
     ]},
-    {label:'→  Stage 3 — Next', color:'var(--accent)', items:[
+    {label:'→  Stage 3 — Next: Message Type Expansion', color:'var(--accent)', items:[
+      'DDS/IDL reader — FACE avionics middleware, any FACE-conformant CCA system',
+      'Cursor on Target (CoT) reader — universal DoD SA, ATAK ecosystem, all services',
       'Wire parseLab invocation — model in, secure C parser out, single command',
-      'Demonstrate full chain to ACC/OUSW stakeholders',
     ]},
-    {label:'◇  Expansion — ACC / CCA', color:'var(--warn)', items:[
-      'Map message standards in play for ACC/CCA platforms',
-      'Add reader for relevant schema format (~200 lines)',
-      'Frame next phase proposal',
+    {label:'◇  Longer Term — ACC / CCA / Space', color:'var(--warn)', items:[
+      'CCSDS reader — space domain, USSF satellite C2 messages',
+      'USMTF reader — joint C2, air tasking orders, ACC operations',
+      'STANAG 4586 reader — NATO UAV interoperability (requires NATO access)',
+      'Formally verified parser output — machine-checkable proofs via Galois Daedalus',
     ]},
   ];
   for (const {label,color,items} of phases) {
