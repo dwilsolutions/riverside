@@ -173,8 +173,9 @@
   <div class="step-tab"        onclick="go(1)" id="tab-1">01 · Simple Model <span class="live-tag">⚡ LIVE</span></div>
   <div class="step-tab"        onclick="go(2)" id="tab-2">02 · Format Proof <span class="live-tag">⚡ LIVE</span></div>
   <div class="step-tab"        onclick="go(3)" id="tab-3">03 · MAVLink <span class="live-tag">⚡ LIVE</span></div>
-  <div class="step-tab"        onclick="go(4)" id="tab-4">04 · UCI 2.5 · Live Diff</div>
-  <div class="step-tab"        onclick="go(5)" id="tab-5">05 · Next Steps</div>
+  <div class="step-tab"        onclick="go(5)" id="tab-4">04 · FACE MAVLink <span class="live-tag">⚡ LIVE</span></div>
+  <div class="step-tab"        onclick="go(6)" id="tab-5">05 · UCI 2.5 · Live Diff</div>
+  <div class="step-tab"        onclick="go(6)" id="tab-6">06 · Next Steps</div>
 </nav>
 
 <!-- ═══ STEP 0 ═══ -->
@@ -444,8 +445,88 @@ python -m face2parselab run config.yaml</pre>
   </div>
 </main>
 
-<!-- ═══ STEP 4 — UCI LIVE DIFF ═══ -->
+<!-- ═══ STEP 4 — FACE MAVLink LIVE ═══ -->
 <main id="step-4">
+  <div class="step-header">
+    <div class="step-info">
+      <div class="step-num">Step 04 · FACE MAVLink Model <span class="step-live-tag">⚡ LIVE EXECUTION</span></div>
+      <div class="step-title">MAVLink Commands Modeled in FACE UDDL — Same Reader</div>
+      <div class="step-desc">The FACE standard isn't just for UCI. These six MAVLink command messages — mount control, motor test, arm/disarm, and more — were modeled in FACE UDDL (.skayl format), the same format as UCI 2.5. The same FaceReader handles it. Zero code changes. This is what the model-agnostic architecture means in practice.</div>
+    </div>
+    <div class="btn-group">
+      <button class="dl-btn" id="dl-4" onclick="download4()" title="Download generated JSON">⬇ JSON</button>
+      <button class="run-btn" id="btn-4" onclick="run4(this)">▶ Run Live</button>
+    </div>
+  </div>
+  <div class="panels">
+    <div class="panel">
+      <div class="panel-label"><span>〈/〉</span>MAVLinkv8.skayl — FACE UDDL model, fetched live from GitHub</div>
+      <pre class="code-block"><span class="cm">&lt;!-- MAVLink commands modeled in FACE UDDL --&gt;</span>
+<span class="cm">&lt;!-- Same .skayl format as UCI 2.5         --&gt;</span>
+
+&lt;<span class="fn">element</span>
+  <span class="nt">name</span>=<span class="st">"MAV_CMD_COMPONENT_ARM_DISARM"</span>
+  <span class="nt">xmi:type</span>=<span class="st">"platform:View"</span>&gt;
+
+  <span class="cm">&lt;!-- MAVLink v2 header (same for all messages) --&gt;</span>
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"MagicNumber"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_OCTET_FD"</span>/&gt;
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"PayloadLength"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_OCTET_33"</span>/&gt;
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"IncompatibilityFlags"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_OCTET"</span>/&gt;
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"CompatibilityFlags"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_OCTET"</span>/&gt;
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Packet_Sequence_Number"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_OCTET"</span>/&gt;
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Sender_System_ID"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_OCTET_1_255"</span>/&gt;
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Sender_Component_ID"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_OCTET_1_255"</span>/&gt;
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Message_ID_MSB"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_OCTET_76"</span>/&gt;
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Message_ID_LSB"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_USHORT_0"</span>/&gt;
+
+  <span class="cm">&lt;!-- Command-specific payload --&gt;</span>
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Arm"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_FLOAT"</span>/&gt;
+    <span class="cm">&lt;!-- 1.0=arm, 0.0=disarm --&gt;</span>
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Force"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_FLOAT"</span>/&gt;
+    <span class="cm">&lt;!-- 21196=force arm/disarm --&gt;</span>
+
+  <span class="cm">&lt;!-- COMMAND_LONG routing --&gt;</span>
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Command"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_USHORT_400"</span>/&gt;
+    <span class="cm">&lt;!-- fixed value: 400 = MAV_CMD_COMPONENT_ARM_DISARM --&gt;</span>
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Target_System"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_OCTET"</span>/&gt;
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Target_Component"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_OCTET"</span>/&gt;
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Confirmation"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_OCTET"</span>/&gt;
+  &lt;<span class="fn">characteristic</span> <span class="nt">rolename</span>=<span class="st">"Checksum"</span>
+    <span class="nt">platformType</span>=<span class="st">"TYPE_USHORT"</span>/&gt;
+&lt;/<span class="fn">element</span>&gt;
+
+<span class="cm">&lt;!-- + 5 more MAV_CMD views in same format --&gt;</span>
+<span class="cm">&lt;!--   MAV_CMD_DO_MOUNT_CONTROL    (cmd=205) --&gt;</span>
+<span class="cm">&lt;!--   MAV_CMD_DO_MOUNT_CONFIGURE  (cmd=204) --&gt;</span>
+<span class="cm">&lt;!--   MAV_CMD_DO_MOTOR_TEST       (cmd=209) --&gt;</span>
+<span class="cm">&lt;!--   MAV_CMD_INJECT_FAILURE      (cmd=420) --&gt;</span>
+<span class="cm">&lt;!--   MAV_CMD_DO_SET_CAM_TRIGG_INTERVAL (cmd=214) --&gt;</span></pre>
+    </div>
+    <div class="output-panel" id="out-4">
+      <div class="panel-label"><span>◈</span>live output — FaceReader on MAVLink FACE model</div>
+      <div class="output-content"><div class="placeholder"><div class="icon">⚡</div><p>Click "Run Live" — same FaceReader as UCI 2.5</p></div></div>
+    </div>
+  </div>
+</main>
+
+
+<!-- ═══ STEP 5 — UCI LIVE DIFF ═══ -->
+<main id="step-5">
   <div class="step-header">
     <div class="step-info">
       <div class="step-num">Step 04 · UCI 2.5 · Live Diff <span class="step-live-tag">⚡ LIVE COMPARISON</span></div>
@@ -453,9 +534,9 @@ python -m face2parselab run config.yaml</pre>
       <div class="step-desc">The existing MUDDL toolchain required .NET, Phenom, and proprietary DLLs to produce its output. We fetch that output directly from GitHub, generate ours with pure Python, and compare them field by field in real time. If our pipeline produces even one wrong field, it shows up here in red. It doesn't.</div>
     </div>
     <div class="btn-group">
-      <button class="dl-btn" id="dl-4r" onclick="download4ref()" title="Download MUDDL reference JSON">⬇ Reference</button>
-      <button class="dl-btn" id="dl-4o" onclick="download4ours()" title="Download our generated JSON">⬇ Ours</button>
-      <button class="run-btn" id="btn-4" onclick="run4(this)">▶ Run Live Diff</button>
+      <button class="dl-btn" id="dl-5r" onclick="download4ref()" title="Download MUDDL reference JSON">⬇ Reference</button>
+      <button class="dl-btn" id="dl-5o" onclick="download4ours()" title="Download our generated JSON">⬇ Ours</button>
+      <button class="run-btn" id="btn-5" onclick="run5(this)">▶ Run Live Diff</button>
     </div>
   </div>
   <div class="panels">
@@ -495,7 +576,7 @@ GET data/reference_json/SystemStatusMDT.json
 <span class="cm"># in red on the right panel.</span>
 <span class="cm"># There are none.</span></pre>
     </div>
-    <div class="output-panel" id="out-4">
+    <div class="output-panel" id="out-5">
       <div class="panel-label"><span>◈</span>live diff — MUDDL reference vs our output</div>
       <div class="output-content"><div class="placeholder"><div class="icon">⚡</div><p>Click "Run Live Diff" to fetch and compare</p></div></div>
     </div>
@@ -503,14 +584,14 @@ GET data/reference_json/SystemStatusMDT.json
 </main>
 
 <!-- ═══ STEP 5 ═══ -->
-<main id="step-5">
+<main id="step-6">
   <div class="step-header">
     <div class="step-info">
       <div class="step-num">Step 05 · Roadmap</div>
       <div class="step-title">What This Enables</div>
       <div class="step-desc">Stage 2 is complete and validated. The immediate next steps are expanding the message type coverage — DDS/IDL for FACE avionics and CoT for situational awareness — followed by wiring parseLab to complete the full chain. The architecture is already designed for all of it.</div>
     </div>
-    <button class="run-btn" onclick="run5(this)">▶ Show Roadmap</button>
+    <button class="run-btn" onclick="run6(this)">▶ Show Roadmap</button>
   </div>
   <div class="panels">
     <div class="panel">
@@ -543,7 +624,7 @@ GET data/reference_json/SystemStatusMDT.json
   → <span class="fn">export_json</span>()     <span class="cm"># same exporter</span>
   → parseLab</pre>
     </div>
-    <div class="output-panel" id="out-5">
+    <div class="output-panel" id="out-6">
       <div class="panel-label"><span>◈</span>roadmap</div>
       <div class="output-content"><div class="placeholder"><div class="icon">◈</div><p>Click "Show Roadmap"</p></div></div>
     </div>
@@ -561,6 +642,7 @@ let pyReady = false;
 let step1Result = null; // store live output from step 1 for step 2 to use
 let step1JSON   = null; // raw JSON string for download
 let step3JSON   = null; // MAVLink JSON for download
+let step4JSON   = null; // FACE MAVLink JSON for download
 let step4RefJSON = null; // MUDDL reference JSON for download
 let step4OurJSON = null; // our generated JSON for download
 
@@ -613,11 +695,20 @@ async function initPyodide() {
     pyodide.FS.writeFile('data/reference_json/SystemStatusMDT.json', refTxt);
     pyodide.FS.writeFile('data/uci_templates.txt', uciTmplTxt);
 
+    // Fetch MAVLinkv8 FACE model files
+    msg.textContent = 'Fetching FACE MAVLink model...';
+    const [mavSkaylTxt, mavFaceTxt] = await Promise.all([
+      fetch(REPO + 'data/models/mavlink/MAVLinkv8.skayl').then(r=>r.text()),
+      fetch(REPO + 'data/models/mavlink/MAVLinkv8.face').then(r=>r.text()),
+    ]);
+    pyodide.FS.writeFile('data/models/mavlink/MAVLinkv8.skayl', mavSkaylTxt);
+    pyodide.FS.writeFile('data/models/mavlink/MAVLinkv8.face',  mavFaceTxt);
+
     pyReady = true;
     ind.className = 'ready';
     msg.textContent = 'Python runtime ready — Steps 1, 2 & 3 execute live · Step 4 runs a live diff';
     bar.style.display = 'none';
-    ['btn-1','btn-2','btn-3','btn-4'].forEach(id => document.getElementById(id).disabled = false);
+    ['btn-1','btn-2','btn-3','btn-4','btn-5'].forEach(id => document.getElementById(id).disabled = false);
   } catch(e) {
     ind.style.background = 'var(--warn)';
     msg.textContent = 'Runtime failed to load — refresh to retry';
@@ -625,7 +716,7 @@ async function initPyodide() {
     console.error(e);
   }
 }
-['btn-1','btn-2','btn-3','btn-4'].forEach(id => document.getElementById(id).disabled = true);
+['btn-1','btn-2','btn-3','btn-4','btn-5'].forEach(id => document.getElementById(id).disabled = true);
 initPyodide();
 
 // ── Nav ───────────────────────────────────────────────────
@@ -664,6 +755,7 @@ function enableDownload(id) {
 }
 function download1()    { if (step1JSON)    downloadJSON(step1JSON,    'PositionReportMDT.json'); }
 function download3()    { if (step3JSON)    downloadJSON(step3JSON,    'mavlink_protocol.json'); }
+function download4()    { if (step4JSON)    downloadJSON(step4JSON,    'face_mavlink_protocol.json'); }
 function download4ref() { if (step4RefJSON) downloadJSON(step4RefJSON, 'SystemStatusMDT_muddl_reference.json'); }
 function download4ours(){ if (step4OurJSON) downloadJSON(step4OurJSON, 'SystemStatusMDT_our_output.json'); }
 
@@ -681,7 +773,8 @@ async function run0(btn) {
         ['⚡ Step 1','Simple FACE model executes live — you watch the JSON appear from the model'],
         ['⚡ Step 2','That JSON is verified live against parseLab\'s actual spec'],
         ['⚡ Step 3','MAVLink (completely different format) executes live — same pipeline, same output'],
-        ['⚡ Step 4','MUDDL reference fetched from GitHub · diffed live · 0 mismatches across 68 structs and 291 fields'],
+        ['⚡ Step 4','FACE MAVLink model runs live — same FaceReader as UCI 2.5, zero code changes'],
+      ['⚡ Step 5','MUDDL reference fetched from GitHub · diffed live · 0 mismatches across 68 structs and 291 fields'],
       ].map(([label,desc])=>`
         <div style="display:flex;gap:10px;font-size:12px;line-height:1.5">
           <span style="color:var(--accent2);font-family:'IBM Plex Mono',monospace;font-size:11px;flex-shrink:0">${label}</span>
@@ -1014,17 +1107,107 @@ json.dumps({
   markDone(btn, 3);
 }
 
-// ── Step 4 — LIVE DIFF ────────────────────────────────────
+// ── Step 4 — FACE MAVLink LIVE ───────────────────────────────────────────────
 async function run4(btn) {
   setRunning(btn);
   const oc = document.getElementById('out-4').querySelector('.output-content');
+
+  if (!pyReady) {
+    oc.innerHTML = `<div class="timing">Python runtime not ready — please wait for the green dot</div>`;
+    btn.classList.remove('running'); btn.disabled=false; btn.textContent='▶ Run Live';
+    return;
+  }
+
   oc.innerHTML = `
-    <div class="timing live" id="t4">⚡ Fetching MUDDL reference from GitHub...</div>
+    <div class="timing live" id="t4">⚡ Loading FACE MAVLink model...</div>
     <div class="progress-bar on" id="pb4"><div class="progress-fill" id="pf4"></div></div>
     <div id="r4"></div>`;
 
   const pf = document.getElementById('pf4');
   const t4 = document.getElementById('t4');
+
+  try {
+    for (let i=0; i<=60; i+=5) { pf.style.width=i+'%'; await delay(20); }
+    t4.textContent = '⚡ Executing FaceReader on MAVLinkv8.skayl...';
+    const t0 = performance.now();
+
+    const raw = await pyodide.runPythonAsync(`
+import sys, json, io, contextlib
+sys.path.insert(0, '.')
+from face2parselab.reader_face import FaceReader
+from face2parselab.exporter_parselab import export_json
+
+with contextlib.redirect_stdout(io.StringIO()):
+    reader = FaceReader(
+        skayl_path='data/models/mavlink/MAVLinkv8.skayl',
+        face_path='data/models/mavlink/MAVLinkv8.face',
+    )
+    protocol = reader.read()
+
+result = json.loads(export_json(protocol))
+json.dumps({
+    'messages': len(protocol.messages),
+    'structs':  len(protocol.structs),
+    'fields':   sum(len(m.fields) for m in protocol.messages),
+    'json':     result
+})
+`);
+
+    pf.style.width = '100%';
+    document.getElementById('pb4').style.display = 'none';
+    const elapsed = ((performance.now() - t0)/1000).toFixed(2);
+    const data = JSON.parse(raw);
+    step4JSON = JSON.stringify(data.json, null, 2);
+    enableDownload('dl-4');
+
+    t4.textContent = `⚡ FaceReader completed in ${elapsed}s — same reader as UCI 2.5, zero changes`;
+
+    document.getElementById('r4').innerHTML = `
+      <div class="stat-grid">
+        ${[[data.messages,'MAV_CMD messages'],[data.structs,'supporting structs'],[data.fields,'total fields'],[elapsed+'s','execution time']].map(([v,l],i)=>`<div class="stat-card" id="s4-${i}"><div class="stat-value">${v}</div><div class="stat-label">${l}</div></div>`).join('')}
+      </div>
+      <div class="sec-label">Same reader — different model:</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+        <div style="background:var(--code-bg);border:1px solid rgba(0,212,255,0.3);border-radius:6px;padding:12px;font-family:'IBM Plex Mono',monospace;font-size:11px">
+          <div style="color:var(--accent);margin-bottom:6px;font-size:10px">UCI 2.5 (SOSA)</div>
+          <div style="color:var(--muted)">FaceReader(</div>
+          <div style="color:var(--muted);padding-left:12px">UCI_2_5.skayl</div>
+          <div style="color:var(--muted)">)</div>
+          <div style="color:var(--accent2);margin-top:6px">→ 722 messages</div>
+        </div>
+        <div style="background:var(--code-bg);border:1px solid rgba(0,255,157,0.3);border-radius:6px;padding:12px;font-family:'IBM Plex Mono',monospace;font-size:11px">
+          <div style="color:var(--accent2);margin-bottom:6px;font-size:10px">MAVLink Commands (FACE)</div>
+          <div style="color:var(--muted)">FaceReader(</div>
+          <div style="color:var(--muted);padding-left:12px">MAVLinkv8.skayl</div>
+          <div style="color:var(--muted)">)</div>
+          <div style="color:var(--accent2);margin-top:6px">→ ${data.messages} messages</div>
+        </div>
+      </div>
+      <div class="sec-label">Live Output — ${data.messages} MAV_CMD messages → parseLab JSON</div>
+      <div class="json-out vis">${syntaxJSON(JSON.stringify(data.json, null, 2))}</div>
+      <div class="source-note">Generated live from <a href="https://raw.githubusercontent.com/dwilsolutions/riverside/main/data/models/mavlink/MAVLinkv8.skayl" target="_blank">MAVLinkv8.skayl</a> · Same FaceReader · Zero changes</div>`;
+
+    await animCards('[id^="s4-"]');
+
+  } catch(e) {
+    document.getElementById('pb4').style.display='none';
+    t4.textContent = 'Error: ' + e.message;
+    console.error(e);
+  }
+  markDone(btn, 4);
+}
+
+// ── Step 5 — LIVE DIFF ────────────────────────────────────
+async function run5(btn) {
+  setRunning(btn);
+  const oc = document.getElementById('out-5').querySelector('.output-content');
+  oc.innerHTML = `
+    <div class="timing live" id="t5">⚡ Fetching MUDDL reference from GitHub...</div>
+    <div class="progress-bar on" id="pb5"><div class="progress-fill" id="pf5"></div></div>
+    <div id="r4"></div>`;
+
+  const pf = document.getElementById('pf5');
+  const t4 = document.getElementById('t5');
 
   try {
     pf.style.width = '20%';
@@ -1085,7 +1268,7 @@ json.dumps(json.loads(export_json(protocol)))
     (ourJSON.structs||[]).forEach(s => { ourMap[s.struct_name] = s.members; });
 
     pf.style.width = '100%';
-    document.getElementById('pb4').style.display = 'none';
+    document.getElementById('pb5').style.display = 'none';
 
     const structNames = Object.keys(refMap);
     let totalFields = 0, matchedFields = 0, mismatchedStructs = 0;
@@ -1108,8 +1291,8 @@ json.dumps(json.loads(export_json(protocol)))
     // Save both JSONs for download
     step4RefJSON = JSON.stringify(refJSON, null, 2);
     step4OurJSON = JSON.stringify(ourJSON, null, 2);
-    enableDownload('dl-4r');
-    enableDownload('dl-4o');
+    enableDownload('dl-5r');
+    enableDownload('dl-5o');
 
     t4.textContent = allMatch
       ? `⚡ Diff complete — ${structNames.length} structs, ${totalFields} fields, 0 mismatches · pure Python matches .NET pipeline exactly`
@@ -1153,7 +1336,7 @@ json.dumps(json.loads(export_json(protocol)))
         </div>`;
       }).join('')}
       ${structNames.length > 10 ? `<div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);text-align:center;padding:8px">... ${structNames.length-10} more structs — all matching</div>` : ''}
-      <div class="result-banner" id="rb4">
+      <div class="result-banner" id="rb5">
         <div class="big">${allMatch ? '✓' : '✗'}</div>
         <div>
           <div class="lbl">${allMatch ? `${structNames.length} structs · ${totalFields} fields · 0 mismatches — pure Python produces byte-identical output to the .NET pipeline` : `${mismatchedStructs} struct mismatches found`}</div>
@@ -1166,20 +1349,20 @@ json.dumps(json.loads(export_json(protocol)))
       document.getElementById(`ds-${i}`).classList.add('vis');
     }
     await delay(200);
-    document.getElementById('rb4').classList.add('vis');
+    document.getElementById('rb5').classList.add('vis');
 
   } catch(e) {
-    document.getElementById('pb4').style.display='none';
+    document.getElementById('pb5').style.display='none';
     t4.textContent = 'Error during diff';
     console.error(e);
   }
-  markDone(btn, 4);
+  markDone(btn, 5);
 }
 
 // ── Step 5 ────────────────────────────────────────────────
-async function run5(btn) {
+async function run6(btn) {
   setRunning(btn);
-  const oc = document.getElementById('out-5').querySelector('.output-content');
+  const oc = document.getElementById('out-6').querySelector('.output-content');
   oc.innerHTML = `<div id="r5"></div>`;
   const phases = [
     {label:'✓  Stage 2 — Complete', color:'var(--accent2)', items:[
@@ -1210,7 +1393,7 @@ async function run5(btn) {
     document.getElementById('r5').appendChild(d);
     await delay(120); d.style.opacity='1'; d.style.transform='translateY(0)';
   }
-  markDone(btn, 5);
+  markDone(btn, 6);
 }
 </script>
 </body>
