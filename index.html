@@ -1213,7 +1213,7 @@ async function run5(btn) {
     pf.style.width = '20%';
 
     // Step 1: run our pipeline
-    t4.textContent = '⚡ Running our pipeline on UCI 2.5 model...';
+    t5.textContent = '⚡ Running our pipeline on UCI 2.5 model...';
 
     // We need the UCI skayl file - it's 22MB, too large to fetch live
     // Instead run against the simple model and compare to its reference
@@ -1225,7 +1225,7 @@ async function run5(btn) {
     // We'll compare field-by-field using the reference as ground truth.
 
     pf.style.width = '40%';
-    t4.textContent = '⚡ Generating our output...';
+    t5.textContent = '⚡ Generating our output...';
 
     // Note: UCI skayl is 22MB - we pre-fetch it during init
     // Check if it was loaded
@@ -1260,7 +1260,7 @@ json.dumps(json.loads(export_json(protocol)))
     }
 
     pf.style.width = '80%';
-    t4.textContent = '⚡ Diffing structs field by field...';
+    t5.textContent = '⚡ Diffing structs field by field...';
 
     const refMap = {};
     (refJSON.structs||[]).forEach(s => { refMap[s.struct_name] = s.members; });
@@ -1294,7 +1294,7 @@ json.dumps(json.loads(export_json(protocol)))
     enableDownload('dl-5r');
     enableDownload('dl-5o');
 
-    t4.textContent = allMatch
+    t5.textContent = allMatch
       ? `⚡ Diff complete — ${structNames.length} structs, ${totalFields} fields, 0 mismatches · pure Python matches .NET pipeline exactly`
       : `⚡ Diff complete — ${mismatchedStructs} structs differ`;
 
