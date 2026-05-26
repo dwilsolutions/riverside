@@ -1207,7 +1207,7 @@ async function run5(btn) {
     <div id="r4"></div>`;
 
   const pf = document.getElementById('pf5');
-  const t4 = document.getElementById('t5');
+  const t5 = document.getElementById('t5');
 
   try {
     pf.style.width = '20%';
@@ -1353,7 +1353,8 @@ json.dumps(json.loads(export_json(protocol)))
 
   } catch(e) {
     document.getElementById('pb5').style.display='none';
-    t5.textContent = 'Error during diff';
+    const t5el = document.getElementById('t5');
+    if (t5el) t5el.textContent = 'Error during diff: ' + e.message;
     console.error(e);
   }
   markDone(btn, 5);
