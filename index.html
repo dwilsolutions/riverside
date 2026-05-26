@@ -1364,7 +1364,7 @@ json.dumps(json.loads(export_json(protocol)))
 async function run6(btn) {
   setRunning(btn);
   const oc = document.getElementById('out-6').querySelector('.output-content');
-  oc.innerHTML = `<div id="r5"></div>`;
+  oc.innerHTML = `<div id="r6"></div>`;
   const phases = [
     {label:'✓  Stage 2 — Complete', color:'var(--accent2)', items:[
       'FACE .skayl reader — pure Python, no .NET runtime',
@@ -1391,7 +1391,7 @@ async function run6(btn) {
     d.style.cssText='margin-bottom:18px;opacity:0;transform:translateY(6px);transition:all 0.4s';
     d.innerHTML=`<div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:${color};text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">${label}</div>`
       +items.map(i=>`<div style="display:flex;gap:8px;margin-bottom:6px;font-size:12px;color:var(--muted);line-height:1.5"><span style="color:${color};flex-shrink:0">→</span><span>${i}</span></div>`).join('');
-    document.getElementById('r5').appendChild(d);
+    document.getElementById('r6').appendChild(d);
     await delay(120); d.style.opacity='1'; d.style.transform='translateY(0)';
   }
   markDone(btn, 6);
