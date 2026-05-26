@@ -1300,7 +1300,7 @@ json.dumps(json.loads(export_json(protocol)))
 
     // Render diff view — show first 10 structs side by side
     const display = structNames.slice(0, 10);
-    document.getElementById('r4').innerHTML = `
+    document.getElementById('r5').innerHTML = `
       <div class="diff-header">
         <div class="diff-col-label ref">MUDDL reference · fetched from GitHub</div>
         <div class="diff-col-label ours">Our output · generated live</div>
@@ -1353,7 +1353,7 @@ json.dumps(json.loads(export_json(protocol)))
 
   } catch(e) {
     document.getElementById('pb5').style.display='none';
-    t4.textContent = 'Error during diff';
+    t5.textContent = 'Error during diff';
     console.error(e);
   }
   markDone(btn, 5);
